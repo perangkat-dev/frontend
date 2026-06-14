@@ -13,14 +13,17 @@
   },
   "modules": [
     {
-      "id": "anamnesa-kunjungan-sebelumnya",
-      "name": "Anamnesa dari Kunjungan Sebelumnya",
-      "version": "2.0",
-      "category": "tools",
-      "icon": "🩺",
-      "defaultEnabled": true,
-      "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/main/modules/anamnesa-kunjungan-sebelumnya.js",
-      "matches": ["https://*.epuskesmas.id/anamnesa/*"]
-    }
+  "id": "data-pasien-reader",
+  "name": "Data Pasien Reader",
+  "version": "1.0",
+  "icon": "🧩",
+  "category": "skrining",
+  "defaultEnabled": true,
+  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/main/modules/data-pasien-reader.js",
+  "matches": [
+    "https://cirebon.epuskesmas.id/klaster_siklushidup/*"
+  ],
+  "userSelector": "#menu_user .label-default"
+}
   ]
 }
