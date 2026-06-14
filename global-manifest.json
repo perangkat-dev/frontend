@@ -1,5 +1,26 @@
 {
-  "name": "My Userscripts",
+  "name": "Jamu Loader",
   "version": "1.0.0",
-  "description": "Koleksi userscript saya"
+  "author": "perangkat-dev",
+  "minExtensionVersion": "1.0.0",
+  "tracking": {
+    "endpoint": "",
+    "key": ""
+  },
+  "whitelist": {
+    "url": "",
+    "selector": ""
+  },
+  "modules": [
+    {
+      "id": "anamnesa-kunjungan-sebelumnya",
+      "name": "Anamnesa dari Kunjungan Sebelumnya",
+      "version": "2.0",
+      "category": "tools",
+      "icon": "🩺",
+      "defaultEnabled": true,
+      "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/main/modules/anamnesa-kunjungan-sebelumnya.js",
+      "matches": ["https://*.epuskesmas.id/anamnesa/*"]
+    }
+  ]
 }
