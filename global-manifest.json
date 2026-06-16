@@ -13,15 +13,28 @@
   },
   "modules": [
     {
-  "id": "data-pasien-reader",
-  "name": "Data Pasien Reader",
-  "version": "1.0",
-  "icon": "🧩",
+      "id": "data-pasien-reader",
+      "name": "Data Pasien Reader",
+      "version": "1.0",
+      "icon": "🧩",
+      "category": "skrining",
+      "defaultEnabled": true,
+      "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/main/modules/data-pasien-reader.js",
+      "matches": [
+        "https://cirebon.epuskesmas.id/klaster_siklushidup/*"
+      ],
+      "userSelector": "#menu_user .label-default"
+    },
+{
+  "id": "anamnesa-dari-kunjungan-sebelumnya",
+  "name": "Anamnesa dari Kunjungan Sebelumnya",
+  "version": "2.0",
+  "icon": "📝",
   "category": "skrining",
   "defaultEnabled": true,
-  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/main/modules/data-pasien-reader.js",
+  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/anamnesa-dari-kunjungan-sebelumnya.js",
   "matches": [
-    "https://cirebon.epuskesmas.id/klaster_siklushidup/*"
+    "https://*.epuskesmas.id/anamnesa/*"
   ],
   "userSelector": "#menu_user .label-default"
 }
