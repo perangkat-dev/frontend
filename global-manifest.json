@@ -64,6 +64,19 @@
         "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan/detail-pemeriksaan*"
       ],
       "userSelector": "#menu_user .label-default"
-    }
+    },
+{
+  "id": "skrining-counter-final",
+  "name": "Skrining Counter Final",
+  "version": "4.1.0",
+  "icon": "🛠️",
+  "category": "tools",
+  "defaultEnabled": false,
+  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/skrining-counter-final.js",
+  "matches": [
+    "https://cirebon.epuskesmas.id/klaster_siklushidup/*"
+  ],
+  "userSelector": "#menu_user .label-default"
+}
   ]
 }
