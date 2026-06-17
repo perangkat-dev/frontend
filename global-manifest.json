@@ -65,16 +65,29 @@
       ],
       "userSelector": "#menu_user .label-default"
     },
+    {
+      "id": "skrining-counter-final",
+      "name": "Skrining Counter Final",
+      "version": "4.1.0",
+      "icon": "🛠️",
+      "category": "tools",
+      "defaultEnabled": false,
+      "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/skrining-counter-final.js",
+      "matches": [
+        "https://cirebon.epuskesmas.id/klaster_siklushidup/*"
+      ],
+      "userSelector": "#menu_user .label-default"
+    },
 {
-  "id": "skrining-counter-final",
-  "name": "Skrining Counter Final",
-  "version": "4.1.0",
-  "icon": "🛠️",
-  "category": "tools",
-  "defaultEnabled": false,
-  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/skrining-counter-final.js",
+  "id": "skrining-pengkajian-nutrisi-mna",
+  "name": "Skrining Pengkajian Nutrisi (MNA)",
+  "version": "1.1",
+  "icon": "📝",
+  "category": "skrining",
+  "defaultEnabled": true,
+  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/skrining-pengkajian-nutrisi-mna.js",
   "matches": [
-    "https://cirebon.epuskesmas.id/klaster_siklushidup/*"
+    "https://cirebon.epuskesmas.id/skriningpengkajiannutrisi/create/*"
   ],
   "userSelector": "#menu_user .label-default"
 }
