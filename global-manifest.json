@@ -2,6 +2,7 @@
   "name": "Jamu Loader",
   "version": "1.0.0",
   "author": "perangkat-dev",
+  "description": "",
   "minExtensionVersion": "1.0.0",
   "tracking": {
     "endpoint": "",
@@ -38,18 +39,31 @@
       ],
       "userSelector": "#menu_user .label-default"
     },
-{
-  "id": "kessan-bpjs-auto",
-  "name": "KESSAN BPJS Auto",
-  "version": "5.0",
-  "icon": "⭐",
-  "category": "skrining",
-  "defaultEnabled": false,
-  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/kessan-bpjs-auto.js",
-  "matches": [
-    "https://kesan.bpjs-kesehatan.go.id/*"
-  ],
-  "userSelector": "#menu_user .label-default"
-}
+    {
+      "id": "kessan-bpjs-auto",
+      "name": "KESSAN BPJS Auto",
+      "version": "5.0",
+      "icon": "⭐",
+      "category": "skrining",
+      "defaultEnabled": false,
+      "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/kessan-bpjs-auto.js",
+      "matches": [
+        "https://kesan.bpjs-kesehatan.go.id/*"
+      ],
+      "userSelector": "#menu_user .label-default"
+    },
+    {
+      "id": "ckg-pelayanan-auto-skip-tool-loader-compatible",
+      "name": "CKG Pelayanan - Auto Skip Tool (Loader Compatible)",
+      "version": "1.5",
+      "icon": "🛠️",
+      "category": "tools",
+      "defaultEnabled": false,
+      "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/ckg-pelayanan-auto-skip-tool-loader-compatible.js",
+      "matches": [
+        "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan/detail-pemeriksaan*"
+      ],
+      "userSelector": "#menu_user .label-default"
+    }
   ]
 }
