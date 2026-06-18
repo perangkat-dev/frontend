@@ -90,6 +90,19 @@
         "https://cirebon.epuskesmas.id/skriningpengkajiannutrisi/create/*"
       ],
       "userSelector": "#menu_user .label-default"
-    }
+    },
+{
+  "id": "bpjs-survey-auto-fill",
+  "name": "BPJS Survey Auto Fill",
+  "version": "1.0",
+  "icon": "📝",
+  "category": "skrining",
+  "defaultEnabled": false,
+  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/bpjs-survey-auto-fill.js",
+  "matches": [
+    "https://webskrining.bpjs-kesehatan.go.id/*"
+  ],
+  "userSelector": "#menu_user .label-default"
+}
   ]
 }
