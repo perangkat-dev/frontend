@@ -9,7 +9,7 @@
     "key": ""
   },
   "whitelist": {
-    "url": "",
+    "url": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/global-manifest.json",
     "selector": ""
   },
   "modules": [
@@ -78,18 +78,18 @@
       ],
       "userSelector": "#menu_user .label-default"
     },
-{
-  "id": "skrining-pengkajian-nutrisi-mna",
-  "name": "Skrining Pengkajian Nutrisi (MNA)",
-  "version": "1.1",
-  "icon": "📝",
-  "category": "skrining",
-  "defaultEnabled": true,
-  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/skrining-pengkajian-nutrisi-mna.js",
-  "matches": [
-    "https://cirebon.epuskesmas.id/skriningpengkajiannutrisi/create/*"
-  ],
-  "userSelector": "#menu_user .label-default"
-}
+    {
+      "id": "skrining-pengkajian-nutrisi-mna",
+      "name": "Skrining Pengkajian Nutrisi (MNA)",
+      "version": "1.1",
+      "icon": "📝",
+      "category": "skrining",
+      "defaultEnabled": true,
+      "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/skrining-pengkajian-nutrisi-mna.js",
+      "matches": [
+        "https://cirebon.epuskesmas.id/skriningpengkajiannutrisi/create/*"
+      ],
+      "userSelector": "#menu_user .label-default"
+    }
   ]
 }
