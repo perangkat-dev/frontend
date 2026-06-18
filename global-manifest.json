@@ -9,8 +9,8 @@
     "key": ""
   },
   "whitelist": {
-    "url": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/global-manifest.json",
-    "selector": ""
+    "url": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/whitelist.json",
+    "selector": "#menu_user .label-default"
   },
   "modules": [
     {
