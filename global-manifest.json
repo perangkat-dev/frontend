@@ -103,6 +103,19 @@
         "https://webskrining.bpjs-kesehatan.go.id/*"
       ],
       "userSelector": "#menu_user .label-default"
-    }
+    },
+{
+  "id": "skrining-faktor-risiko",
+  "name": "Skrining Faktor Risiko",
+  "version": "1.0",
+  "icon": "📝",
+  "category": "skrining",
+  "defaultEnabled": false,
+  "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-faktor-risiko.js",
+  "matches": [
+    "https://cirebon.epuskesmas.id/skriningfaktorrisiko/*"
+  ],
+  "userSelector": "#menu_user .label-default"
+}
   ]
 }
