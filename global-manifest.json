@@ -117,17 +117,30 @@
       ],
       "userSelector": "#menu_user .label-default"
     },
+    {
+      "id": "auto-survey-kemkes-mandiri",
+      "name": "Auto Survey Kemkes Mandiri",
+      "version": "7.0",
+      "icon": "🚀",
+      "category": "skrining",
+      "defaultEnabled": true,
+      "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/auto-survey-kemkes-mandiri.js",
+      "matches": [
+        "https://form.kemkes.go.id/v2/skrining-form*",
+        "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan-sekolah/detail-pemeriksaan*"
+      ],
+      "userSelector": "#menu_user .label-default"
+    },
 {
-  "id": "auto-survey-kemkes-mandiri",
-  "name": "Auto Survey Kemkes Mandiri",
-  "version": "7.0",
+  "id": "ckg-pelayanan-auto-skip-tool-loader-compatible",
+  "name": "CKG Pelayanan - Auto Skip Tool (Loader Compatible)",
+  "version": "1.5",
   "icon": "🚀",
   "category": "skrining",
   "defaultEnabled": true,
-  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/auto-survey-kemkes-mandiri.js",
+  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/ckg-pelayanan-auto-skip-tool-loader-compatible.js",
   "matches": [
-    "https://form.kemkes.go.id/v2/skrining-form*",
-    "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan-sekolah/detail-pemeriksaan*"
+    "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan/detail-pemeriksaan*"
   ],
   "userSelector": "#menu_user .label-default"
 }
