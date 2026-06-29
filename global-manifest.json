@@ -104,16 +104,30 @@
       ],
       "userSelector": "#menu_user .label-default"
     },
+    {
+      "id": "skrining-faktor-risiko",
+      "name": "Skrining Faktor Risiko",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "defaultEnabled": false,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-faktor-risiko.js",
+      "matches": [
+        "https://cirebon.epuskesmas.id/skriningfaktorrisiko/*"
+      ],
+      "userSelector": "#menu_user .label-default"
+    },
 {
-  "id": "skrining-faktor-risiko",
-  "name": "Skrining Faktor Risiko",
-  "version": "1.0",
-  "icon": "📝",
+  "id": "auto-survey-kemkes-mandiri",
+  "name": "Auto Survey Kemkes Mandiri",
+  "version": "7.0",
+  "icon": "🚀",
   "category": "skrining",
-  "defaultEnabled": false,
-  "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-faktor-risiko.js",
+  "defaultEnabled": true,
+  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/auto-survey-kemkes-mandiri.js",
   "matches": [
-    "https://cirebon.epuskesmas.id/skriningfaktorrisiko/*"
+    "https://form.kemkes.go.id/v2/skrining-form*",
+    "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan-sekolah/detail-pemeriksaan*"
   ],
   "userSelector": "#menu_user .label-default"
 }
