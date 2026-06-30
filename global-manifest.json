@@ -143,6 +143,20 @@
         "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan/detail-pemeriksaan*"
       ],
       "userSelector": "#menu_user .label-default"
-    }
+    },
+{
+  "id": "ckg-pelayanan-auto-skip-tool",
+  "name": "CKG Pelayanan - Auto Skip Tool",
+  "version": "8.0",
+  "icon": "🚀",
+  "category": "skrining",
+  "defaultEnabled": true,
+  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/ckg-pelayanan-auto-skip-tool.js",
+  "matches": [
+    "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan/detail-pemeriksaan*",
+    "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan-sekolah/detail-pemeriksaan*"
+  ],
+  "userSelector": "#menu_user .label-default"
+}
   ]
 }
