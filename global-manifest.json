@@ -131,18 +131,18 @@
       ],
       "userSelector": "#menu_user .label-default"
     },
-{
-  "id": "ckg-pelayanan-auto-skip-tool-loader-compatible",
-  "name": "CKG Pelayanan - Auto Skip Tool (Loader Compatible)",
-  "version": "1.5",
-  "icon": "🚀",
-  "category": "skrining",
-  "defaultEnabled": true,
-  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/ckg-pelayanan-auto-skip-tool-loader-compatible.js",
-  "matches": [
-    "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan/detail-pemeriksaan*"
-  ],
-  "userSelector": "#menu_user .label-default"
-}
+    {
+      "id": "ckg-pelayanan-auto-skip-tool-loader-compatible",
+      "name": "CKG Pelayanan - Auto Skip Tool (Loader Compatible)",
+      "version": "1.5",
+      "icon": "🚀",
+      "category": "skrining",
+      "defaultEnabled": true,
+      "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/ckg-pelayanan-auto-skip-tool-loader-compatible.js",
+      "matches": [
+        "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan/detail-pemeriksaan*"
+      ],
+      "userSelector": "#menu_user .label-default"
+    }
   ]
 }
