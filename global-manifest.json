@@ -53,19 +53,6 @@
       "userSelector": "#menu_user .label-default"
     },
     {
-      "id": "ckg-pelayanan-auto-skip-tool-loader-compatible",
-      "name": "CKG Pelayanan - Auto Skip Tool (Loader Compatible)",
-      "version": "1.5",
-      "icon": "🛠️",
-      "category": "tools",
-      "defaultEnabled": false,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/ckg-pelayanan-auto-skip-tool-loader-compatible.js",
-      "matches": [
-        "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan/detail-pemeriksaan*"
-      ],
-      "userSelector": "#menu_user .label-default"
-    },
-    {
       "id": "skrining-counter-final",
       "name": "Skrining Counter Final",
       "version": "4.1.0",
@@ -132,31 +119,18 @@
       "userSelector": "#menu_user .label-default"
     },
     {
-      "id": "ckg-pelayanan-auto-skip-tool-loader-compatible",
-      "name": "CKG Pelayanan - Auto Skip Tool (Loader Compatible)",
-      "version": "1.5",
+      "id": "ckg-pelayanan-auto-skip-tool",
+      "name": "CKG Pelayanan - Auto Skip Tool",
+      "version": "8.0",
       "icon": "🚀",
       "category": "skrining",
       "defaultEnabled": true,
-      "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/ckg-pelayanan-auto-skip-tool-loader-compatible.js",
+      "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/ckg-pelayanan-auto-skip-tool.js",
       "matches": [
-        "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan/detail-pemeriksaan*"
+        "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan/detail-pemeriksaan*",
+        "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan-sekolah/detail-pemeriksaan*"
       ],
       "userSelector": "#menu_user .label-default"
-    },
-{
-  "id": "ckg-pelayanan-auto-skip-tool",
-  "name": "CKG Pelayanan - Auto Skip Tool",
-  "version": "8.0",
-  "icon": "🚀",
-  "category": "skrining",
-  "defaultEnabled": true,
-  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/ckg-pelayanan-auto-skip-tool.js",
-  "matches": [
-    "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan/detail-pemeriksaan*",
-    "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan-sekolah/detail-pemeriksaan*"
-  ],
-  "userSelector": "#menu_user .label-default"
-}
+    }
   ]
 }
