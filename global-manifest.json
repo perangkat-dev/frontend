@@ -131,6 +131,21 @@
         "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan-sekolah/detail-pemeriksaan*"
       ],
       "userSelector": "#menu_user .label-default"
-    }
+    },
+{
+  "id": "sensor-data-4",
+  "name": "Sensor Data 4",
+  "version": "4.2.1",
+  "icon": "❌",
+  "category": "skrining",
+  "defaultEnabled": false,
+  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/sensor-data-4.js",
+  "matches": [
+    "https://cirebon.epuskesmas.id/klaster_siklushidup/*",
+    "https://cirebon.epuskesmas.id/pelayanan/show/*",
+    "https://cirebon.epuskesmas.id/laporaninterpretasiskrining"
+  ],
+  "userSelector": "#menu_user .label-default"
+}
   ]
 }
