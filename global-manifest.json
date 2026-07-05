@@ -146,19 +146,6 @@
         "https://cirebon.epuskesmas.id/laporaninterpretasiskrining"
       ],
       "userSelector": "#menu_user .label-default"
-    },
-{
-  "id": "dhis2-floating-apps-menu",
-  "name": "DHIS2 Floating Apps Menu",
-  "version": "3.1",
-  "icon": "📋",
-  "category": "skrining",
-  "defaultEnabled": true,
-  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/dhis2-floating-apps-menu.js",
-  "matches": [
-    "https://asdk.kemkes.go.id/*"
-  ],
-  "userSelector": "#menu_user .label-default"
-}
+    }
   ]
 }
