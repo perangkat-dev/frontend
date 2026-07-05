@@ -146,6 +146,19 @@
         "https://cirebon.epuskesmas.id/laporaninterpretasiskrining"
       ],
       "userSelector": "#menu_user .label-default"
-    }
+    },
+{
+  "id": "asdk-floating-apps-menu",
+  "name": "ASDK Floating Apps Menu",
+  "version": "3.2",
+  "icon": "📋",
+  "category": "tools",
+  "defaultEnabled": true,
+  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/asdk-floating-apps-menu.js",
+  "matches": [
+    "https://asdk.kemkes.go.id/*"
+  ],
+  "userSelector": "#menu_user .label-default"
+}
   ]
 }
