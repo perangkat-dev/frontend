@@ -132,18 +132,31 @@
       ],
       "userSelector": "#menu_user .label-default"
     },
+    {
+      "id": "sensor-data-4",
+      "name": "Sensor Data 4",
+      "version": "4.2.1",
+      "icon": "❌",
+      "category": "skrining",
+      "defaultEnabled": false,
+      "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/sensor-data-4.js",
+      "matches": [
+        "https://cirebon.epuskesmas.id/klaster_siklushidup/*",
+        "https://cirebon.epuskesmas.id/pelayanan/show/*",
+        "https://cirebon.epuskesmas.id/laporaninterpretasiskrining"
+      ],
+      "userSelector": "#menu_user .label-default"
+    },
 {
-  "id": "sensor-data-4",
-  "name": "Sensor Data 4",
-  "version": "4.2.1",
-  "icon": "❌",
+  "id": "dhis2-floating-apps-menu",
+  "name": "DHIS2 Floating Apps Menu",
+  "version": "3.1",
+  "icon": "📋",
   "category": "skrining",
-  "defaultEnabled": false,
-  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/sensor-data-4.js",
+  "defaultEnabled": true,
+  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/dhis2-floating-apps-menu.js",
   "matches": [
-    "https://cirebon.epuskesmas.id/klaster_siklushidup/*",
-    "https://cirebon.epuskesmas.id/pelayanan/show/*",
-    "https://cirebon.epuskesmas.id/laporaninterpretasiskrining"
+    "https://asdk.kemkes.go.id/*"
   ],
   "userSelector": "#menu_user .label-default"
 }
