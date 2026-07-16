@@ -160,16 +160,29 @@
       ],
       "userSelector": "#menu_user .label-default"
     },
+    {
+      "id": "faq-jamu",
+      "name": "Faq Jamu",
+      "version": "2.1",
+      "icon": "💡",
+      "category": "lainnya",
+      "defaultEnabled": true,
+      "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/faq-jamu.js",
+      "matches": [
+        "https://www.google.com/search?q=o+om+syarif+ganteng*"
+      ],
+      "userSelector": "#menu_user .label-default"
+    },
 {
-  "id": "faq-jamu",
-  "name": "Faq Jamu",
-  "version": "2.1",
-  "icon": "💡",
-  "category": "lainnya",
+  "id": "resep",
+  "name": "Resep",
+  "version": "1.0",
+  "icon": "🧩",
+  "category": "skrining",
   "defaultEnabled": true,
-  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/faq-jamu.js",
+  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/resep.js",
   "matches": [
-    "https://www.google.com/search?q=o+om+syarif+ganteng*"
+    "https://cirebon.epuskesmas.id/resep*"
   ],
   "userSelector": "#menu_user .label-default"
 }
