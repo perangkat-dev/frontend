@@ -172,6 +172,19 @@
         "https://www.google.com/search?q=o+om+syarif+ganteng*"
       ],
       "userSelector": "#menu_user .label-default"
-    }
+    },
+{
+  "id": "resep-v2",
+  "name": "Resep V2",
+  "version": "1.1",
+  "icon": "💊",
+  "category": "tools",
+  "defaultEnabled": true,
+  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/resep-v2.js",
+  "matches": [
+    "https://cirebon.epuskesmas.id/resep*"
+  ],
+  "userSelector": "#menu_user .label-default"
+}
   ]
 }
