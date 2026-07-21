@@ -109,7 +109,7 @@
       "name": "Auto Survey Kemkes Mandiri",
       "version": "7.0",
       "icon": "🚀",
-      "category": "skrining",
+      "category": "tools",
       "defaultEnabled": true,
       "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/auto-survey-kemkes-mandiri.js",
       "matches": [
@@ -123,7 +123,7 @@
       "name": "CKG Pelayanan - Auto Skip Tool",
       "version": "8.0",
       "icon": "🚀",
-      "category": "skrining",
+      "category": "tools",
       "defaultEnabled": true,
       "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/ckg-pelayanan-auto-skip-tool.js",
       "matches": [
@@ -137,7 +137,7 @@
       "name": "Sensor Data 4",
       "version": "4.2.1",
       "icon": "❌",
-      "category": "skrining",
+      "category": "tools",
       "defaultEnabled": false,
       "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/sensor-data-4.js",
       "matches": [
@@ -173,18 +173,18 @@
       ],
       "userSelector": "#menu_user .label-default"
     },
-{
-  "id": "resep-v2",
-  "name": "Resep V2",
-  "version": "1.1",
-  "icon": "💊",
-  "category": "tools",
-  "defaultEnabled": true,
-  "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/resep-v2.js",
-  "matches": [
-    "https://cirebon.epuskesmas.id/resep*"
-  ],
-  "userSelector": "#menu_user .label-default"
-}
+    {
+      "id": "resep-v2",
+      "name": "Resep V2",
+      "version": "1.1",
+      "icon": "💊",
+      "category": "tools",
+      "defaultEnabled": true,
+      "scriptUrl": "https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/modules/resep-v2.js",
+      "matches": [
+        "https://cirebon.epuskesmas.id/resep*"
+      ],
+      "userSelector": "#menu_user .label-default"
+    }
   ]
 }
