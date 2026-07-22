@@ -9,7 +9,7 @@
     "key": ""
   },
   "whitelist": {
-    "url": "https://perangkat-dev.github.io/frontend/whitelist.json",
+    "url": "https://perangkat-dev.github.io/frontend/whitelist2.json",
     "selector": "#menu_user .label-default"
   },
   "modules": [
