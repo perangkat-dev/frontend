@@ -18,5 +18,15 @@
       "asik": "32090200041"
     },
     "active": false
+  },
+  {
+    "id": "pkm_sejahtera_2",
+    "name": "Puskesmas Sejahtera 2",
+    "identifiers": {
+      "epuskesmas": "1030827",
+      "bpjs": "10182003",
+      "asik": "32090200043"
+    },
+    "active": false
   }
 ]
