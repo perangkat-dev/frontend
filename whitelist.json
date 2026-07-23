@@ -7,7 +7,7 @@
       "bpjs": "10182001",
       "asik": "32090200040"
     },
-    "active": false
+    "active": true
   },
   {
     "id": "pkm_sejahtera",
@@ -17,7 +17,7 @@
       "bpjs": "10182002",
       "asik": "32090200041"
     },
-    "active": false
+    "active": true
   },
   {
     "id": "pkm_sejahtera_2",
@@ -27,6 +27,6 @@
       "bpjs": "10182003",
       "asik": "32090200049"
     },
-    "active": false
+    "active": true
   }
 ]
