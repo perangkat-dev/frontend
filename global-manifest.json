@@ -43,14 +43,15 @@
       "id": "kessan-bpjs-auto",
       "name": "KESSAN BPJS Auto",
       "version": "5.0",
-      "icon": "⭐",
-      "category": "skrining",
-      "defaultEnabled": false,
+      "icon": "📝",
+      "category": "tools",
+      "description": "Otomatis mengisi KESSAN BPJS Kesehatan dari daftar No. BPJS",
+      "tier": "premium",
+      "defaultEnabled": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/kessan-bpjs-auto.js",
       "matches": [
         "https://kesan.bpjs-kesehatan.go.id/*"
-      ],
-      "userSelector": "#menu_user .label-default"
+      ]
     },
     {
       "id": "skrining-counter-final",
