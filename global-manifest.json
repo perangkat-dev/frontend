@@ -248,38 +248,6 @@
       "matches": [
         "https://cirebon.epuskesmas.id/klaster_siklushidup/*"
       ]
-    },
-    {
-      "id": "sensor-data-4-universal-ajax-proof",
-      "name": "Sensor Data 4 (Universal AJAX-Proof)",
-      "version": "4.8.0",
-      "icon": "🧩",
-      "category": "tools",
-      "description": "Versi universal: Mendukung /pelayanan dan /pasien dengan deteksi jalur otomatis, plus perlindungan struktur HTML (anti-hancur tag).",
-      "tier": "premium",
-      "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/sensor-data-4-universal-ajax-proof.js",
-      "matches": [
-        "https://cirebon.epuskesmas.id/klaster_siklushidup/*",
-        "https://cirebon.epuskesmas.id/pelayanan/show/*",
-        "https://cirebon.epuskesmas.id/laporaninterpretasiskrining",
-        "https://cirebon.epuskesmas.id/pelayanan*",
-        "https://cirebon.epuskesmas.id/pasien*"
-      ]
-    },
-    {
-      "id": "usila-belum-periksa",
-      "name": "Usila Belum Periksa",
-      "version": "1.2",
-      "icon": "🧩",
-      "category": "tools",
-      "description": "Tombol untuk memilih filter dengan jeda 0.5 detik tiap aksi: Ruangan UMUM, Pemeriksaan Belum Diperiksa, Skrining Visual Hijau, Klaster 3, Siklus Hidup Lanjut Usia",
-      "tier": "premium",
-      "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/usila-belum-periksa.js",
-      "matches": [
-        "https://cirebon.epuskesmas.id/pelayana*"
-      ]
     }
   ]
 }
