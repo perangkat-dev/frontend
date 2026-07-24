@@ -1,4 +1,32 @@
 [
-  "0000103082599",
-  "00001030825"
+  {
+    "id": "pkm_kedawung",
+    "name": "Puskesmas Kedawung",
+    "identifiers": {
+      "epuskesmas": "1030825",
+      "bpjs": "10182001",
+      "asik": "32090200040"
+    },
+    "active": true
+  },
+  {
+    "id": "pkm_sejahtera",
+    "name": "Puskesmas Sejahtera",
+    "identifiers": {
+      "epuskesmas": "1030826",
+      "bpjs": "10182002",
+      "asik": "32090200041"
+    },
+    "active": true
+  },
+  {
+    "id": "pkm_sejahtera_2",
+    "name": "Puskesmas Sejahtera 2",
+    "identifiers": {
+      "epuskesmas": "1030827",
+      "bpjs": "10182003",
+      "asik": "32090200043"
+    },
+    "active": true
+  }
 ]
