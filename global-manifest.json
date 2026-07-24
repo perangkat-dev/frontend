@@ -234,6 +234,20 @@
       "matches": [
         "https://cirebon.epuskesmas.id/skriningfaktorrisiko/*"
       ]
+    },
+    {
+      "id": "data-pasien-reader",
+      "name": "Data Pasien Reader",
+      "version": "1.0",
+      "icon": "🧩",
+      "category": "tools",
+      "description": "Baca data pasien dan simpan ke localStorage, Modul ini harus aktif",
+      "tier": "free",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/data-pasien-reader.js",
+      "matches": [
+        "https://cirebon.epuskesmas.id/klaster_siklushidup/*"
+      ]
     }
   ]
 }
