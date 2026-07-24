@@ -217,37 +217,6 @@
       "matches": [
         "https://*.epuskesmas.id/dashboardilp"
       ]
-    },
-    {
-      "id": "skrining-malaria",
-      "name": "Skrining Malaria",
-      "version": "1.0",
-      "icon": "📝",
-      "category": "skrining",
-      "description": "Skrining Malaria untuk semua pasien (tanpa kondisi)",
-      "tier": "premium",
-      "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-malaria.js",
-      "matches": [
-        "https://cirebon.epuskesmas.id/skriningmalaria/*"
-      ],
-      "dependencies": [
-        "data-pasien-reader"
-      ]
-    },
-    {
-      "id": "wajib-mobile-jkn",
-      "name": "Wajib Mobile JKN",
-      "version": "2.0",
-      "icon": "📝",
-      "category": "tools",
-      "description": "Mengganti tombol pendaftaran BPJS dengan pesan wajib Mobile JKN + audio lanjutan",
-      "tier": "premium",
-      "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/wajib-mobile-jkn.js",
-      "matches": [
-        "https://*.epuskesmas.id/antreanpendaftaran*"
-      ]
     }
   ]
 }
