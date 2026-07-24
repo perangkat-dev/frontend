@@ -185,6 +185,23 @@
         "https://cirebon.epuskesmas.id/resep*"
       ],
       "userSelector": "#menu_user .label-default"
+    },
+    {
+      "id": "skrining-ad-8-ina",
+      "name": "Skrining AD-8 INA",
+      "version": "1.0",
+      "icon": "🧩",
+      "category": "skrining",
+      "description": "Auto-fill Skrining AD-8 INA untuk lansia",
+      "tier": "premium",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-ad-8-ina.js",
+      "matches": [
+        "https://cirebon.epuskesmas.id/skriningascertaindementia/*"
+      ],
+      "dependencies": [
+        "data-pasien-reader"
+      ]
     }
   ]
 }
