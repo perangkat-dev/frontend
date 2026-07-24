@@ -54,19 +54,6 @@
       ]
     },
     {
-      "id": "skrining-counter-final",
-      "name": "Skrining Counter Final",
-      "version": "4.1.0",
-      "icon": "🛠️",
-      "category": "tools",
-      "defaultEnabled": false,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-counter-final.js",
-      "matches": [
-        "https://cirebon.epuskesmas.id/klaster_siklushidup/*"
-      ],
-      "userSelector": "#menu_user .label-default"
-    },
-    {
       "id": "skrining-pengkajian-nutrisi-mna",
       "name": "Skrining Pengkajian Nutrisi (MNA)",
       "version": "1.1",
