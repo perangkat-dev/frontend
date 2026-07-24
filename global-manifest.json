@@ -216,6 +216,23 @@
       "matches": [
         "https://*.epuskesmas.id/dashboardilp"
       ]
+    },
+    {
+      "id": "skrining-malaria",
+      "name": "Skrining Malaria",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining Malaria untuk semua pasien (tanpa kondisi)",
+      "tier": "premium",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-malaria.js",
+      "matches": [
+        "https://cirebon.epuskesmas.id/skriningmalaria/*"
+      ],
+      "dependencies": [
+        "data-pasien-reader"
+      ]
     }
   ]
 }
