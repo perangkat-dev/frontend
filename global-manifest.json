@@ -232,20 +232,6 @@
       "matches": [
         "https://pcarejkn.bpjs-kesehatan.go.id/eclaim/EntriDaftarDokkel"
       ]
-    },
-    {
-      "id": "skrining-counter",
-      "name": "Skrining Counter",
-      "version": "3.2.2",
-      "icon": "🧩",
-      "category": "tools",
-      "description": "Menghitung jumlah skrining yang sudah dan belum dilakukan di tahun berjalan - Versi @grant none",
-      "tier": "premium",
-      "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-counter.js",
-      "matches": [
-        "https://cirebon.epuskesmas.id/klaster_siklushidup/*"
-      ]
     }
   ]
 }
