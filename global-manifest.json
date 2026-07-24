@@ -231,6 +231,20 @@
       "matches": [
         "https://*.epuskesmas.id/antreanpendaftaran*"
       ]
+    },
+    {
+      "id": "bpjs-kunjungan-sehat",
+      "name": "BPJS kunjungan sehat",
+      "version": "2.7",
+      "icon": "🧩",
+      "category": "tools",
+      "description": "Proses multi nomor BPJS kunjungan sehat + Ekspor semua data + Status Skrining akurat",
+      "tier": "enterprise",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/bpjs-kunjungan-sehat.js",
+      "matches": [
+        "https://pcarejkn.bpjs-kesehatan.go.id/eclaim/EntriDaftarDokkel"
+      ]
     }
   ]
 }
