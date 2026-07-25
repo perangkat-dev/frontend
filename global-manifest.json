@@ -199,7 +199,7 @@
       "icon": "🔑",
       "category": "tools",
       "description": "Sensor data sensitif untuk keperluan meeting online, presentasi, atau screen sharing. Mendukung AJAX dan SPA.",
-      "tier": "pro",
+      "tier": "max",
       "defaultEnabled": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/sensor-data.js",
       "matches": [
