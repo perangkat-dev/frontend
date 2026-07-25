@@ -193,20 +193,6 @@
       ]
     },
     {
-      "id": "skrining-faktor-risiko",
-      "name": "Skrining Faktor Risiko",
-      "version": "1.0",
-      "icon": "🧩",
-      "category": "skrining",
-      "description": "Auto-fill Skrining Faktor Risiko untuk semua gender dan usia",
-      "tier": "premium",
-      "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-faktor-risiko.js",
-      "matches": [
-        "https://cirebon.epuskesmas.id/skriningfaktorrisiko/*"
-      ]
-    },
-    {
       "id": "data-pasien-reader",
       "name": "Data Pasien Reader",
       "version": "1.0",
