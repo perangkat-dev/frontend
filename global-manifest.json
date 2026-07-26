@@ -14,6 +14,20 @@
   },
   "modules": [
     {
+      "id": "data-pasien-reader",
+      "name": "Data Pasien Reader",
+      "version": "1.0",
+      "icon": "🧩",
+      "category": "tools",
+      "description": "Baca data pasien dan simpan ke localStorage, Modul ini harus aktif",
+      "tier": "free",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/data-pasien-reader.js",
+      "matches": [
+        "https://cirebon.epuskesmas.id/klaster_siklushidup/*"
+      ]
+    },
+    {
       "id": "anamnesa-dari-kunjungan-sebelumnya",
       "name": "Anamnesa dari Kunjungan Sebelumnya",
       "version": "2.0",
@@ -151,20 +165,6 @@
       ]
     },
     {
-      "id": "exporter-data-skrining",
-      "name": "Exporter Data Skrining",
-      "version": "1.0",
-      "icon": "🧩",
-      "category": "skrining",
-      "description": "Menambahkan fitur preview popup, copy to clipboard, dan export Excel untuk data skrining ePuskesmas",
-      "tier": "free",
-      "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/exporter-data-skrining.js",
-      "matches": [
-        "https://*.epuskesmas.id/dashboardilp"
-      ]
-    },
-    {
       "id": "bpjs-kunjungan-sehat",
       "name": "BPJS kunjungan sehat",
       "version": "2.7",
@@ -179,17 +179,17 @@
       ]
     },
     {
-      "id": "data-pasien-reader",
-      "name": "Data Pasien Reader",
+      "id": "exporter-data-skrining",
+      "name": "Exporter Data Skrining",
       "version": "1.0",
       "icon": "🧩",
-      "category": "tools",
-      "description": "Baca data pasien dan simpan ke localStorage, Modul ini harus aktif",
+      "category": "skrining",
+      "description": "Menambahkan fitur preview popup, copy to clipboard, dan export Excel untuk data skrining ePuskesmas",
       "tier": "free",
       "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/data-pasien-reader.js",
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/exporter-data-skrining.js",
       "matches": [
-        "https://cirebon.epuskesmas.id/klaster_siklushidup/*"
+        "https://*.epuskesmas.id/dashboardilp"
       ]
     },
     {
