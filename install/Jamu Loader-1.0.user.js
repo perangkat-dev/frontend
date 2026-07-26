@@ -1222,9 +1222,11 @@ if (!validation.skipValidation && isEpuskesmasModule(mod) && whitelistUrl) {
                 <div id="app">
                     <div class="header">
                         <div class="header-left">
-                            <div class="logo"><span class="logo-bracket">[</span><span class="logo-text">JL</span><span class="logo-bracket">]</span></div>
+                            <div class="logo">
+                            <img src="https://perangkat-dev.github.io/frontend/logo.svg" class="logo-svg" alt="Jamu Loader" />
+                            </div>
                             <div class="header-info">
-                                <div class="title">Jamu Loader</div>
+                                <div class="logo-text">Jamu Loader</div>
                                 <div class="subtitle-row">
                                     <span class="subtitle" id="module-count">Loading...</span>
                                     <span class="custom-indicator hidden" id="custom-indicator">⬡ custom</span>
