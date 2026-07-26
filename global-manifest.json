@@ -27,19 +27,6 @@
       ]
     },
     {
-      "id": "anamnesa-dari-kunjungan-sebelumnya",
-      "name": "Anamnesa dari Kunjungan Sebelumnya",
-      "version": "2.0",
-      "icon": "📝",
-      "category": "skrining",
-      "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/anamnesa-dari-kunjungan-sebelumnya.js",
-      "matches": [
-        "https://*.epuskesmas.id/anamnesa/*"
-      ],
-      "userSelector": "#menu_user .label-default"
-    },
-    {
       "id": "kessan-bpjs-auto",
       "name": "KESSAN BPJS Auto",
       "version": "5.0",
