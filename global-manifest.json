@@ -19,7 +19,7 @@
       "icon": "🧩",
       "category": "tools",
       "description": "Baca data pasien dan simpan ke localStorage, Modul ini harus aktif",
-      "tier": "free",
+      "tier": "dasar",
       "defaultEnabled": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/data-pasien-reader.js",
       "matches": [
@@ -153,7 +153,7 @@
       "icon": "🧩",
       "category": "skrining",
       "description": "Auto-fill Skrining AD-8 INA untuk lansia",
-      "tier": "premium",
+      "tier": "dasar",
       "defaultEnabled": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-ad-8-ina.js",
       "matches": [
@@ -170,7 +170,7 @@
       "icon": "🧩",
       "category": "tools",
       "description": "Proses multi nomor BPJS kunjungan sehat + Ekspor semua data + Status Skrining akurat",
-      "tier": "enterprise",
+      "tier": "max",
       "defaultEnabled": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/bpjs-kunjungan-sehat.js",
       "matches": [
