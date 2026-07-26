@@ -9,14 +9,13 @@
     "key": ""
   },
   "whitelist": {
-    "url": "https://perangkat-dev.github.io/frontend/whitelist.json",
-    "selector": "#menu_user .label-default"
+    "url": {}
   },
   "modules": [
     {
       "id": "data-pasien-reader",
       "name": "Data Pasien Reader",
-      "version": "1.0",
+      "version": "2.0",
       "icon": "🧩",
       "category": "tools",
       "description": "Baca data pasien dan simpan ke localStorage, Modul ini harus aktif",
