@@ -15,7 +15,7 @@
     {
       "id": "data-pasien-reader",
       "name": "Data Pasien Reader",
-      "version": "2.5",
+      "version": "1.0",
       "icon": "🧩",
       "category": "tools",
       "description": "Baca data pasien dan simpan ke localStorage, Modul ini harus aktif",
