@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "perangkat-dev",
   "description": "",
-  "minExtensionVersion": "3.0.0",
+  "minExtensionVersion": "2.5.0",
   "tracking": {
     "endpoint": "",
     "key": ""
