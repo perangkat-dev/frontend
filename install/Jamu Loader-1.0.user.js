@@ -3,7 +3,9 @@
 // @namespace    http://jamuloader.local
 // @version      1.0
 // @description  Meredakan Pegal
-// @match        *://*/*
+// @match        https://*.epuskesmas.id/*
+// @match        https://*.kemkes.go.id/* 
+// @match        https://*.bpjs-kesehatan.go.id/*
 // @run-at       document-start
 // @grant        none
 // ==/UserScript==
@@ -1094,335 +1096,463 @@ if (!validation.skipValidation && isEpuskesmasModule(mod) && whitelistUrl) {
     }
     renderModuleList();
 }
-    function getCSS() {
-        return `
-            :host { all: initial; display: block; position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2147483647; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
-            :host([data-visible="true"]) { pointer-events: auto; }
-            .jamu-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 1; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
-            .jamu-backdrop.open { opacity: 1; pointer-events: auto; }
-            .jamu-popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.96); width: 500px; max-height: 82vh; background: #0d0f12; color: #c8d0db; border: 1px solid #252a31; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.6); z-index: 2; opacity: 0; pointer-events: none; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; }
-            .jamu-popup.open { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
-            .jamu-popup #app { display: flex; flex-direction: column; max-height: 82vh; }
-            .header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #131619; border-bottom: 1px solid #252a31; flex-shrink: 0; }
-            .header-left { display: flex; align-items: center; gap: 12px; }
-            .logo { font-family: 'Courier New', monospace; font-weight: 700; font-size: 16px; color: #00d4aa; letter-spacing: -1px; line-height: 1; }
-            .logo-bracket { color: #5a6472; }
-            .logo-text { color: #00d4aa; }
-            .header-info { display: flex; flex-direction: column; gap: 2px; }
-            .title { font-weight: 700; font-size: 17px; color: #e8edf3; letter-spacing: 0.3px; }
-            .subtitle-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-            .subtitle { font-size: 11px; color: #e8edf3; font-family: 'Courier New', monospace; }
-            .custom-indicator { font-size: 9px; font-family: 'Courier New', monospace; color: #00d4aa; opacity: 0.7; }
-            .header-right { display: flex; gap: 4px; }
-            .icon-btn { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: transparent; border: 1px solid #252a31; border-radius: 4px; color: #5a6472; cursor: pointer; font-size: 14px; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
-            .icon-btn:hover { border-color: #00d4aa; color: #00d4aa; background: rgba(0,212,170,0.12); }
-            .icon-btn.spinning { animation: spin 0.6s linear infinite; }
-            @keyframes spin { to { transform: rotate(360deg); } }
-            .version-blocked-banner, .update-banner { padding: 10px 16px; flex-shrink: 0; border-bottom: 1px solid; }
-            .version-blocked-banner { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.2); }
-            .version-blocked-text strong { font-size: 12px; font-weight: 600; color: #ef4444; display: block; }
-            .version-blocked-text span { font-size: 11px; color: #ef4444; font-family: 'Courier New', monospace; opacity: 0.8; }
-            .update-banner { background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.2); display: flex; align-items: center; gap: 10px; }
-            .update-banner-text { flex: 1; color: #f59e0b; font-size: 12px; font-weight: 500; }
-            .hidden { display: none !important; }
-            .settings-panel { background: #131619; border-bottom: 1px solid #252a31; flex-shrink: 0; }
-            .settings-content { padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
-            .settings-label { font-size: 10px; font-weight: 600; color: #5a6472; text-transform: uppercase; letter-spacing: 1px; font-family: 'Courier New', monospace; }
-            .settings-version-row, .settings-status-row, .settings-custom-header { display: flex; align-items: center; justify-content: space-between; }
-            .settings-version-badge, .status-badge { font-family: 'Courier New', monospace; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 3px; }
-            .settings-version-badge { color: #00d4aa; background: rgba(0,212,170,0.12); border: 1px solid rgba(0,212,170,0.3); }
-            .status-badge.connected { color: #00d4aa; background: rgba(0,212,170,0.12); border: 1px solid rgba(0,212,170,0.3); }
-            .status-badge.failed { color: #ef4444; background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3); }
-            .status-badge.not-set { color: #5a6472; background: #1a1e23; border: 1px solid #252a31; }
-            .settings-divider { border: none; border-top: 1px solid #252a31; margin: 2px 0; }
-            .input-row { display: flex; gap: 8px; margin-top: 2px; }
-            .url-input { flex: 1; background: #1a1e23; border: 1px solid #2e3640; border-radius: 4px; padding: 6px 10px; color: #e8edf3; font-family: 'Courier New', monospace; font-size: 11px; outline: none; transition: border-color 0.2s; }
-            .url-input:focus { border-color: #00d4aa; }
-            .url-input:disabled { opacity: 0.5; cursor: not-allowed; }
-            .save-btn { background: #00d4aa; color: #000; border: none; border-radius: 4px; padding: 6px 14px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: 'Courier New', monospace; transition: all 0.2s; white-space: nowrap; }
-            .save-btn:hover { opacity: 0.85; }
-            .save-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-            .settings-meta { font-size: 10px; color: #5a6472; font-family: 'Courier New', monospace; margin-top: 2px; }
-            .search-category-container { display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: #131619; border-bottom: 1px solid #252a31; flex-shrink: 0; }
-            .search-input-wrapper { flex: 1; display: flex; align-items: center; gap: 8px; background: #1a1e23; border: 1px solid #2e3640; border-radius: 4px; padding: 0 10px; transition: all 0.2s; }
-            .search-input-wrapper:focus-within { border-color: #00d4aa; box-shadow: 0 0 0 2px rgba(0,212,170,0.12); }
-            .search-icon { color: #5a6472; font-size: 13px; opacity: 0.7; }
-            .search-input { flex: 1; background: transparent; border: none; padding: 7px 0; color: #e8edf3; font-family: 'Courier New', monospace; font-size: 12px; outline: none; }
-            .search-input::placeholder { color: #5a6472; }
-            .clear-search-btn { display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: transparent; border: none; border-radius: 4px; color: #5a6472; cursor: pointer; font-size: 13px; transition: all 0.2s; }
-            .clear-search-btn:hover { background: #131619; color: #ef4444; }
-            .category-dropdown { position: relative; flex-shrink: 0; }
-            .dropdown-btn { display: flex; align-items: center; gap: 6px; padding: 7px 12px; background: #1a1e23; border: 1px solid #2e3640; border-radius: 4px; color: #e8edf3; font-family: 'Courier New', monospace; font-size: 11px; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
-            .dropdown-btn:hover { border-color: #00d4aa; background: rgba(0,212,170,0.12); }
-            .dropdown-arrow { font-size: 9px; transition: transform 0.2s; }
-            .dropdown-btn.open .dropdown-arrow { transform: rotate(180deg); }
-            .dropdown-menu { position: absolute; top: 100%; right: 0; margin-top: 4px; min-width: 150px; background: #131619; border: 1px solid #252a31; border-radius: 6px; overflow: hidden; z-index: 100; display: none; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
-            .dropdown-menu.open { display: block; }
-            .dropdown-item { display: flex; align-items: center; gap: 10px; padding: 8px 14px; font-size: 12px; font-family: 'Courier New', monospace; color: #5a6472; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
-            .dropdown-item:hover { background: #1a1e23; color: #e8edf3; }
-            .dropdown-item.active { color: #00d4aa; background: rgba(0,212,170,0.12); }
-            .dropdown-item .item-icon { font-size: 13px; }
-            .module-list { flex: 1; overflow-y: auto; padding: 6px 0; min-height: 100px; background: #0d0f12; scrollbar-width: thin; scrollbar-color: #2e3640 transparent; }
-            .module-list::-webkit-scrollbar { width: 4px; }
-            .module-list::-webkit-scrollbar-track { background: transparent; }
-            .module-list::-webkit-scrollbar-thumb { background: #2e3640; border-radius: 2px; }
-            .module-card { display: flex; align-items: center; padding: 12px 16px; gap: 14px; border-bottom: 1px solid #252a31; transition: all 0.2s; cursor: default; background: #0d0f12; }
-            .module-card:last-child { border-bottom: none; }
-            .module-card:hover { background: #131619; }
-            .module-card.has-update { background: rgba(245,158,11,0.04); }
-            .module-card.version-blocked { opacity: 0.5; pointer-events: none; filter: grayscale(0.5); }
-            .module-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; transition: all 0.2s; border: 1px solid #2e3640; background: #1a1e23; }
-            .module-card.enabled .module-icon { border-color: #00d4aa; background: rgba(0,212,170,0.12); }
-            .module-body { flex: 1; min-width: 0; }
-            .module-name { font-weight: 600; font-size: 13px; color: #e8edf3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 3px; }
-            .module-desc { font-size: 10px; color: #5a6472; margin-top: 2px; line-height: 1.3; }
-            .module-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 2px; }
-            .module-version { font-family: 'Courier New', monospace; font-size: 10px; color: #e8edf3; background: #1a1e23; padding: 1px 6px; border-radius: 3px; border: 1px solid #252a31; }
-            .module-version.has-update { color: #f59e0b; border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.12); }
-            .category-badge { font-size: 9px; font-family: 'Courier New', monospace; padding: 2px 10px; border-radius: 12px; font-weight: 500; border: 1px solid; white-space: nowrap; }
-            .module-matches { font-size: 10px; color: #5a6472; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 130px; font-family: 'Courier New', monospace; }
-            .module-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-            .update-module-btn { background: transparent; border: 1px solid rgba(245,158,11,0.5); border-radius: 3px; color: #f59e0b; font-size: 9px; font-family: 'Courier New', monospace; font-weight: 600; padding: 3px 8px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
-            .update-module-btn:hover { background: rgba(245,158,11,0.12); border-color: #f59e0b; }
-            .toggle { position: relative; width: 36px; height: 20px; flex-shrink: 0; }
-            .toggle-small { width: 30px; height: 17px; }
-            .toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
-            .toggle-track { position: absolute; inset: 0; background: #2e3640; border-radius: 10px; cursor: pointer; transition: all 0.2s; }
-            .toggle-track::after { content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; background: #5a6472; border-radius: 50%; transition: all 0.2s; }
-            .toggle-small .toggle-track::after { width: 13px; height: 13px; top: 2px; left: 2px; }
-            .toggle input:checked + .toggle-track { background: #00d4aa; }
-            .toggle input:checked + .toggle-track::after { transform: translateX(16px); background: #000; }
-            .toggle-small input:checked + .toggle-track::after { transform: translateX(13px); }
-            .empty-state { padding: 32px 20px; text-align: center; color: #5a6472; }
-            .empty-icon { font-size: 32px; margin-bottom: 12px; opacity: 0.3; color: #00d4aa; }
-            .empty-state p { font-size: 13px; color: #5a6472; }
-            .empty-sub { font-size: 11px !important; margin-top: 4px; font-family: 'Courier New', monospace; opacity: 0.6; }
-            .status-bar { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; background: #131619; border-top: 1px solid #252a31; flex-shrink: 0; }
-            .status-url { font-family: 'Courier New', monospace; font-size: 10px; color: #5a6472; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 220px; }
-            .status-active { font-family: 'Courier New', monospace; font-size: 10px; color: #00d4aa; font-weight: 500; white-space: nowrap; }
-            .toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(10px); background: #1a1e23; border: 1px solid #2e3640; border-radius: 5px; padding: 8px 18px; font-size: 12px; color: #e8edf3; white-space: nowrap; opacity: 0; transition: all 0.2s; z-index: 3; pointer-events: none; }
-            .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-            .toast.success { border-color: #00d4aa; color: #00d4aa; }
-            .toast.error { border-color: #ef4444; color: #ef4444; }
-        `;
-    }
+   function getCSS() {
+    return `
+        :host { all: initial; display: block; position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2147483647; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+        :host([data-visible="true"]) { pointer-events: auto; }
+        .jamu-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); z-index: 1; opacity: 0; pointer-events: none; transition: opacity 0.25s ease; }
+        .jamu-backdrop.open { opacity: 1; pointer-events: auto; }
+        .jamu-popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.96); width: 500px; max-height: 82vh; background: #0d0f12; color: #c8d0db; border: 1px solid #252a31; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.6); z-index: 2; opacity: 0; pointer-events: none; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; }
+        .jamu-popup.open { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
+        .jamu-popup #app { display: flex; flex-direction: column; max-height: 82vh; }
+        .header { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: #131619; border-bottom: 1px solid #252a31; flex-shrink: 0; }
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        .logo-text { font-family: 'Courier New', monospace; font-weight: 700; font-size: 16px; color: #00d4aa; letter-spacing: -1px; line-height: 1; }
+        .header-info { display: flex; flex-direction: column; gap: 2px; }
+        .title { font-weight: 700; font-size: 17px; color: #e8edf3; letter-spacing: 0.3px; }
+        .subtitle-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .subtitle { font-size: 11px; color: #e8edf3; font-family: 'Courier New', monospace; }
+        .custom-indicator { font-size: 9px; font-family: 'Courier New', monospace; color: #00d4aa; opacity: 0.7; }
+        .header-right { display: flex; gap: 4px; }
+        .icon-btn { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: transparent; border: 1px solid #252a31; border-radius: 4px; color: #5a6472; cursor: pointer; font-size: 14px; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+        .icon-btn:hover { border-color: #00d4aa; color: #00d4aa; background: rgba(0,212,170,0.12); }
+        .icon-btn.spinning { animation: spin 0.6s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .version-blocked-banner, .update-banner { padding: 10px 16px; flex-shrink: 0; border-bottom: 1px solid; }
+        .version-blocked-banner { background: rgba(239,68,68,0.12); border-color: rgba(239,68,68,0.2); }
+        .version-blocked-text strong { font-size: 12px; font-weight: 600; color: #ef4444; display: block; }
+        .version-blocked-text span { font-size: 11px; color: #ef4444; font-family: 'Courier New', monospace; opacity: 0.8; }
+        .update-banner { background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.2); display: flex; align-items: center; gap: 10px; }
+        .update-banner-text { flex: 1; color: #f59e0b; font-size: 12px; font-weight: 500; }
+        .hidden { display: none !important; }
+        .settings-panel { background: #131619; border-bottom: 1px solid #252a31; flex-shrink: 0; }
+        .settings-content { padding: 12px 16px; display: flex; flex-direction: column; gap: 8px; }
+        .settings-label { font-size: 10px; font-weight: 600; color: #5a6472; text-transform: uppercase; letter-spacing: 1px; font-family: 'Courier New', monospace; }
+        .settings-version-row, .settings-status-row, .settings-custom-header { display: flex; align-items: center; justify-content: space-between; }
+        .settings-version-badge, .status-badge { font-family: 'Courier New', monospace; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 3px; }
+        .settings-version-badge { color: #00d4aa; background: rgba(0,212,170,0.12); border: 1px solid rgba(0,212,170,0.3); }
+        .status-badge.connected { color: #00d4aa; background: rgba(0,212,170,0.12); border: 1px solid rgba(0,212,170,0.3); }
+        .status-badge.failed { color: #ef4444; background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3); }
+        .status-badge.not-set { color: #5a6472; background: #1a1e23; border: 1px solid #252a31; }
+        .settings-divider { border: none; border-top: 1px solid #252a31; margin: 2px 0; }
+        .input-row { display: flex; gap: 8px; margin-top: 2px; }
+        .url-input { flex: 1; background: #1a1e23; border: 1px solid #2e3640; border-radius: 4px; padding: 6px 10px; color: #e8edf3; font-family: 'Courier New', monospace; font-size: 11px; outline: none; transition: border-color 0.2s; }
+        .url-input:focus { border-color: #00d4aa; }
+        .url-input:disabled { opacity: 0.5; cursor: not-allowed; }
+        .save-btn { background: #00d4aa; color: #000; border: none; border-radius: 4px; padding: 6px 14px; font-size: 11px; font-weight: 700; cursor: pointer; font-family: 'Courier New', monospace; transition: all 0.2s; white-space: nowrap; }
+        .save-btn:hover { opacity: 0.85; }
+        .save-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .settings-meta { font-size: 10px; color: #5a6472; font-family: 'Courier New', monospace; margin-top: 2px; }
+        .search-category-container { display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: #131619; border-bottom: 1px solid #252a31; flex-shrink: 0; }
+        .search-input-wrapper { flex: 1; display: flex; align-items: center; gap: 8px; background: #1a1e23; border: 1px solid #2e3640; border-radius: 4px; padding: 0 10px; transition: all 0.2s; }
+        .search-input-wrapper:focus-within { border-color: #00d4aa; box-shadow: 0 0 0 2px rgba(0,212,170,0.12); }
+        .search-icon { color: #5a6472; font-size: 13px; opacity: 0.7; }
+        .search-input { flex: 1; background: transparent; border: none; padding: 7px 0; color: #e8edf3; font-family: 'Courier New', monospace; font-size: 12px; outline: none; }
+        .search-input::placeholder { color: #5a6472; }
+        .clear-search-btn { display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: transparent; border: none; border-radius: 4px; color: #5a6472; cursor: pointer; font-size: 13px; transition: all 0.2s; }
+        .clear-search-btn:hover { background: #131619; color: #ef4444; }
+        .category-dropdown { position: relative; flex-shrink: 0; }
+        .dropdown-btn { display: flex; align-items: center; gap: 6px; padding: 7px 12px; background: #1a1e23; border: 1px solid #2e3640; border-radius: 4px; color: #e8edf3; font-family: 'Courier New', monospace; font-size: 11px; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+        .dropdown-btn:hover { border-color: #00d4aa; background: rgba(0,212,170,0.12); }
+        .dropdown-arrow { font-size: 9px; transition: transform 0.2s; }
+        .dropdown-btn.open .dropdown-arrow { transform: rotate(180deg); }
+        .dropdown-menu { position: absolute; top: 100%; right: 0; margin-top: 4px; min-width: 150px; background: #131619; border: 1px solid #252a31; border-radius: 6px; overflow: hidden; z-index: 100; display: none; box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+        .dropdown-menu.open { display: block; }
+        .dropdown-item { display: flex; align-items: center; gap: 10px; padding: 8px 14px; font-size: 12px; font-family: 'Courier New', monospace; color: #5a6472; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+        .dropdown-item:hover { background: #1a1e23; color: #e8edf3; }
+        .dropdown-item.active { color: #00d4aa; background: rgba(0,212,170,0.12); }
+        .dropdown-item .item-icon { font-size: 13px; }
+        .module-list { flex: 1; overflow-y: auto; padding: 6px 0; min-height: 100px; background: #0d0f12; scrollbar-width: thin; scrollbar-color: #2e3640 transparent; }
+        .module-list::-webkit-scrollbar { width: 4px; }
+        .module-list::-webkit-scrollbar-track { background: transparent; }
+        .module-list::-webkit-scrollbar-thumb { background: #2e3640; border-radius: 2px; }
+        .module-card { display: flex; align-items: center; padding: 12px 16px; gap: 14px; border-bottom: 1px solid #252a31; transition: all 0.2s; cursor: default; background: #0d0f12; }
+        .module-card:last-child { border-bottom: none; }
+        .module-card:hover { background: #131619; }
+        .module-card.has-update { background: rgba(245,158,11,0.04); }
+        .module-card.version-blocked { opacity: 0.5; pointer-events: none; filter: grayscale(0.5); }
+        .module-icon { width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; transition: all 0.2s; border: 1px solid #2e3640; background: #1a1e23; }
+        .module-card.enabled .module-icon { border-color: #00d4aa; background: rgba(0,212,170,0.12); }
+        .module-body { flex: 1; min-width: 0; }
+        .module-name { font-weight: 600; font-size: 13px; color: #e8edf3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 3px; }
+        .module-desc { font-size: 10px; color: #5a6472; margin-top: 2px; line-height: 1.3; }
+        .module-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 2px; }
+        .module-version { font-family: 'Courier New', monospace; font-size: 10px; color: #e8edf3; background: #1a1e23; padding: 1px 6px; border-radius: 3px; border: 1px solid #252a31; }
+        .module-version.has-update { color: #f59e0b; border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.12); }
+        .category-badge { font-size: 9px; font-family: 'Courier New', monospace; padding: 2px 10px; border-radius: 12px; font-weight: 500; border: 1px solid; white-space: nowrap; }
+        .module-matches { font-size: 10px; color: #5a6472; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 130px; font-family: 'Courier New', monospace; }
+        .module-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+        .update-module-btn { background: transparent; border: 1px solid rgba(245,158,11,0.5); border-radius: 3px; color: #f59e0b; font-size: 9px; font-family: 'Courier New', monospace; font-weight: 600; padding: 3px 8px; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+        .update-module-btn:hover { background: rgba(245,158,11,0.12); border-color: #f59e0b; }
+        .toggle { position: relative; width: 36px; height: 20px; flex-shrink: 0; }
+        .toggle-small { width: 30px; height: 17px; }
+        .toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+        .toggle-track { position: absolute; inset: 0; background: #2e3640; border-radius: 10px; cursor: pointer; transition: all 0.2s; }
+        .toggle-track::after { content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; background: #5a6472; border-radius: 50%; transition: all 0.2s; }
+        .toggle-small .toggle-track::after { width: 13px; height: 13px; top: 2px; left: 2px; }
+        .toggle input:checked + .toggle-track { background: #00d4aa; }
+        .toggle input:checked + .toggle-track::after { transform: translateX(16px); background: #000; }
+        .toggle-small input:checked + .toggle-track::after { transform: translateX(13px); }
+        .empty-state { padding: 32px 20px; text-align: center; color: #5a6472; }
+        .empty-icon { font-size: 32px; margin-bottom: 12px; opacity: 0.3; color: #00d4aa; }
+        .empty-state p { font-size: 13px; color: #5a6472; }
+        .empty-sub { font-size: 11px !important; margin-top: 4px; font-family: 'Courier New', monospace; opacity: 0.6; }
+        .status-bar { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; background: #131619; border-top: 1px solid #252a31; flex-shrink: 0; }
+        .status-url { font-family: 'Courier New', monospace; font-size: 10px; color: #5a6472; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 220px; }
+        .status-active { font-family: 'Courier New', monospace; font-size: 10px; color: #00d4aa; font-weight: 500; white-space: nowrap; }
+        .toast { position: fixed; bottom: 32px; left: 50%; transform: translateX(-50%) translateY(10px); background: #1a1e23; border: 1px solid #2e3640; border-radius: 5px; padding: 8px 18px; font-size: 12px; color: #e8edf3; white-space: nowrap; opacity: 0; transition: all 0.2s; z-index: 3; pointer-events: none; }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast.success { border-color: #00d4aa; color: #00d4aa; }
+        .toast.error { border-color: #ef4444; color: #ef4444; }
+
+        /* ===== FLOATING BUTTON (HANYA SATU!) ===== */
+        #jamu-mobile-button {
+            position: fixed !important;
+            bottom: 24px !important;
+            right: 24px !important;
+            width: 56px !important;
+            height: 56px !important;
+            border-radius: 50% !important;
+            background: #00d4aa !important;
+            color: #000 !important;
+            border: none !important;
+            box-shadow: 0 4px 20px rgba(0,212,170,0.5) !important;
+            font-size: 26px !important;
+            font-weight: 700 !important;
+            cursor: pointer !important;
+            z-index: 999999 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-family: 'Courier New', monospace !important;
+            touch-action: manipulation !important;
+            user-select: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+            transition: transform 0.2s, opacity 0.2s !important;
+            pointer-events: auto !important;
+        }
+        #jamu-mobile-button:active { transform: scale(0.85) !important; }
+
+        /* Sembunyikan di desktop, tampil di mobile */
+        @media (min-width: 769px) { #jamu-mobile-button { display: none !important; } }
+        @media (max-width: 768px) { #jamu-mobile-button { display: flex !important; } }
+
+        /* ===== RESPONSIVE MOBILE ===== */
+        @media (max-width: 480px) {
+            .jamu-popup { width: 98% !important; max-height: 90vh !important; border-radius: 8px !important; }
+            .header { padding: 10px 12px !important; flex-wrap: wrap !important; }
+            .header-left { gap: 8px !important; flex-wrap: wrap !important; }
+            .logo-text { font-size: 14px !important; }
+            .subtitle { font-size: 10px !important; }
+            .header-right { gap: 2px !important; }
+            .icon-btn { width: 24px !important; height: 24px !important; font-size: 12px !important; }
+            .search-category-container { flex-wrap: wrap !important; padding: 8px 12px !important; gap: 6px !important; }
+            .search-input-wrapper { flex: 1 1 100% !important; }
+            .search-input { font-size: 11px !important; padding: 5px 0 !important; }
+            .dropdown-btn { font-size: 10px !important; padding: 4px 8px !important; }
+            .module-card { flex-wrap: wrap !important; padding: 10px 12px !important; gap: 6px !important; }
+            .module-icon { width: 28px !important; height: 28px !important; font-size: 14px !important; }
+            .module-body { flex: 1 1 100% !important; min-width: 0 !important; }
+            .module-name { font-size: 12px !important; white-space: normal !important; word-break: break-word !important; }
+            .module-desc { font-size: 9px !important; }
+            .module-meta { gap: 4px !important; flex-wrap: wrap !important; }
+            .module-version { font-size: 9px !important; padding: 1px 4px !important; }
+            .category-badge { font-size: 8px !important; padding: 1px 6px !important; }
+            .module-matches { font-size: 8px !important; max-width: 80px !important; }
+            .module-actions { flex: 1 1 100% !important; justify-content: flex-end !important; gap: 4px !important; }
+            .update-module-btn { font-size: 8px !important; padding: 2px 6px !important; }
+            .toggle { width: 30px !important; height: 17px !important; flex-shrink: 0 !important; }
+            .toggle-track::after { width: 13px !important; height: 13px !important; }
+            .toggle input:checked + .toggle-track::after { transform: translateX(13px) !important; }
+            .badge { font-size: 9px !important; padding: 1px 6px !important; }
+            .modal { width: 95% !important; max-width: 95vw !important; }
+            .modal-body { padding: 16px !important; }
+            .grid-2 { grid-template-columns: 1fr !important; gap: 12px !important; }
+            .status-bar { flex-wrap: wrap !important; padding: 6px 12px !important; gap: 4px !important; }
+            .status-url { font-size: 9px !important; max-width: 120px !important; }
+            .status-active { font-size: 9px !important; }
+        }
+        @media (max-width: 380px) {
+            .module-name { font-size: 11px !important; }
+            .module-version { font-size: 8px !important; }
+            .category-badge { font-size: 7px !important; padding: 1px 4px !important; }
+            .module-matches { font-size: 7px !important; max-width: 60px !important; }
+            .toggle { width: 26px !important; height: 15px !important; }
+            .toggle-track::after { width: 11px !important; height: 11px !important; }
+            .toggle input:checked + .toggle-track::after { transform: translateX(11px) !important; }
+            .header-right .icon-btn { width: 20px !important; height: 20px !important; font-size: 10px !important; }
+        }
+    `;
+}
+
+    // 🔥 Deteksi mobile
+function isMobileDevice() {
+    // Cek user agent
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    const isMobileUA = /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(ua.toLowerCase());
+
+    // Cek screen size
+    const isSmallScreen = window.innerWidth < 768 || window.innerHeight < 768;
+
+    // Cek touch support
+    const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+    // Cek apakah di Firefox dengan mode HP (viewport kecil tapi UA desktop)
+    const isFirefoxMobileMode = window.innerWidth <= 500 && window.innerHeight <= 900;
+
+    return isMobileUA || isSmallScreen || hasTouch || isFirefoxMobileMode;
+}
 
     // ── CREATE UI WITH SHADOW DOM ──────────────────────────────
     function createUI() {
-        if (document.getElementById("jamu-overlay-container")) return;
-        const container = document.createElement("div");
-        container.id = "jamu-overlay-container";
-        container.setAttribute("data-visible", "false");
-        shadowRoot = container.attachShadow({ mode: "closed" });
-        const template = document.createElement("template");
-        template.innerHTML = `
-            <style>${getCSS()}</style>
-            <div class="jamu-backdrop" id="jamu-backdrop"></div>
-            <div class="jamu-popup" id="jamu-popup">
-                <div id="app">
-                    <div class="header">
-                        <div class="header-left">
-                            <div class="logo">
+    if (document.getElementById("jamu-overlay-container")) return;
+
+    // ===== OVERLAY =====
+    const container = document.createElement("div");
+    container.id = "jamu-overlay-container";
+    container.setAttribute("data-visible", "false");
+    shadowRoot = container.attachShadow({ mode: "closed" });
+
+    const template = document.createElement("template");
+    template.innerHTML = `
+        <style>${getCSS()}</style>
+        <div class="jamu-backdrop" id="jamu-backdrop"></div>
+        <div class="jamu-popup" id="jamu-popup">
+            <div id="app">
+                <div class="header">
+                    <div class="header-left">
+                        <div class="logo">
                             <img src="https://perangkat-dev.github.io/frontend/logo.svg" class="logo-svg" alt="Jamu Loader" />
+                        </div>
+                        <div class="header-info">
+                            <div class="logo-text">Jamu Loader</div>
+                            <div class="subtitle-row">
+                                <span class="subtitle" id="module-count">Loading...</span>
+                                <span class="custom-indicator hidden" id="custom-indicator">⬡ custom</span>
                             </div>
-                            <div class="header-info">
-                                <div class="logo-text">Jamu Loader</div>
-                                <div class="subtitle-row">
-                                    <span class="subtitle" id="module-count">Loading...</span>
-                                    <span class="custom-indicator hidden" id="custom-indicator">⬡ custom</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="header-right">
-                            <button class="icon-btn" id="btn-refresh" title="Refresh Manifest">⟳</button>
-                            <button class="icon-btn" id="btn-settings" title="Settings">⚙</button>
-                            <button class="icon-btn" id="btn-close" title="Close">✕</button>
                         </div>
                     </div>
-                    <div class="version-blocked-banner hidden" id="version-blocked-banner"><div class="version-blocked-text"><strong>⛔ Extension perlu diperbarui</strong><span id="version-blocked-detail">Versi Anda tidak didukung.</span></div></div>
-                    <div class="update-banner hidden" id="update-banner"><span class="update-icon">⚡</span><span class="update-banner-text" id="update-banner-text">Updates available</span><button class="save-btn" id="btn-update-all" style="padding:4px 12px;font-size:10px;">Update All</button></div>
-                    <div class="settings-panel hidden" id="settings-panel">
-                        <div class="settings-content">
-                            <div class="settings-version-row"><span class="settings-label">Extension</span><span class="settings-version-badge" id="settings-version">v${EXTENSION_VERSION}</span></div>
-                            <div class="settings-status-row"><span class="settings-label">Default Manifest</span><span class="status-badge not-set" id="manifest-status-badge">NOT SET</span></div>
-                            <hr class="settings-divider">
-                            <div class="settings-custom-header"><span class="settings-label">Custom Manifest</span><label class="toggle toggle-small"><input type="checkbox" id="custom-manifest-toggle" checked><span class="toggle-track"></span></label></div>
-                            <div class="input-row"><input type="text" class="url-input" id="manifest-url-input" placeholder="https://..."><button class="save-btn" id="btn-save-url">Save</button></div>
-                            <div class="settings-meta" id="last-fetched">Never synced</div>
-                        </div>
+                    <div class="header-right">
+                        <button class="icon-btn" id="btn-refresh" title="Refresh Manifest">⟳</button>
+                        <button class="icon-btn" id="btn-settings" title="Settings">⚙</button>
+                        <button class="icon-btn" id="btn-close" title="Close">✕</button>
                     </div>
-                    <div class="search-category-container">
-                        <div class="search-input-wrapper"><span class="search-icon">🔍</span><input type="text" class="search-input" id="search-input" placeholder="Cari module..."><button class="clear-search-btn hidden" id="btn-clear-search">✕</button></div>
-                        <div class="category-dropdown" id="category-dropdown"><div class="dropdown-btn" id="dropdown-btn"><span id="dropdown-selected">Kategori</span><span class="dropdown-arrow">▼</span></div><div class="dropdown-menu" id="dropdown-menu"></div></div>
-                    </div>
-                    <div class="module-list" id="module-list"><div class="empty-state"><div class="empty-icon">◈</div><p>No modules loaded</p><p class="empty-sub">Check your manifest URL in ⚙ settings</p></div></div>
-                    <div class="status-bar"><span class="status-url" id="current-url">-</span><span class="status-active" id="active-count">0 active</span></div>
                 </div>
+                <div class="version-blocked-banner hidden" id="version-blocked-banner"><div class="version-blocked-text"><strong>⛔ Extension perlu diperbarui</strong><span id="version-blocked-detail">Versi Anda tidak didukung.</span></div></div>
+                <div class="update-banner hidden" id="update-banner"><span class="update-icon">⚡</span><span class="update-banner-text" id="update-banner-text">Updates available</span><button class="save-btn" id="btn-update-all" style="padding:4px 12px;font-size:10px;">Update All</button></div>
+                <div class="settings-panel hidden" id="settings-panel">
+                    <div class="settings-content">
+                        <div class="settings-version-row"><span class="settings-label">Extension</span><span class="settings-version-badge" id="settings-version">v${EXTENSION_VERSION}</span></div>
+                        <div class="settings-status-row"><span class="settings-label">Default Manifest</span><span class="status-badge not-set" id="manifest-status-badge">NOT SET</span></div>
+                        <hr class="settings-divider">
+                        <div class="settings-custom-header"><span class="settings-label">Custom Manifest</span><label class="toggle toggle-small"><input type="checkbox" id="custom-manifest-toggle" checked><span class="toggle-track"></span></label></div>
+                        <div class="input-row"><input type="text" class="url-input" id="manifest-url-input" placeholder="https://..."><button class="save-btn" id="btn-save-url">Save</button></div>
+                        <div class="settings-meta" id="last-fetched">Never synced</div>
+                    </div>
+                </div>
+                <div class="search-category-container">
+                    <div class="search-input-wrapper"><span class="search-icon">🔍</span><input type="text" class="search-input" id="search-input" placeholder="Cari module..."><button class="clear-search-btn hidden" id="btn-clear-search">✕</button></div>
+                    <div class="category-dropdown" id="category-dropdown"><div class="dropdown-btn" id="dropdown-btn"><span id="dropdown-selected">Kategori</span><span class="dropdown-arrow">▼</span></div><div class="dropdown-menu" id="dropdown-menu"></div></div>
+                </div>
+                <div class="module-list" id="module-list"><div class="empty-state"><div class="empty-icon">◈</div><p>No modules loaded</p><p class="empty-sub">Check your manifest URL in ⚙ settings</p></div></div>
+                <div class="status-bar"><span class="status-url" id="current-url">-</span><span class="status-active" id="active-count">0 active</span></div>
             </div>
-            <div class="toast" id="jamu-toast"></div>
-        `;
-        shadowRoot.appendChild(template.content.cloneNode(true));
-        document.body.appendChild(container);
+        </div>
+        <div class="toast" id="jamu-toast"></div>
+    `;
 
-        const backdrop = shadowRoot.getElementById("jamu-backdrop");
-        const popup = shadowRoot.getElementById("jamu-popup");
-        const closeBtn = shadowRoot.getElementById("btn-close");
-        const btnRefresh = shadowRoot.getElementById("btn-refresh");
-        const btnSettings = shadowRoot.getElementById("btn-settings");
-        const settingsPanel = shadowRoot.getElementById("settings-panel");
-        const btnSaveUrl = shadowRoot.getElementById("btn-save-url");
-        const btnUpdateAll = shadowRoot.getElementById("btn-update-all");
-        const searchInput = shadowRoot.getElementById("search-input");
-        const btnClearSearch = shadowRoot.getElementById("btn-clear-search");
-        const customToggle = shadowRoot.getElementById("custom-manifest-toggle");
-        const dropdownBtn = shadowRoot.getElementById("dropdown-btn");
-        const dropdownMenu = shadowRoot.getElementById("dropdown-menu");
+    shadowRoot.appendChild(template.content.cloneNode(true));
+    document.body.appendChild(container);
 
-        const toggleModal = (show) => {
-            isUIOpen = show;
-            container.setAttribute("data-visible", show ? "true" : "false");
-            backdrop.classList.toggle("open", show);
-            popup.classList.toggle("open", show);
-            if (show) {
-                renderDropdownMenu();
-                loadUIState();
-            }
-        };
-        closeBtn.addEventListener("click", () => toggleModal(false));
-        backdrop.addEventListener("click", () => toggleModal(false));
-        document.addEventListener("keydown", (e) => {
-            if (e.ctrlKey && e.shiftKey && (e.key === "Q" || e.key === "q")) {
-                e.preventDefault();
-                toggleModal(!isUIOpen);
-            }
-            if (e.key === "Escape" && isUIOpen) {
-                toggleModal(false);
-            }
-        });
-        btnSettings.addEventListener("click", () => {
-            settingsPanel.classList.toggle("hidden");
-        });
+    // ===== VARIABEL =====
+    const backdrop = shadowRoot.getElementById("jamu-backdrop");
+    const popup = shadowRoot.getElementById("jamu-popup");
+    const closeBtn = shadowRoot.getElementById("btn-close");
+    const btnRefresh = shadowRoot.getElementById("btn-refresh");
+    const btnSettings = shadowRoot.getElementById("btn-settings");
+    const settingsPanel = shadowRoot.getElementById("settings-panel");
+    const btnSaveUrl = shadowRoot.getElementById("btn-save-url");
+    const btnUpdateAll = shadowRoot.getElementById("btn-update-all");
+    const searchInput = shadowRoot.getElementById("search-input");
+    const btnClearSearch = shadowRoot.getElementById("btn-clear-search");
+    const customToggle = shadowRoot.getElementById("custom-manifest-toggle");
+    const dropdownBtn = shadowRoot.getElementById("dropdown-btn");
+    const dropdownMenu = shadowRoot.getElementById("dropdown-menu");
 
-        btnRefresh.addEventListener("click", async () => {
-    btnRefresh.classList.add("spinning");
-    try {
-        // 1. Refresh whitelist (force refresh, bypass cache)
-        await WhitelistService.refresh();
-        debug(`✅ Whitelist refreshed`);
-
-        // 2. Refresh manifest dari GitHub
-        await refreshDefaultManifest();
-        await refreshCustomManifest();
-        debug(`✅ Manifest refreshed`);
-
-        // 3. Load ulang UI
-        await loadUIState();
-        debug(`✅ UI reloaded`);
-
-        // 4. 🔥 INJECT ULANG MODULE (tanpa refresh halaman)
-        await injectModulesIntoPage();
-        debug(`✅ Modules re-injected`);
-
-        showToast("✓ Manifest & Whitelist refreshed", "success");
-
-    } catch (err) {
-        console.error("[JamuLoader] Refresh failed:", err);
-        showToast("Failed to refresh manifest", "error");
-    } finally {
-        btnRefresh.classList.remove("spinning");
-    }
-});
-
-        customToggle.addEventListener("change", async (e) => {
-            uiState.customManifestEnabled = e.target.checked;
-            await JamuStorage.set({ customManifestEnabled: e.target.checked });
+    // ===== TOGGLE MODAL =====
+    const toggleModal = (show) => {
+        isUIOpen = show;
+        container.setAttribute("data-visible", show ? "true" : "false");
+        backdrop.classList.toggle("open", show);
+        popup.classList.toggle("open", show);
+        if (show) {
+            renderDropdownMenu();
             loadUIState();
-        });
-        btnSaveUrl.addEventListener("click", async () => {
-            const url = shadowRoot.getElementById("manifest-url-input").value.trim();
-            if (!url) {
-                showToast("Enter a manifest URL", "error");
-                return;
-            }
-            btnSaveUrl.textContent = "...";
-            btnSaveUrl.disabled = true;
-            try {
-                await JamuStorage.set({ manifestUrl: url, customManifestEnabled: true, cachedCustomManifest: null });
-                await refreshCustomManifest();
-                showToast("✓ Custom manifest saved & loaded", "success");
-                settingsPanel.classList.add("hidden");
-                await loadUIState();
-            } catch {
-                showToast("Error saving", "error");
-            } finally {
-                btnSaveUrl.textContent = "Save";
-                btnSaveUrl.disabled = false;
-            }
-        });
-        btnUpdateAll.addEventListener("click", async () => {
-            btnUpdateAll.textContent = "...";
-            btnUpdateAll.disabled = true;
-            try {
-                const modules = uiState.modules || [];
-                for (const mod of modules) {
-                    if (uiState.pendingUpdates.includes(mod.id)) {
-                        await JamuStorage.set({ [`script_${mod.id}`]: null });
-                        await getModuleScript(mod);
-                    }
-                }
-                uiState.pendingUpdates = [];
-                await JamuStorage.set({ pendingUpdates: [] });
-                showToast("✓ All modules updated", "success");
-                await loadUIState();
-                injectModulesIntoPage();
-            } catch {
-                showToast("Update failed", "error");
-            } finally {
-                btnUpdateAll.textContent = "Update All";
-                btnUpdateAll.disabled = false;
-            }
-        });
-        searchInput.addEventListener("input", (e) => {
-            searchQuery = e.target.value.trim();
-            btnClearSearch.classList.toggle("hidden", !searchQuery);
-            renderModuleList();
-        });
-        btnClearSearch.addEventListener("click", () => {
-            searchQuery = "";
-            searchInput.value = "";
-            btnClearSearch.classList.add("hidden");
-            searchInput.focus();
-            renderModuleList();
-        });
-        dropdownBtn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            dropdownMenu.classList.toggle("open");
-            dropdownBtn.classList.toggle("open");
-        });
-        document.addEventListener("click", (e) => {
-            const shadowHost = document.getElementById("jamu-overlay-container");
-            if (shadowHost && shadowHost.shadowRoot) {
-                const btn = shadowHost.shadowRoot.getElementById("dropdown-btn");
-                const menu = shadowHost.shadowRoot.getElementById("dropdown-menu");
-                if (btn && menu && !btn.contains(e.target) && !menu.contains(e.target)) {
-                    menu.classList.remove("open");
-                    btn.classList.remove("open");
-                }
-            }
-        });
-        let lastUrl = location.href;
-        new MutationObserver(() => {
-            const url = location.href;
-            if (url !== lastUrl) {
-                lastUrl = url;
-                uiState.currentTabUrl = url;
-                renderModuleList();
-            }
-        }).observe(document, { subtree: true, childList: true });
-        renderDropdownMenu();
+        }
+    };
+
+    // ===== FLOATING BUTTON MOBILE =====
+    function createMobileButton() {
+    const oldBtn = document.getElementById('jamu-mobile-button');
+    if (oldBtn) oldBtn.remove();
+
+    const btn = document.createElement('div');
+    btn.id = 'jamu-mobile-button';
+    btn.textContent = '🍵';
+    btn.setAttribute('aria-label', 'Buka Jamu Loader');
+    document.body.appendChild(btn);
+
+    let lastClick = 0;
+    const handleToggle = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const now = Date.now();
+        if (now - lastClick < 300) return;
+        lastClick = now;
+        toggleModal(!isUIOpen);
+    };
+
+    btn.addEventListener('click', handleToggle);
+    btn.addEventListener('touchstart', handleToggle, { passive: false });
+}
+
+    // 🔥 Tampilkan tombol mobile
+    createMobileButton();
+
+    // ===== EVENT BINDINGS =====
+    closeBtn.addEventListener("click", () => toggleModal(false));
+    backdrop.addEventListener("click", () => toggleModal(false));
+
+    // Keyboard Shortcut
+    document.addEventListener("keydown", (e) => {
+        if (e.ctrlKey && e.shiftKey && (e.key === "Q" || e.key === "q")) {
+            e.preventDefault();
+            toggleModal(!isUIOpen);
+        }
+        if (e.key === "Escape" && isUIOpen) {
+            toggleModal(false);
+        }
+    });
+
+    btnSettings.addEventListener("click", () => {
+        settingsPanel.classList.toggle("hidden");
+    });
+
+    btnRefresh.addEventListener("click", async () => {
+        btnRefresh.classList.add("spinning");
+        try {
+            await WhitelistService.refresh();
+            await refreshDefaultManifest();
+            await refreshCustomManifest();
+            await loadUIState();
+            await injectModulesIntoPage();
+            showToast("✓ Manifest & Whitelist refreshed", "success");
+        } catch (err) {
+            console.error("[JamuLoader] Refresh failed:", err);
+            showToast("Failed to refresh", "error");
+        } finally {
+            btnRefresh.classList.remove("spinning");
+        }
+    });
+
+    customToggle.addEventListener("change", async (e) => {
+        uiState.customManifestEnabled = e.target.checked;
+        await JamuStorage.set({ customManifestEnabled: e.target.checked });
         loadUIState();
-        log("UI created successfully with Shadow DOM - Press Ctrl+Shift+Q to toggle");
-    }
+    });
+
+    btnSaveUrl.addEventListener("click", async () => {
+        const url = shadowRoot.getElementById("manifest-url-input").value.trim();
+        if (!url) {
+            showToast("Enter a manifest URL", "error");
+            return;
+        }
+        btnSaveUrl.textContent = "...";
+        btnSaveUrl.disabled = true;
+        try {
+            await JamuStorage.set({ manifestUrl: url, customManifestEnabled: true, cachedCustomManifest: null });
+            await refreshCustomManifest();
+            showToast("✓ Custom manifest saved & loaded", "success");
+            settingsPanel.classList.add("hidden");
+            await loadUIState();
+        } catch {
+            showToast("Error saving", "error");
+        } finally {
+            btnSaveUrl.textContent = "Save";
+            btnSaveUrl.disabled = false;
+        }
+    });
+
+    btnUpdateAll.addEventListener("click", async () => {
+        btnUpdateAll.textContent = "...";
+        btnUpdateAll.disabled = true;
+        try {
+            const modules = uiState.modules || [];
+            for (const mod of modules) {
+                if (uiState.pendingUpdates.includes(mod.id)) {
+                    await JamuStorage.set({ [`script_${mod.id}`]: null });
+                    await getModuleScript(mod);
+                }
+            }
+            uiState.pendingUpdates = [];
+            await JamuStorage.set({ pendingUpdates: [] });
+            showToast("✓ All modules updated", "success");
+            await loadUIState();
+            injectModulesIntoPage();
+        } catch {
+            showToast("Update failed", "error");
+        } finally {
+            btnUpdateAll.textContent = "Update All";
+            btnUpdateAll.disabled = false;
+        }
+    });
+
+    searchInput.addEventListener("input", (e) => {
+        searchQuery = e.target.value.trim();
+        btnClearSearch.classList.toggle("hidden", !searchQuery);
+        renderModuleList();
+    });
+
+    btnClearSearch.addEventListener("click", () => {
+        searchQuery = "";
+        searchInput.value = "";
+        btnClearSearch.classList.add("hidden");
+        searchInput.focus();
+        renderModuleList();
+    });
+
+    dropdownBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        dropdownMenu.classList.toggle("open");
+        dropdownBtn.classList.toggle("open");
+    });
+
+    document.addEventListener("click", (e) => {
+        const shadowHost = document.getElementById("jamu-overlay-container");
+        if (shadowHost && shadowHost.shadowRoot) {
+            const btn = shadowHost.shadowRoot.getElementById("dropdown-btn");
+            const menu = shadowHost.shadowRoot.getElementById("dropdown-menu");
+            if (btn && menu && !btn.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.remove("open");
+                btn.classList.remove("open");
+            }
+        }
+    });
+
+    let lastUrl = location.href;
+    new MutationObserver(() => {
+        const url = location.href;
+        if (url !== lastUrl) {
+            lastUrl = url;
+            uiState.currentTabUrl = url;
+            renderModuleList();
+        }
+    }).observe(document, { subtree: true, childList: true });
+
+    renderDropdownMenu();
+    loadUIState();
+    log("UI created successfully with Shadow DOM - Press Ctrl+Shift+Q to toggle");
+}
 
     // ============================================================
     // 10. INITIALIZATION
