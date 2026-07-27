@@ -9,9 +9,21 @@
     "key": ""
   },
   "whitelist": {
-    "url": "https://perangkat-dev.github.io/frontend/whitelist.json"
+    "url": {}
   },
   "modules": [
+{
+  "id": "jamu-dashboard",
+  "name": "Jamu Dashboard",
+  "version": "1.0.0",
+  "icon": "📊",
+  "category": "dashboard",
+  "description": "Manajemen modul Jamu Loader",
+  "tier": "dasar",
+  "defaultEnabled": true,
+  "scriptUrl": "https://perangkat-dev.github.io/frontend/dashboard/dashboard.js",
+  "matches": ["<all_urls>"]
+},
     {
       "id": "data-pasien-reader",
       "name": "Data Pasien Reader",
