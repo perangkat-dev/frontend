@@ -371,7 +371,55 @@
             .popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.96); width: 480px; max-height: 80vh; background: #0d0f12; color: #e8edf3; border: 1px solid #252a31; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.6); z-index: 2; opacity: 0; pointer-events: none; transition: all 0.2s; display: flex; flex-direction: column; }
             .popup.open { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
             .header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #131619; border-bottom: 1px solid #252a31; flex-shrink: 0; }
-            
+            .search-bar {
+    margin-bottom: 12px;
+    position: relative;
+}
+.search-input {
+    width: 100%;
+    padding: 8px 12px 8px 32px;
+    background: #1a1e23;
+    border: 1px solid #252a31;
+    border-radius: 6px;
+    color: #e8edf3;
+    font-size: 12px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.search-input:focus {
+    border-color: #00d4aa;
+}
+.search-input::placeholder {
+    color: #5a6472;
+}
+.search-icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #5a6472;
+    font-size: 14px;
+}
+.search-clear {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #5a6472;
+    cursor: pointer;
+    font-size: 14px;
+    display: none;
+    padding: 0 4px;
+}
+.search-clear:hover {
+    color: #ef4444;
+}
+.search-clear.visible {
+    display: block;
+}
 .header-left {
     display: flex;
     align-items: center;
@@ -470,7 +518,14 @@
                     <button class="header-close" id="dashboard-close">✕</button>
                 </div>
                 <div class="body" id="dashboard-body">
-                    <div class="empty-state">Loading modules...</div>
+                    <div class="search-bar">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" class="search-input" id="search-input" placeholder="Cari module..." />
+                        <button class="search-clear" id="search-clear">✕</button>
+                    </div>
+                    <div id="module-list-container">
+                        <div class="empty-state">Loading modules...</div>
+                    </div>
                 </div>
                 <div class="status-bar">
                     <span id="dashboard-status">Ready</span>
@@ -513,100 +568,134 @@
         });
 
         renderModuleList();
-    }
 
-    async function renderModuleList() {
+        // ===== SEARCH =====
+        const searchInput = shadow.getElementById('search-input');
+        const searchClear = shadow.getElementById('search-clear');
 
-        // Update tier badge di header
-        const tierBadge = shadowRoot?.getElementById('dashboard-tier');
-        if (tierBadge) {
-            const userTier = await getUserTier();
-            const tierLabel = userTier === 'all' ? 'All Access' : userTier.charAt(0).toUpperCase() + userTier.slice(1);
-            tierBadge.textContent = tierLabel;
-            tierBadge.className = `header-tier ${userTier}`;
-        }
-        const body = shadowRoot?.getElementById('dashboard-body');
-        if (!body) return;
-
-        const userTier = await getUserTier();
-        const modules = getModules().filter(m => m.id !== MODULE_ID);
-        const moduleStates = (await Storage.get('moduleStates')).moduleStates || {};
-
-        // Filter module berdasarkan tier
-        let allowedModules = modules;
-        if (userTier !== 'all') {
-            allowedModules = modules.filter(m => isModuleAllowedByTier(m.tier || 'dasar', userTier));
-        }
-
-        const url = window.location.href;
-        const matchedModules = allowedModules.filter(m => {
-            return (m.matches || []).some(p => {
-                if (p === '<all_urls>' || p === '') return true;
-                try {
-                    const escaped = p.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*');
-                    return new RegExp(`^${escaped}$`).test(url);
-                } catch { return url.includes(p); }
-            });
-        });
-
-        if (!matchedModules.length) {
-            body.innerHTML = `<div class="empty-state">Tidak ada module yang match atau diizinkan</div>`;
-            return;
-        }
-
-        const html = matchedModules.map(m => {
-            const enabled = moduleStates[m.id] !== false;
-            const tierClass = `tier-${m.tier || 'dasar'}`;
-            const tierLabel = m.tier || 'dasar';
-
-            return `
-                <div class="module-item" data-id="${m.id}">
-                    <span class="module-icon">${m.icon || '📦'}</span>
-                    <div class="module-info">
-                        <div class="module-name" title="${m.name || m.id}">${m.name || m.id}</div>
-                        <div class="module-meta">
-                            <span class="tier-badge ${tierClass}">${tierLabel}</span>
-                            v${m.version || '1.0'}
-                            <span style="color:#5a6472;margin-left:4px;">${m.matches?.length || 0} URL</span>
-                        </div>
-                    </div>
-                    <div class="module-toggle">
-                        <label>
-                            <input type="checkbox" class="toggle-input" ${enabled ? 'checked' : ''} data-id="${m.id}" />
-                            <span class="toggle-track"></span>
-                        </label>
-                    </div>
-                </div>
-            `;
-        }).join('');
-
-        body.innerHTML = html;
-
-        body.querySelectorAll('.toggle-input').forEach(input => {
-            input.addEventListener('change', async (e) => {
-                const id = e.target.dataset.id;
-                const checked = e.target.checked;
-                const states = await Storage.get('moduleStates');
-                const moduleStates = states.moduleStates || {};
-                moduleStates[id] = checked;
-                await Storage.set({ moduleStates });
-
-                if (checked) {
-                    await injectModule(id);
-                }
-
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value;
+                searchClear?.classList.toggle('visible', searchQuery.length > 0);
                 renderModuleList();
             });
-        });
+        }
 
-        const statusEl = shadowRoot?.getElementById('dashboard-status');
-        const activeEl = shadowRoot?.getElementById('dashboard-active');
-        if (statusEl) statusEl.textContent = `${matchedModules.length} modules on this page | Tier: ${userTier}`;
-        if (activeEl) {
-            const activeCount = matchedModules.filter(m => moduleStates[m.id] !== false).length;
-            activeEl.textContent = `${activeCount} active`;
+        if (searchClear) {
+            searchClear.addEventListener('click', () => {
+                searchQuery = '';
+                searchInput.value = '';
+                searchClear.classList.remove('visible');
+                renderModuleList();
+            });
         }
     }
+
+    let searchQuery = '';
+
+async function renderModuleList() {
+    const container = shadowRoot?.getElementById('module-list-container');
+    if (!container) return;
+
+    // 🔥 UPDATE TIER BADGE DI HEADER
+    const userTier = await getUserTier();
+    const tierBadge = shadowRoot?.getElementById('dashboard-tier');
+    if (tierBadge) {
+        const tierLabel = userTier === 'all' ? 'All Access' : userTier.charAt(0).toUpperCase() + userTier.slice(1);
+        tierBadge.textContent = tierLabel;
+        tierBadge.className = `header-tier ${userTier}`;
+    }
+
+    const modules = getModules().filter(m => m.id !== MODULE_ID);
+    const moduleStates = (await Storage.get('moduleStates')).moduleStates || {};
+
+    // Filter module berdasarkan tier
+    let allowedModules = modules;
+    if (userTier !== 'all') {
+        allowedModules = modules.filter(m => isModuleAllowedByTier(m.tier || 'dasar', userTier));
+    }
+
+    const url = window.location.href;
+    let matchedModules = allowedModules.filter(m => {
+        return (m.matches || []).some(p => {
+            if (p === '<all_urls>' || p === '') return true;
+            try {
+                const escaped = p.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*');
+                return new RegExp(`^${escaped}$`).test(url);
+            } catch { return url.includes(p); }
+        });
+    });
+
+    // 🔥 SEARCH FILTER
+    if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase().trim();
+        matchedModules = matchedModules.filter(m => {
+            const name = (m.name || m.id).toLowerCase();
+            const id = m.id.toLowerCase();
+            const desc = (m.description || '').toLowerCase();
+            return name.includes(q) || id.includes(q) || desc.includes(q);
+        });
+    }
+
+    if (!matchedModules.length) {
+        container.innerHTML = `<div class="empty-state">${searchQuery.trim() ? 'Tidak ada module yang cocok dengan pencarian' : 'Tidak ada module yang match atau diizinkan'}</div>`;
+        return;
+    }
+
+    const html = matchedModules.map(m => {
+        const enabled = moduleStates[m.id] !== false;
+        const tierClass = `tier-${m.tier || 'dasar'}`;
+        const tierLabel = m.tier || 'dasar';
+
+        return `
+            <div class="module-item" data-id="${m.id}">
+                <span class="module-icon">${m.icon || '📦'}</span>
+                <div class="module-info">
+                    <div class="module-name" title="${m.name || m.id}">${m.name || m.id}</div>
+                    <div class="module-meta">
+                        <span class="tier-badge ${tierClass}">${tierLabel}</span>
+                        v${m.version || '1.0'}
+                        <span style="color:#5a6472;margin-left:4px;">${m.matches?.length || 0} URL</span>
+                        ${m.description ? `<span style="color:#5a6472;margin-left:4px;font-size:9px;opacity:0.6;">${m.description.substring(0, 30)}${m.description.length > 30 ? '...' : ''}</span>` : ''}
+                    </div>
+                </div>
+                <div class="module-toggle">
+                    <label>
+                        <input type="checkbox" class="toggle-input" ${enabled ? 'checked' : ''} data-id="${m.id}" />
+                        <span class="toggle-track"></span>
+                    </label>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    container.innerHTML = html;
+
+    container.querySelectorAll('.toggle-input').forEach(input => {
+        input.addEventListener('change', async (e) => {
+            const id = e.target.dataset.id;
+            const checked = e.target.checked;
+            const states = await Storage.get('moduleStates');
+            const moduleStates = states.moduleStates || {};
+            moduleStates[id] = checked;
+            await Storage.set({ moduleStates });
+
+            if (checked) {
+                await injectModule(id);
+            }
+
+            renderModuleList();
+        });
+    });
+
+    const statusEl = shadowRoot?.getElementById('dashboard-status');
+    const activeEl = shadowRoot?.getElementById('dashboard-active');
+    if (statusEl) statusEl.textContent = `${matchedModules.length} modules on this page${searchQuery.trim() ? ' (filtered)' : ''}`;
+    if (activeEl) {
+        const activeCount = matchedModules.filter(m => moduleStates[m.id] !== false).length;
+        activeEl.textContent = `${activeCount} active`;
+    }
+}
 
     // ============================================================
     // 9. LIST & STATS
