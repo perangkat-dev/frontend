@@ -55,20 +55,6 @@
       ]
     },
     {
-      "id": "asdk-apps-menu",
-      "name": "ASDK Apps Menu",
-      "version": "3.2",
-      "icon": "⚙️",
-      "category": "tools",
-      "description": "Floating draggable apps menu untuk ASDK",
-      "tier": "dasar",
-      "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/asdk-apps-menu.js",
-      "matches": [
-        "https://asdk.kemkes.go.id/*"
-      ]
-    },
-    {
       "id": "sensor-data",
       "name": "Sensor Data",
       "version": "1.0",
