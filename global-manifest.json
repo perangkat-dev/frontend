@@ -71,6 +71,20 @@
         "https://*.epuskesmas.id/pelayanan*",
         "https://*.epuskesmas.id/pasien*"
       ]
+    },
+    {
+      "id": "jamu-dashboard",
+      "name": "Dashboard",
+      "version": "1.0",
+      "icon": "🧩",
+      "category": "dashboard",
+      "description": "Meredakan Pegal",
+      "tier": "dasar",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/jamu-dashboard.js",
+      "matches": [
+        "*://*/*"
+      ]
     }
   ]
 }
