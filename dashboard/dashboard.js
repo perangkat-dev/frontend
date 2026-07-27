@@ -371,6 +371,51 @@
             .popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.96); width: 480px; max-height: 80vh; background: #0d0f12; color: #e8edf3; border: 1px solid #252a31; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.6); z-index: 2; opacity: 0; pointer-events: none; transition: all 0.2s; display: flex; flex-direction: column; }
             .popup.open { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
             .header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #131619; border-bottom: 1px solid #252a31; flex-shrink: 0; }
+            
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.header-title {
+    font-weight: 600;
+    font-size: 16px;
+    color: #e8edf3;
+}
+.header-title .jamu {
+    color: #00d4aa;
+}
+.header-tier {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.header-tier.dasar {
+    background: rgba(52,211,153,0.15);
+    color: #34d399;
+    border: 1px solid rgba(52,211,153,0.3);
+}
+.header-tier.pro {
+    background: rgba(245,158,11,0.15);
+    color: #f59e0b;
+    border: 1px solid rgba(245,158,11,0.3);
+}
+.header-tier.max {
+    background: rgba(139,92,246,0.15);
+    color: #8b5cf6;
+    border: 1px solid rgba(139,92,246,0.3);
+}
+.header-tier.all {
+    background: rgba(255,255,255,0.06);
+    color: #5a6472;
+    border: 1px solid #252a31;
+}
+
+
             .header-title { font-weight: 600; font-size: 16px; color: #00d4aa; }
             .header-close { background: none; border: none; color: #5a6472; font-size: 20px; cursor: pointer; padding: 0 4px; }
             .header-close:hover { color: #ef4444; }
@@ -468,6 +513,15 @@
     }
 
     async function renderModuleList() {
+
+        // Update tier badge di header
+        const tierBadge = shadowRoot?.getElementById('dashboard-tier');
+        if (tierBadge) {
+            const userTier = await getUserTier();
+            const tierLabel = userTier === 'all' ? 'All Access' : userTier.charAt(0).toUpperCase() + userTier.slice(1);
+            tierBadge.textContent = tierLabel;
+            tierBadge.className = `header-tier ${userTier}`;
+        }
         const body = shadowRoot?.getElementById('dashboard-body');
         if (!body) return;
 
