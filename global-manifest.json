@@ -9,7 +9,7 @@
     "key": ""
   },
   "whitelist": {
-    "url": "https://perangkat-dev.github.io/frontend/whitelist.json"
+    "url": {}
   },
   "modules": [
     {
@@ -61,7 +61,7 @@
       "icon": "👁️",
       "category": "tools",
       "description": "Sensor data sensitif untuk keperluan meeting online, presentasi, atau screen sharing. Mendukung AJAX dan SPA.",
-      "tier": "dasar",
+      "tier": "max",
       "defaultEnabled": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/sensor-data.js",
       "matches": [
@@ -71,18 +71,6 @@
         "https://*.epuskesmas.id/pelayanan*",
         "https://*.epuskesmas.id/pasien*"
       ]
-    },
-    {
-  "id": "jamu-dashboard",
-  "name": "Jamu Dashboard",
-  "version": "1.0.0",
-  "icon": "📊",
-  "category": "dashboard",
-  "description": "Manajemen modul Jamu Loader",
-  "tier": "dasar",
-  "defaultEnabled": true,
-  "scriptUrl": "https://perangkat-dev.github.io/frontend/dashboard/dashboard.js",
-  "matches": ["<all_urls>"]
-}
+    }
   ]
 }
