@@ -1,7 +1,7 @@
 // ============================================================
 // Dashboard Module untuk Jamu Loader
 // ============================================================
-(function(__meta__) {
+(function() {
     'use strict';
 
     const MODULE_ID = 'jamu-dashboard';
