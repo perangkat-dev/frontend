@@ -27,24 +27,6 @@
       ]
     },
     {
-      "id": "sensor-data",
-      "name": "Sensor Data",
-      "version": "4.8.0",
-      "icon": "🔑",
-      "category": "tools",
-      "description": "Sensor data sensitif untuk keperluan meeting online, presentasi, atau screen sharing. Mendukung AJAX dan SPA.",
-      "tier": "dasar",
-      "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/sensor-data.js",
-      "matches": [
-        "https://*.epuskesmas.id/klaster_siklushidup/*",
-        "https://*.epuskesmas.id/pelayanan/show/*",
-        "https://*.epuskesmas.id/laporaninterpretasiskrining",
-        "https://*.epuskesmas.id/pelayanan*",
-        "https://*.epuskesmas.id/pasien*"
-      ]
-    },
-    {
       "id": "anamnesa-dari-kunjungan-sebelumnya",
       "name": "Anamnesa dari Kunjungan Sebelumnya",
       "version": "1.0",
