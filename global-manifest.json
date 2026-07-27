@@ -12,7 +12,6 @@
     "url": {}
   },
   "modules": [
-    
     {
       "id": "data-pasien-reader",
       "name": "Data Pasien Reader",
