@@ -463,7 +463,10 @@
             <div class="backdrop" id="dashboard-backdrop"></div>
             <div class="popup" id="dashboard-popup">
                 <div class="header">
-                    <span class="header-title">📊 Jamu Dashboard</span>
+                    <div class="header-left">
+                        <span class="header-title"><span class="jamu">🍵 Jamu</span> Loader</span>
+                        <span class="header-tier" id="dashboard-tier">Loading...</span>
+                    </div>
                     <button class="header-close" id="dashboard-close">✕</button>
                 </div>
                 <div class="body" id="dashboard-body">
