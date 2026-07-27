@@ -512,7 +512,7 @@
             <div class="popup" id="dashboard-popup">
                 <div class="header">
                     <div class="header-left">
-                        <span class="header-title"><span class="jamu">🍵 Jamu</span> Loader</span>
+                        <span class="header-title"><span class="jamu">🍵 Jamu</span> Loader v.1</span>
                         <span class="header-tier" id="dashboard-tier">Loading...</span>
                     </div>
                     <button class="header-close" id="dashboard-close">✕</button>
@@ -638,7 +638,7 @@ async function renderModuleList() {
     }
 
     if (!matchedModules.length) {
-        container.innerHTML = `<div class="empty-state">${searchQuery.trim() ? 'Tidak ada module yang cocok dengan pencarian' : 'Tidak ada module yang match atau diizinkan'}</div>`;
+        container.innerHTML = `<div class="empty-state">${searchQuery.trim() ? 'Tidak ada module yang cocok dengan pencarian' : 'Tidak ada module disini atau diizinkan'}</div>`;
         return;
     }
 
