@@ -1,11 +1,11 @@
 // ============================================================
-// Jamu Dashboard - Module v1.0.1
+// Jamu Dashboard - Module v1.0.2 (UI Clean)
 // ============================================================
 (function() {
     'use strict';
 
     const MODULE_ID = 'jamu-dashboard';
-    const VERSION = '1.0.1';
+    const VERSION = '1.0.2';
 
     console.log(`[Dashboard] ✅ v${VERSION} loaded successfully!`);
 
@@ -309,13 +309,11 @@
         let modules = getModules().filter(m => m.id !== MODULE_ID);
         console.log(`[Dashboard] 📦 Total modules: ${modules.length}`);
 
-        // 🔥 Filter berdasarkan tier
         if (userTier !== 'all') {
             modules = modules.filter(m => isModuleAllowedByTier(m.tier || 'dasar', userTier));
             console.log(`[Dashboard] 📦 Modules allowed by tier: ${modules.length}`);
         }
 
-        // 🔥 Auto-inject tanpa menunggu toggle
         const moduleStates = (await Storage.get('moduleStates')).moduleStates || {};
 
         let success = 0;
@@ -323,14 +321,12 @@
         let skipped = 0;
 
         for (const mod of modules) {
-            // Skip jika user disable
             if (moduleStates[mod.id] === false) {
                 console.log(`[Dashboard] ⏭️ ${mod.id} disabled by user`);
                 skipped++;
                 continue;
             }
 
-            // Cek URL match
             const shouldInject = (mod.matches || []).some(p => {
                 if (p === '<all_urls>' || p === '') return true;
                 try {
@@ -355,7 +351,7 @@
     }
 
     // ============================================================
-    // 8. UI (Sama seperti sebelumnya, dengan tambahan)
+    // 8. UI (DENGAN TAMPILAN CLEAN)
     // ============================================================
 
     let isUIOpen = false;
@@ -371,127 +367,122 @@
             .popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.96); width: 480px; max-height: 80vh; background: #0d0f12; color: #e8edf3; border: 1px solid #252a31; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.6); z-index: 2; opacity: 0; pointer-events: none; transition: all 0.2s; display: flex; flex-direction: column; }
             .popup.open { opacity: 1; pointer-events: auto; transform: translate(-50%, -50%) scale(1); }
             .header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #131619; border-bottom: 1px solid #252a31; flex-shrink: 0; }
-            .search-bar {
-    margin-bottom: 12px;
-    position: relative;
-}
-.search-input {
-    width: 100%;
-    padding: 8px 12px 8px 32px;
-    background: #1a1e23;
-    border: 1px solid #252a31;
-    border-radius: 6px;
-    color: #e8edf3;
-    font-size: 12px;
-    font-family: inherit;
-    outline: none;
-    transition: border-color 0.2s;
-}
-.search-input:focus {
-    border-color: #00d4aa;
-}
-.search-input::placeholder {
-    color: #5a6472;
-}
-.search-icon {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #5a6472;
-    font-size: 14px;
-}
-.search-clear {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: #5a6472;
-    cursor: pointer;
-    font-size: 14px;
-    display: none;
-    padding: 0 4px;
-}
-.search-clear:hover {
-    color: #ef4444;
-}
-.search-clear.visible {
-    display: block;
-}
-.header-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-.header-title {
-    font-weight: 600;
-    font-size: 16px;
-    color: #e8edf3;
-}
-.header-title .jamu {
-    color: #00d4aa;
-}
-.header-tier {
-    display: inline-block;
-    padding: 2px 10px;
-    border-radius: 12px;
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-.header-tier.dasar {
-    background: rgba(52,211,153,0.15);
-    color: #34d399;
-    border: 1px solid rgba(52,211,153,0.3);
-}
-.header-tier.pro {
-    background: rgba(245,158,11,0.15);
-    color: #f59e0b;
-    border: 1px solid rgba(245,158,11,0.3);
-}
-.header-tier.max {
-    background: rgba(139,92,246,0.15);
-    color: #8b5cf6;
-    border: 1px solid rgba(139,92,246,0.3);
-}
-.header-tier.all {
-    background: rgba(255,255,255,0.06);
-    color: #5a6472;
-    border: 1px solid #252a31;
-}
-
-
-            .header-title { font-weight: 600; font-size: 16px; color: #00d4aa; }
+            .header-left { display: flex; align-items: center; gap: 10px; }
+            .header-title { font-weight: 600; font-size: 16px; color: #e8edf3; }
+            .header-title .jamu { color: #00d4aa; }
+            .header-tier { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+            .header-tier.dasar { background: rgba(52,211,153,0.15); color: #34d399; border: 1px solid rgba(52,211,153,0.3); }
+            .header-tier.pro { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+            .header-tier.max { background: rgba(139,92,246,0.15); color: #8b5cf6; border: 1px solid rgba(139,92,246,0.3); }
+            .header-tier.all { background: rgba(255,255,255,0.06); color: #5a6472; border: 1px solid #252a31; }
             .header-close { background: none; border: none; color: #5a6472; font-size: 20px; cursor: pointer; padding: 0 4px; }
             .header-close:hover { color: #ef4444; }
             .body { flex: 1; overflow-y: auto; padding: 12px 16px; scrollbar-width: thin; scrollbar-color: #2e3640 transparent; }
             .body::-webkit-scrollbar { width: 4px; }
             .body::-webkit-scrollbar-thumb { background: #2e3640; border-radius: 2px; }
-            .module-item { display: flex; align-items: center; padding: 8px 12px; border-radius: 6px; margin-bottom: 4px; background: #1a1e23; border: 1px solid #252a31; transition: all 0.2s; }
+            
+            /* 🔥 SEARCH BAR - DIPERBAIKI LEBARNYA */
+            .search-bar { margin-bottom: 12px; position: relative; }
+            .search-input { 
+                width: 100%; 
+                padding: 8px 12px 8px 32px; 
+                background: #1a1e23; 
+                border: 1px solid #252a31; 
+                border-radius: 6px; 
+                color: #e8edf3; 
+                font-size: 12px; 
+                font-family: inherit; 
+                outline: none; 
+                transition: border-color 0.2s; 
+                box-sizing: border-box; 
+            }
+            .search-input:focus { border-color: #00d4aa; }
+            .search-input::placeholder { color: #5a6472; }
+            .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #5a6472; font-size: 14px; }
+            .search-clear { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #5a6472; cursor: pointer; font-size: 14px; display: none; padding: 0 4px; }
+            .search-clear:hover { color: #ef4444; }
+            .search-clear.visible { display: block; }
+
+            /* 🔥 MODULE ITEM - CLEAN, HANYA NAMA + BADGE */
+            .module-item { 
+                display: flex; 
+                align-items: center; 
+                padding: 10px 14px; 
+                border-radius: 8px; 
+                margin-bottom: 4px; 
+                background: #1a1e23; 
+                border: 1px solid #252a31; 
+                transition: all 0.2s; 
+            }
             .module-item:hover { background: #22262f; }
-            .module-icon { font-size: 18px; margin-right: 10px; flex-shrink: 0; }
-            .module-info { flex: 1; min-width: 0; }
-            .module-name { font-size: 13px; font-weight: 500; color: #e8edf3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-            .module-meta { font-size: 10px; color: #5a6472; }
-            .module-meta .tier-badge { display: inline-block; padding: 0 6px; border-radius: 3px; font-size: 9px; font-weight: 600; margin-right: 4px; }
-            .tier-dasar { background: rgba(52,211,153,0.15); color: #34d399; }
-            .tier-pro { background: rgba(245,158,11,0.15); color: #f59e0b; }
-            .tier-max { background: rgba(139,92,246,0.15); color: #8b5cf6; }
-            .module-toggle { flex-shrink: 0; margin-left: 8px; }
+            .module-icon { font-size: 20px; margin-right: 12px; flex-shrink: 0; }
+            .module-info { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; }
+            .module-name { 
+                font-size: 15px; 
+                font-weight: 500; 
+                color: #e8edf3; 
+                white-space: nowrap; 
+                overflow: hidden; 
+                text-overflow: ellipsis; 
+            }
+            .module-meta { 
+                display: flex; 
+                align-items: center; 
+                gap: 4px; 
+                flex-shrink: 0; 
+            }
+            .tier-badge { 
+                display: inline-block; 
+                padding: 2px 10px; 
+                border-radius: 12px; 
+                font-size: 10px; 
+                font-weight: 600; 
+                text-transform: uppercase; 
+                letter-spacing: 0.3px; 
+            }
+            .tier-dasar { background: rgba(52,211,153,0.15); color: #34d399; border: 1px solid rgba(52,211,153,0.2); }
+            .tier-pro { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.2); }
+            .tier-max { background: rgba(139,92,246,0.15); color: #8b5cf6; border: 1px solid rgba(139,92,246,0.2); }
+            
+            .module-toggle { flex-shrink: 0; margin-left: 12px; }
             .toggle-input { display: none; }
             .toggle-track { width: 32px; height: 18px; background: #2e3640; border-radius: 10px; cursor: pointer; transition: background 0.2s; display: block; position: relative; }
             .toggle-track::after { content: ''; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; background: #5a6472; border-radius: 50%; transition: all 0.2s; }
             .toggle-input:checked + .toggle-track { background: #00d4aa; }
             .toggle-input:checked + .toggle-track::after { transform: translateX(14px); background: #000; }
+            
             .status-bar { display: flex; justify-content: space-between; padding: 8px 16px; border-top: 1px solid #252a31; background: #131619; font-size: 10px; color: #5a6472; flex-shrink: 0; }
             .status-bar .active-count { color: #00d4aa; }
             .empty-state { padding: 32px 16px; text-align: center; color: #5a6472; font-size: 13px; }
-            #dashboard-floating-btn { position: fixed !important; bottom: 24px !important; right: 24px !important; width: 56px !important; height: 56px !important; border-radius: 50% !important; background: #00d4aa !important; color: #000 !important; border: none !important; box-shadow: 0 4px 20px rgba(0,212,170,0.4) !important; font-size: 24px !important; cursor: pointer !important; z-index: 999999 !important; display: flex !important; align-items: center !important; justify-content: center !important; touch-action: manipulation !important; user-select: none !important; transition: transform 0.2s !important; font-family: 'Courier New', monospace !important; }
+            
+            #dashboard-floating-btn { 
+                position: fixed !important; 
+                bottom: 24px !important; 
+                right: 24px !important; 
+                width: 56px !important; 
+                height: 56px !important; 
+                border-radius: 50% !important; 
+                background: #00d4aa !important; 
+                color: #000 !important; 
+                border: none !important; 
+                box-shadow: 0 4px 20px rgba(0,212,170,0.4) !important; 
+                font-size: 24px !important; 
+                cursor: pointer !important; 
+                z-index: 999999 !important; 
+                display: flex !important; 
+                align-items: center !important; 
+                justify-content: center !important; 
+                touch-action: manipulation !important; 
+                user-select: none !important; 
+                transition: transform 0.2s !important; 
+                font-family: 'Courier New', monospace !important; 
+            }
             #dashboard-floating-btn:active { transform: scale(0.85) !important; }
-            @media (max-width: 480px) { .popup { width: 95% !important; } #dashboard-floating-btn { width: 48px !important; height: 48px !important; font-size: 20px !important; bottom: 16px !important; right: 16px !important; } }
+            @media (max-width: 480px) { 
+                .popup { width: 95% !important; } 
+                #dashboard-floating-btn { width: 48px !important; height: 48px !important; font-size: 20px !important; bottom: 16px !important; right: 16px !important; } 
+                .module-name { font-size: 13px !important; }
+            }
         `;
     }
 
@@ -593,109 +584,107 @@
 
     let searchQuery = '';
 
-async function renderModuleList() {
-    const container = shadowRoot?.getElementById('module-list-container');
-    if (!container) return;
+    // ============================================================
+    // 🔥 RENDER MODULE LIST - CLEAN VERSION
+    // ============================================================
+    async function renderModuleList() {
+        const container = shadowRoot?.getElementById('module-list-container');
+        if (!container) return;
 
-    // 🔥 UPDATE TIER BADGE DI HEADER
-    const userTier = await getUserTier();
-    const tierBadge = shadowRoot?.getElementById('dashboard-tier');
-    if (tierBadge) {
-        const tierLabel = userTier === 'all' ? 'All Access' : userTier.charAt(0).toUpperCase() + userTier.slice(1);
-        tierBadge.textContent = tierLabel;
-        tierBadge.className = `header-tier ${userTier}`;
-    }
+        const userTier = await getUserTier();
+        const tierBadge = shadowRoot?.getElementById('dashboard-tier');
+        if (tierBadge) {
+            const tierLabel = userTier === 'all' ? 'All Access' : userTier.charAt(0).toUpperCase() + userTier.slice(1);
+            tierBadge.textContent = tierLabel;
+            tierBadge.className = `header-tier ${userTier}`;
+        }
 
-    const modules = getModules().filter(m => m.id !== MODULE_ID);
-    const moduleStates = (await Storage.get('moduleStates')).moduleStates || {};
+        const modules = getModules().filter(m => m.id !== MODULE_ID);
+        const moduleStates = (await Storage.get('moduleStates')).moduleStates || {};
 
-    // Filter module berdasarkan tier
-    let allowedModules = modules;
-    if (userTier !== 'all') {
-        allowedModules = modules.filter(m => isModuleAllowedByTier(m.tier || 'dasar', userTier));
-    }
+        let allowedModules = modules;
+        if (userTier !== 'all') {
+            allowedModules = modules.filter(m => isModuleAllowedByTier(m.tier || 'dasar', userTier));
+        }
 
-    const url = window.location.href;
-    let matchedModules = allowedModules.filter(m => {
-        return (m.matches || []).some(p => {
-            if (p === '<all_urls>' || p === '') return true;
-            try {
-                const escaped = p.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*');
-                return new RegExp(`^${escaped}$`).test(url);
-            } catch { return url.includes(p); }
+        const url = window.location.href;
+        let matchedModules = allowedModules.filter(m => {
+            return (m.matches || []).some(p => {
+                if (p === '<all_urls>' || p === '') return true;
+                try {
+                    const escaped = p.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*');
+                    return new RegExp(`^${escaped}$`).test(url);
+                } catch { return url.includes(p); }
+            });
         });
-    });
 
-    // 🔥 SEARCH FILTER
-    if (searchQuery.trim()) {
-        const q = searchQuery.toLowerCase().trim();
-        matchedModules = matchedModules.filter(m => {
-            const name = (m.name || m.id).toLowerCase();
-            const id = m.id.toLowerCase();
-            const desc = (m.description || '').toLowerCase();
-            return name.includes(q) || id.includes(q) || desc.includes(q);
-        });
-    }
+        if (searchQuery.trim()) {
+            const q = searchQuery.toLowerCase().trim();
+            matchedModules = matchedModules.filter(m => {
+                const name = (m.name || m.id).toLowerCase();
+                const id = m.id.toLowerCase();
+                return name.includes(q) || id.includes(q);
+            });
+        }
 
-    if (!matchedModules.length) {
-        container.innerHTML = `<div class="empty-state">${searchQuery.trim() ? 'Tidak ada module yang cocok dengan pencarian' : 'Tidak ada module disini atau diizinkan'}</div>`;
-        return;
-    }
+        if (!matchedModules.length) {
+            container.innerHTML = `<div class="empty-state">${searchQuery.trim() ? 'Tidak ada module yang cocok' : 'Tidak ada module di halaman ini'}</div>`;
+            return;
+        }
 
-    const html = matchedModules.map(m => {
-        const enabled = moduleStates[m.id] !== false;
-        const tierClass = `tier-${m.tier || 'dasar'}`;
-        const tierLabel = m.tier || 'dasar';
+        // 🔥 RENDER: NAMA + BADGE SAJA
+        const html = matchedModules.map(m => {
+            const enabled = moduleStates[m.id] !== false;
+            const tierClass = `tier-${m.tier || 'dasar'}`;
+            const tierLabel = m.tier || 'dasar';
+            const icon = m.icon || '📦';
 
-        return `
-            <div class="module-item" data-id="${m.id}">
-                <span class="module-icon">${m.icon || '📦'}</span>
-                <div class="module-info">
-                    <div class="module-name" title="${m.name || m.id}">${m.name || m.id}</div>
-                    <div class="module-meta">
-                        <span class="tier-badge ${tierClass}">${tierLabel}</span>
-                        v${m.version || '1.0'}
-                        <span style="color:#5a6472;margin-left:4px;">${m.matches?.length || 0} URL</span>
-                        ${m.description ? `<span style="color:#5a6472;margin-left:4px;font-size:9px;opacity:0.6;">${m.description.substring(0, 30)}${m.description.length > 30 ? '...' : ''}</span>` : ''}
+            return `
+                <div class="module-item" data-id="${m.id}">
+                    <span class="module-icon">${icon}</span>
+                    <div class="module-info">
+                        <span class="module-name">${m.name || m.id}</span>
+                        <span class="module-meta">
+                            <span class="tier-badge ${tierClass}">${tierLabel}</span>
+                        </span>
+                    </div>
+                    <div class="module-toggle">
+                        <label>
+                            <input type="checkbox" class="toggle-input" ${enabled ? 'checked' : ''} data-id="${m.id}" />
+                            <span class="toggle-track"></span>
+                        </label>
                     </div>
                 </div>
-                <div class="module-toggle">
-                    <label>
-                        <input type="checkbox" class="toggle-input" ${enabled ? 'checked' : ''} data-id="${m.id}" />
-                        <span class="toggle-track"></span>
-                    </label>
-                </div>
-            </div>
-        `;
-    }).join('');
+            `;
+        }).join('');
 
-    container.innerHTML = html;
+        container.innerHTML = html;
 
-    container.querySelectorAll('.toggle-input').forEach(input => {
-        input.addEventListener('change', async (e) => {
-            const id = e.target.dataset.id;
-            const checked = e.target.checked;
-            const states = await Storage.get('moduleStates');
-            const moduleStates = states.moduleStates || {};
-            moduleStates[id] = checked;
-            await Storage.set({ moduleStates });
+        container.querySelectorAll('.toggle-input').forEach(input => {
+            input.addEventListener('change', async (e) => {
+                const id = e.target.dataset.id;
+                const checked = e.target.checked;
+                const states = await Storage.get('moduleStates');
+                const moduleStates = states.moduleStates || {};
+                moduleStates[id] = checked;
+                await Storage.set({ moduleStates });
 
-            if (checked) {
-                await injectModule(id);
-            }
+                if (checked) {
+                    await injectModule(id);
+                }
 
-            renderModuleList();
+                renderModuleList();
+            });
         });
-    });
 
-    const statusEl = shadowRoot?.getElementById('dashboard-status');
-    const activeEl = shadowRoot?.getElementById('dashboard-active');
-    if (statusEl) statusEl.textContent = `${matchedModules.length} modules on this page${searchQuery.trim() ? ' (filtered)' : ''}`;
-    if (activeEl) {
-        const activeCount = matchedModules.filter(m => moduleStates[m.id] !== false).length;
-        activeEl.textContent = `${activeCount} active`;
+        const statusEl = shadowRoot?.getElementById('dashboard-status');
+        const activeEl = shadowRoot?.getElementById('dashboard-active');
+        if (statusEl) statusEl.textContent = `${matchedModules.length} modules on this page${searchQuery.trim() ? ' (filtered)' : ''}`;
+        if (activeEl) {
+            const activeCount = matchedModules.filter(m => moduleStates[m.id] !== false).length;
+            activeEl.textContent = `${activeCount} active`;
+        }
     }
-}
 
     // ============================================================
     // 9. LIST & STATS
@@ -733,7 +722,6 @@ async function renderModuleList() {
     // ============================================================
     console.log(`[Dashboard] ✅ v${VERSION} loaded!`);
 
-    // 🔥 AUTO INJECT setelah dashboard load
     (async function() {
         const userTier = await getUserTier();
         console.log(`[Dashboard] 👤 User Tier: ${userTier}`);
