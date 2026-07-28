@@ -1,11 +1,11 @@
 // ============================================================
-// Jamu Dashboard - Module v1.0.4
+// Jamu Dashboard - Module v1.0.5
 // ============================================================
 (function() {
     'use strict';
 
     const MODULE_ID = 'jamu-dashboard';
-    const VERSION = '1.0.4';
+    const VERSION = '1.0.5';
 
     console.log(`[Dashboard] ✅ v${VERSION} loaded successfully!`);
 
@@ -55,24 +55,51 @@
 
         getEpuskesmasIdentifier() {
             try {
+                // Coba dari AppLayoutConfig
                 if (window.AppLayoutConfig?.webSocket?.puskesmasId) {
                     const match = window.AppLayoutConfig.webSocket.puskesmasId.match(/(\d+)/);
-                    if (match) return match[1].replace(/^0+/, '');
+                    if (match) {
+                        const id = match[1].replace(/^0+/, '');
+                        console.log(`[Dashboard] 🔍 Found ePuskesmas ID from AppLayoutConfig: ${id}`);
+                        return id;
+                    }
                 }
+                
+                // Coba dari menu user
                 const userMenu = document.querySelector("#menu_user .label-default");
                 if (userMenu) {
                     const match = userMenu.textContent.trim().match(/(\d+)/);
-                    if (match) return match[1].replace(/^0+/, '');
+                    if (match) {
+                        const id = match[1].replace(/^0+/, '');
+                        console.log(`[Dashboard] 🔍 Found ePuskesmas ID from user menu: ${id}`);
+                        return id;
+                    }
                 }
+                
+                // Coba dari script tags
                 const scripts = document.querySelectorAll('script');
                 for (const script of scripts) {
                     const content = script.textContent || '';
                     if (content.includes('puskesmasId')) {
                         const match = content.match(/puskesmasId["']?\s*:\s*["']?(\d+)/);
-                        if (match) return match[1].replace(/^0+/, '');
+                        if (match) {
+                            const id = match[1].replace(/^0+/, '');
+                            console.log(`[Dashboard] 🔍 Found ePuskesmas ID from script: ${id}`);
+                            return id;
+                        }
                     }
                 }
-            } catch (e) {}
+                
+                // Coba dari URL
+                const urlMatch = window.location.href.match(/puskesmas[=\/](\d+)/i);
+                if (urlMatch) {
+                    const id = urlMatch[1].replace(/^0+/, '');
+                    console.log(`[Dashboard] 🔍 Found ePuskesmas ID from URL: ${id}`);
+                    return id;
+                }
+            } catch (e) {
+                console.error('[Dashboard] Error getting ePuskesmas ID:', e);
+            }
             return null;
         },
 
@@ -81,19 +108,29 @@
                 const hiddenSpans = document.querySelectorAll('.hidden-xs');
                 for (const span of hiddenSpans) {
                     const match = span.textContent.trim().match(/\((\d{8})\)/);
-                    if (match) return match[1];
+                    if (match) {
+                        console.log(`[Dashboard] 🔍 Found BPJS ID from hidden span: ${match[1]}`);
+                        return match[1];
+                    }
                 }
                 const userHeader = document.querySelector('.user-header p');
                 if (userHeader) {
                     const match = userHeader.textContent.trim().match(/\b(\d{8})\b/);
-                    if (match) return match[1];
+                    if (match) {
+                        console.log(`[Dashboard] 🔍 Found BPJS ID from user header: ${match[1]}`);
+                        return match[1];
+                    }
                 }
                 const bodyText = document.body.textContent;
                 const matches = bodyText.match(/\b(\d{8})\b/g);
                 if (matches && matches.length > 0) {
-                    return matches.find(c => c.startsWith('10')) || matches[0];
+                    const found = matches.find(c => c.startsWith('10')) || matches[0];
+                    console.log(`[Dashboard] 🔍 Found BPJS ID from body: ${found}`);
+                    return found;
                 }
-            } catch (e) {}
+            } catch (e) {
+                console.error('[Dashboard] Error getting BPJS ID:', e);
+            }
             return null;
         },
 
@@ -103,18 +140,28 @@
                 if (userData) {
                     try {
                         const parsed = JSON.parse(userData);
-                        if (parsed?.user?.kode_sarana) return parsed.user.kode_sarana;
-                        if (parsed?.kode_sarana) return parsed.kode_sarana;
+                        if (parsed?.user?.kode_sarana) {
+                            console.log(`[Dashboard] 🔍 Found ASIK ID from user: ${parsed.user.kode_sarana}`);
+                            return parsed.user.kode_sarana;
+                        }
+                        if (parsed?.kode_sarana) {
+                            console.log(`[Dashboard] 🔍 Found ASIK ID from user: ${parsed.kode_sarana}`);
+                            return parsed.kode_sarana;
+                        }
                     } catch (e) {}
                 }
                 const userEksternal = localStorage.getItem('user_eksternal');
                 if (userEksternal) {
                     try {
                         const parsed = JSON.parse(userEksternal);
-                        if (parsed?.kode_sarana) return parsed.kode_sarana;
+                        if (parsed?.kode_sarana) {
+                            console.log(`[Dashboard] 🔍 Found ASIK ID from user_eksternal: ${parsed.kode_sarana}`);
+                            return parsed.kode_sarana;
+                        }
                     } catch (e) {}
                 }
                 if (window.__asikData?.kode_sarana) {
+                    console.log(`[Dashboard] 🔍 Found ASIK ID from window: ${window.__asikData.kode_sarana}`);
                     return window.__asikData.kode_sarana;
                 }
                 const keys = ['userData', 'userInfo', 'profile', 'asik_user', 'currentUser'];
@@ -123,18 +170,36 @@
                     if (data) {
                         try {
                             const parsed = JSON.parse(data);
-                            if (parsed?.kode_sarana) return parsed.kode_sarana;
-                            if (parsed?.user?.kode_sarana) return parsed.user.kode_sarana;
-                            if (parsed?.data?.kode_sarana) return parsed.data.kode_sarana;
+                            if (parsed?.kode_sarana) {
+                                console.log(`[Dashboard] 🔍 Found ASIK ID from ${key}: ${parsed.kode_sarana}`);
+                                return parsed.kode_sarana;
+                            }
+                            if (parsed?.user?.kode_sarana) {
+                                console.log(`[Dashboard] 🔍 Found ASIK ID from ${key}.user: ${parsed.user.kode_sarana}`);
+                                return parsed.user.kode_sarana;
+                            }
+                            if (parsed?.data?.kode_sarana) {
+                                console.log(`[Dashboard] 🔍 Found ASIK ID from ${key}.data: ${parsed.data.kode_sarana}`);
+                                return parsed.data.kode_sarana;
+                            }
                         } catch (e) {}
                     }
                     data = sessionStorage.getItem(key);
                     if (data) {
                         try {
                             const parsed = JSON.parse(data);
-                            if (parsed?.kode_sarana) return parsed.kode_sarana;
-                            if (parsed?.user?.kode_sarana) return parsed.user.kode_sarana;
-                            if (parsed?.data?.kode_sarana) return parsed.data.kode_sarana;
+                            if (parsed?.kode_sarana) {
+                                console.log(`[Dashboard] 🔍 Found ASIK ID from ${key} (session): ${parsed.kode_sarana}`);
+                                return parsed.kode_sarana;
+                            }
+                            if (parsed?.user?.kode_sarana) {
+                                console.log(`[Dashboard] 🔍 Found ASIK ID from ${key}.user (session): ${parsed.user.kode_sarana}`);
+                                return parsed.user.kode_sarana;
+                            }
+                            if (parsed?.data?.kode_sarana) {
+                                console.log(`[Dashboard] 🔍 Found ASIK ID from ${key}.data (session): ${parsed.data.kode_sarana}`);
+                                return parsed.data.kode_sarana;
+                            }
                         } catch (e) {}
                     }
                 }
@@ -143,18 +208,27 @@
                     const el = document.querySelector(sel);
                     if (el) {
                         const value = el.dataset.kodeSarana || el.dataset.kodePuskesmas || el.textContent.trim();
-                        if (value) return value;
+                        if (value) {
+                            console.log(`[Dashboard] 🔍 Found ASIK ID from selector ${sel}: ${value}`);
+                            return value;
+                        }
                     }
                 }
                 const bodyText = document.body.textContent;
                 const matches = bodyText.match(/\b(\d{11})\b/g);
-                if (matches && matches.length > 0) return matches[0];
-            } catch (e) {}
+                if (matches && matches.length > 0) {
+                    console.log(`[Dashboard] 🔍 Found ASIK ID from body: ${matches[0]}`);
+                    return matches[0];
+                }
+            } catch (e) {
+                console.error('[Dashboard] Error getting ASIK ID:', e);
+            }
             return null;
         },
 
         getCurrentIdentifier() {
             const domain = this.getDomain();
+            console.log(`[Dashboard] 🔍 Current domain: ${domain}`);
             let identifier = null;
             let source = '';
             if (domain === 'skipped') {
@@ -176,6 +250,7 @@
                 default:
                     return { domain, identifier: null, source: 'unknown' };
             }
+            console.log(`[Dashboard] 🔍 Final identifier: ${identifier} (source: ${source})`);
             return { domain, identifier, source };
         }
     };
@@ -185,10 +260,12 @@
     // ============================================================
     async function getWhitelist() {
         const url = manifest.whitelist?.url || 'https://perangkat-dev.github.io/frontend/whitelist.json';
+        console.log(`[Dashboard] 📡 Fetching whitelist from: ${url}`);
         try {
             const res = await fetch(url);
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
             const data = await res.json();
+            console.log(`[Dashboard] 📋 Whitelist loaded: ${data.length} entries`);
             return Array.isArray(data) ? data : [];
         } catch (err) {
             console.warn('[Dashboard] Whitelist fetch failed:', err);
@@ -200,24 +277,35 @@
         const info = IdentifierService.getCurrentIdentifier();
         console.log(`[Dashboard] 🔍 Identifier Info:`, info);
 
-        // FIX: Jika domain skipped atau tidak ada identifier, kembalikan 'dasar' bukan 'all'
+        // Jika domain skipped atau tidak ada identifier, kembalikan 'dasar'
         if (info.domain === 'skipped' || info.domain === 'other' || !info.identifier) {
             console.log(`[Dashboard] ⚠️ No valid identifier, using default tier: dasar`);
             return 'dasar';
         }
 
         const whitelist = await getWhitelist();
-        console.log(`[Dashboard] 📋 Whitelist:`, whitelist);
+        console.log(`[Dashboard] 📋 Checking whitelist for identifier: ${info.identifier}`);
 
+        // FIX: Cari di whitelist dengan pencocokan yang lebih baik
         const matched = whitelist.find(item => {
             const ids = item.identifiers || {};
-            return Object.values(ids).some(
-                val => val && val.toLowerCase().trim() === info.identifier.toLowerCase().trim()
-            );
+            // Cek semua identifier yang ada
+            for (const [key, value] of Object.entries(ids)) {
+                if (value) {
+                    const normalizedWhitelist = value.toLowerCase().trim();
+                    const normalizedIdentifier = info.identifier.toLowerCase().trim();
+                    console.log(`[Dashboard] 🔍 Comparing ${key}: ${normalizedWhitelist} vs ${normalizedIdentifier}`);
+                    if (normalizedWhitelist === normalizedIdentifier) {
+                        console.log(`[Dashboard] ✅ Matched!`);
+                        return true;
+                    }
+                }
+            }
+            return false;
         });
 
         if (!matched) {
-            console.log(`[Dashboard] ⚠️ Identifier not in whitelist, using default tier: dasar`);
+            console.log(`[Dashboard] ⚠️ Identifier "${info.identifier}" not in whitelist, using default tier: dasar`);
             return 'dasar';
         }
 
@@ -236,9 +324,6 @@
     }
 
     function isModuleAllowedByTier(modTier, userTier) {
-        // FIX: Hapus pengecekan 'all' di sini, karena kita tidak akan pernah punya userTier 'all'
-        // Tapi tetap support untuk backward compatibility
-        
         const modTierSafe = modTier || 'dasar';
         const tierLevel = { dasar: 0, pro: 1, max: 2 };
         const modLevel = tierLevel[modTierSafe] ?? 0;
@@ -267,7 +352,7 @@
             return false;
         }
 
-        // FIX: Cek tier sebelum inject
+        // Cek tier sebelum inject
         const userTier = await getUserTier();
         if (!isModuleAllowedByTier(mod.tier || 'dasar', userTier)) {
             console.log(`[Dashboard] ⛔ Module ${mod.id} (${mod.tier}) not allowed for tier ${userTier}`);
@@ -341,7 +426,7 @@
             console.log(`  ${m.id}: tier=${m.tier || 'undefined'}`);
         });
 
-        // FIX: Selalu filter berdasarkan tier (tidak perlu cek 'all' lagi)
+        // Filter berdasarkan tier
         const before = modules.length;
         modules = modules.filter(m => isModuleAllowedByTier(m.tier || 'dasar', userTier));
         console.log(`[Dashboard] 📦 Modules after tier filter: ${modules.length} (was ${before})`);
@@ -651,7 +736,7 @@
         const modules = getModules().filter(m => m.id !== MODULE_ID);
         const moduleStates = (await Storage.get('moduleStates')).moduleStates || {};
 
-        // FIX: Selalu filter berdasarkan tier
+        // Filter berdasarkan tier
         let allowedModules = modules.filter(m => isModuleAllowedByTier(m.tier || 'dasar', userTier));
 
         const url = window.location.href;
