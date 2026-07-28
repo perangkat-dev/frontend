@@ -87,20 +87,6 @@
       ]
     },
     {
-      "id": "ckg-pelayanan-auto-skip-tool-loader-compatible",
-      "name": "CKG Pelayanan - Auto Tidak",
-      "version": "1.0",
-      "icon": "🛠️",
-      "category": "tools",
-      "description": "Otomasi mengubah status pemeriksaan dari \"Ya\" menjadi \"Tidak\" - Compatible dengan Script Loader",
-      "tier": "pro",
-      "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/ckg-pelayanan-auto-skip-tool-loader-compatible.js",
-      "matches": [
-        "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan/detail-pemeriksaan*"
-      ]
-    },
-    {
       "id": "auto-survey-kemkes-mandiri",
       "name": "Auto Survey Mandiri CKG Sekolah",
       "version": "1.0",
