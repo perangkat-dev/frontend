@@ -9,7 +9,7 @@
     "key": ""
   },
   "whitelist": {
-    "url": "https://perangkat-dev.github.io/frontend/whitelist.json"
+    "url": {}
   },
   "modules": [
     {
@@ -115,19 +115,19 @@
         "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan-sekolah/detail-pemeriksaan*"
       ]
     },
-{
-  "id": "anamnesa-dari-kunjungan-sebelumnya",
-  "name": "Anamnesa dari Kunjungan Sebelumnya",
-  "version": "1.0",
-  "icon": "📝",
-  "category": "skrining",
-  "description": "Isi form anamnesa dari kunjungan sebelumnya. Ctrl+Shift+Z. Skip otomatis kunjungan tanpa anamnesa.",
-  "tier": "pro",
-  "defaultEnabled": true,
-  "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/anamnesa-dari-kunjungan-sebelumnya.js",
-  "matches": [
-    "https://*.epuskesmas.id/anamnesa/*"
-  ]
-}
+    {
+      "id": "anamnesa-dari-kunjungan-sebelumnya",
+      "name": "Anamnesa dari Kunjungan Sebelumnya",
+      "version": "1.0",
+      "icon": "🩺",
+      "category": "skrining",
+      "description": "Isi form anamnesa dari kunjungan sebelumnya. Ctrl+Shift+Z. Skip otomatis kunjungan tanpa anamnesa.",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/anamnesa-dari-kunjungan-sebelumnya.js",
+      "matches": [
+        "https://*.epuskesmas.id/anamnesa/*"
+      ]
+    }
   ]
 }
