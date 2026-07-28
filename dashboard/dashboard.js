@@ -13,6 +13,7 @@
     // 1. AMBIL MANIFEST
     // ============================================================
     const manifest = window.__JAMU_MANIFEST__ || {};
+    manifest._originalUrl = 'https://perangkat-dev.github.io/frontend/global-manifest.json';
     const loaderVersion = window.__JAMU_VERSION__ || '2.0.0';
 
     // ============================================================
@@ -453,6 +454,32 @@
             .status-bar { display: flex; justify-content: space-between; padding: 8px 16px; border-top: 1px solid #252a31; background: #131619; font-size: 10px; color: #5a6472; flex-shrink: 0; }
             .status-bar .active-count { color: #00d4aa; }
             .empty-state { padding: 32px 16px; text-align: center; color: #5a6472; font-size: 13px; }
+            .header-right {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }
+            .header-btn {
+                background: none;
+                border: none;
+                color: #5a6472;
+                font-size: 18px;
+                cursor: pointer;
+                padding: 4px 8px;
+                border-radius: 6px;
+                transition: all 0.2s;
+                line-height: 1;
+            }
+            .header-btn:hover {
+                background: rgba(255,255,255,0.05);
+                color: #e8edf3;
+            }
+            .header-btn.spinning {
+                animation: spin 0.6s linear infinite;
+            }
+            @keyframes spin {
+                to { transform: rotate(360deg); }
+            }
             
             /* 🔥 FIX: Tombol dengan !important super kuat untuk ASIK */
             #dashboard-floating-btn { 
@@ -505,6 +532,12 @@
     }
 
     function createUI() {
+
+        // ===== REFRESH MANIFEST =====
+const refreshBtn = shadow.getElementById('btn-refresh');
+if (refreshBtn) {
+    refreshBtn.addEventListener('click', refreshManifest);
+}
         if (uiContainer) return;
 
         try {
@@ -522,10 +555,14 @@
                 <div class="popup" id="dashboard-popup">
                     <div class="header">
                         <div class="header-left">
-                            <span class="header-title"><span class="jamu">🍵 Jamu</span> Loader v.1</span>
+                            <img src="https://perangkat-dev.github.io/frontend/logo.svg" class="header-logo" alt="Jamu Loader" />
+                            <span class="header-title"><span class="jamu">Jamu</span> Loader</span>
                             <span class="header-tier" id="dashboard-tier">Loading...</span>
                         </div>
-                        <button class="header-close" id="dashboard-close">✕</button>
+                        <div class="header-right">
+                            <button class="header-btn" id="btn-refresh" title="Refresh Manifest">⟳</button>
+                            <button class="header-close" id="dashboard-close">✕</button>
+                        </div>
                     </div>
                     <div class="body" id="dashboard-body">
                         <div class="search-bar">
@@ -631,6 +668,38 @@
             console.error('[Dashboard] ❌ Gagal membuat UI:', err);
         }
     }
+
+    // ============================================================
+// REFRESH MANIFEST
+// ============================================================
+async function refreshManifest() {
+    const btn = shadowRoot?.getElementById('btn-refresh');
+    if (btn) btn.classList.add('spinning');
+
+    try {
+        console.log('[Dashboard] 🔄 Refreshing manifest...');
+
+        // 1. Fetch manifest baru
+        const url = manifest._originalUrl || 
+                    'https://raw.githubusercontent.com/perangkat-dev/frontend/refs/heads/main/global-manifest.json';
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const newManifest = await res.json();
+
+        // 2. Update manifest di window
+        window.__JAMU_MANIFEST__ = newManifest;
+        Object.assign(manifest, newManifest);
+
+        // 3. Update UI
+        await renderModuleList();
+        console.log('[Dashboard] ✅ Manifest refreshed');
+
+    } catch (err) {
+        console.error('[Dashboard] ❌ Refresh manifest failed:', err);
+    } finally {
+        if (btn) btn.classList.remove('spinning');
+    }
+}
 
     // ============================================================
     // 🔥 RENDER MODULE LIST - CLEAN VERSION
