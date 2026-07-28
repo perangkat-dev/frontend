@@ -16,7 +16,7 @@
       "id": "jamu-dashboard",
       "name": "Jamu Dashboard",
       "version": "1.0.0",
-      "icon": "📊",
+      "icon": "https://perangkat-dev.github.io/frontend/logo.svg",
       "category": "dashboard",
       "description": "Manajemen modul Jamu Loader",
       "tier": "dasar",
@@ -84,6 +84,20 @@
         "https://*.epuskesmas.id/laporaninterpretasiskrining",
         "https://*.epuskesmas.id/pelayanan*",
         "https://*.epuskesmas.id/pasien*"
+      ]
+    },
+    {
+      "id": "ckg-pelayanan-auto-skip-tool-loader-compatible",
+      "name": "CKG Pelayanan - Auto Tidak",
+      "version": "1.0",
+      "icon": "🛠️",
+      "category": "tools",
+      "description": "Otomasi mengubah status pemeriksaan dari \"Ya\" menjadi \"Tidak\" - Compatible dengan Script Loader",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/ckg-pelayanan-auto-skip-tool-loader-compatible.js",
+      "matches": [
+        "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan/detail-pemeriksaan*"
       ]
     }
   ]
