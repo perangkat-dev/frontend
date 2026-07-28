@@ -37,7 +37,7 @@
       "defaultEnabled": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/data-pasien-reader.js",
       "matches": [
-        "https://cirebon.epuskesmas.id/klaster_siklushidup/*"
+        "https://cirebon.epuskesmas.id/*"
       ]
     },
     {
@@ -127,6 +127,20 @@
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/anamnesa-dari-kunjungan-sebelumnya.js",
       "matches": [
         "https://*.epuskesmas.id/anamnesa/*"
+      ]
+    },
+    {
+      "id": "skrining-pengkajian-nutrisi-mna",
+      "name": "Skrining Pengkajian Nutrisi (MNA)",
+      "version": "1.1",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Auto-fill Skrining Pengkajian Nutrisi dengan enhanced event triggering + forced score recalculation",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-pengkajian-nutrisi-mna.js",
+      "matches": [
+        "https://cirebon.epuskesmas.id/skriningpengkajiannutrisi/create/*"
       ]
     }
   ]
