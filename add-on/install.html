@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Install User Script - Jamu Script Manager</title>
+  <link rel="stylesheet" href="popup.css">
+  <style>
+    body {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f5f7fa;
+    }
+    
+    .install-container {
+      width: 100%;
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    }
+    
+    .install-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #eef2f7;
+    }
+    
+    .install-icon {
+      font-size: 40px;
+      background: #e8edff;
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+    }
+    
+    .install-title h1 {
+      font-size: 22px;
+      color: #2c3e50;
+      margin: 0;
+    }
+    
+    .install-title p {
+      color: #7f8c8d;
+      margin: 4px 0 0 0;
+      font-size: 14px;
+    }
+    
+    .script-metadata {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 16px 0 24px 0;
+      border: 1px solid #eef2f7;
+    }
+    
+    .metadata-row {
+      display: flex;
+      padding: 6px 0;
+      font-size: 14px;
+    }
+    
+    .metadata-label {
+      font-weight: 600;
+      color: #2c3e50;
+      min-width: 100px;
+    }
+    
+    .metadata-value {
+      color: #34495e;
+      word-break: break-all;
+    }
+    
+    .script-preview {
+      background: #1a1a2e;
+      color: #e0e0e0;
+      border-radius: 12px;
+      padding: 16px;
+      margin: 16px 0 24px 0;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      max-height: 300px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+      line-height: 1.5;
+    }
+    
+    .script-preview::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    .script-preview::-webkit-scrollbar-track {
+      background: #2d2d44;
+      border-radius: 4px;
+    }
+    
+    .script-preview::-webkit-scrollbar-thumb {
+      background: #4a6cf7;
+      border-radius: 4px;
+    }
+    
+    .warning-box {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 16px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    
+    .warning-box .warning-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    
+    .warning-box .warning-text {
+      font-size: 13px;
+      color: #856404;
+    }
+    
+    .warning-box .warning-text strong {
+      color: #533f03;
+    }
+    
+    .install-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+      justify-content: flex-end;
+    }
+    
+    .btn-secondary {
+      background: #ecf0f1;
+      color: #2c3e50;
+      padding: 10px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .btn-secondary:hover {
+      background: #d5dbdf;
+    }
+    
+    .btn-primary {
+      background: #4a6cf7;
+      color: white;
+      padding: 10px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .btn-primary:hover {
+      background: #3a5bd9;
+    }
+    
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    
+    .btn-success {
+      background: #27ae60;
+      color: white;
+      padding: 10px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .btn-success:hover {
+      background: #229954;
+    }
+    
+    .status-message {
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      display: none;
+    }
+    
+    .status-message.show {
+      display: block;
+    }
+    
+    .status-message.success {
+      background: #d5f5e3;
+      color: #1a7a42;
+      border: 1px solid #82e0aa;
+    }
+    
+    .status-message.error {
+      background: #fadbd8;
+      color: #922b21;
+      border: 1px solid #f1948a;
+    }
+    
+    .status-message .message-title {
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    
+    .status-message .message-detail {
+      font-size: 13px;
+    }
+    
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      border-top-color: transparent;
+      animation: spin 0.6s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    .install-success-icon {
+      text-align: center;
+      font-size: 64px;
+      margin: 16px 0 8px 0;
+    }
+    
+    .install-success-text {
+      text-align: center;
+      color: #2c3e50;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    
+    .install-success-sub {
+      text-align: center;
+      color: #7f8c8d;
+      font-size: 15px;
+      line-height: 1.6;
+      max-width: 400px;
+      margin: 0 auto 16px auto;
+    }
+
+    @media (max-width: 480px) {
+      .install-container {
+        padding: 20px 16px !important;
+      }
+      
+      .install-header {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .install-actions {
+        flex-direction: column;
+      }
+      
+      .install-actions button {
+        width: 100%;
+      }
+      
+      .metadata-row {
+        flex-direction: column;
+        padding: 4px 0;
+      }
+      
+      .metadata-label {
+        min-width: auto;
+        font-size: 12px;
+        color: #7f8c8d;
+      }
+      
+      .metadata-value {
+        font-size: 14px;
+      }
+      
+      .script-preview {
+        font-size: 11px;
+        max-height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="install-container" id="app">
+    <!-- Loading State -->
+    <div id="loadingState" style="text-align: center; padding: 40px 0;">
+      <div style="font-size: 48px; margin-bottom: 16px;">⏳</div>
+      <h3>Loading script information...</h3>
+      <p style="color: #7f8c8d;">Please wait</p>
+    </div>
+    
+    <!-- Install State -->
+    <div id="installState" style="display: none;">
+      <div class="install-header">
+        <div class="install-icon">📜</div>
+        <div class="install-title">
+          <h1 id="scriptName">User Script</h1>
+          <p id="scriptSource">Source: <span id="sourceUrl">unknown</span></p>
+        </div>
+      </div>
+      
+      <div class="script-metadata">
+        <div class="metadata-row">
+          <span class="metadata-label">📛 Name</span>
+          <span class="metadata-value" id="metaName">Unknown</span>
+        </div>
+        <div class="metadata-row">
+          <span class="metadata-label">👤 Author</span>
+          <span class="metadata-value" id="metaAuthor">Unknown</span>
+        </div>
+        <div class="metadata-row">
+          <span class="metadata-label">📌 Version</span>
+          <span class="metadata-value" id="metaVersion">Unknown</span>
+        </div>
+        <div class="metadata-row">
+          <span class="metadata-label">📝 Description</span>
+          <span class="metadata-value" id="metaDescription">No description</span>
+        </div>
+        <div class="metadata-row">
+          <span class="metadata-label">🌐 Match</span>
+          <span class="metadata-value" id="metaMatch">All URLs</span>
+        </div>
+      </div>
+      
+      <div class="warning-box">
+        <span class="warning-icon">⚠️</span>
+        <div class="warning-text">
+          <strong>Review before installing:</strong> 
+          Always review user scripts before installation. Scripts can access all websites you visit.
+        </div>
+      </div>
+      
+      <div id="previewToggle" style="margin-bottom: 12px;">
+        <button class="btn-secondary" id="togglePreviewBtn" style="font-size: 12px; padding: 4px 12px;">
+          📄 Show/Hide Source
+        </button>
+      </div>
+      
+      <div class="script-preview" id="scriptPreview" style="display: none;"></div>
+      
+      <div class="install-actions">
+        <button class="btn-secondary" id="cancelBtn">Cancel</button>
+        <button class="btn-primary" id="installBtn">Install Script</button>
+      </div>
+      
+      <div id="statusMessage" class="status-message">
+        <div class="message-title" id="statusTitle">Success</div>
+        <div class="message-detail" id="statusDetail">Script installed successfully</div>
+      </div>
+    </div>
+    
+    <!-- Success State -->
+    <div id="successState" style="display: none;">
+      <div class="install-success-icon" id="successIcon">✅</div>
+      <div class="install-success-text" id="successTitle">Script Installed Successfully!</div>
+      <div class="install-success-sub" id="successMessage">The script has been added to your collection.</div>
+      <div class="install-actions" style="justify-content: center; margin-top: 24px;">
+        <button class="btn-success" id="closeBtn">Close</button>
+      </div>
+    </div>
+  </div>
+  
+  <script type="module" src="install.js"></script>
+</body>
+</html>
