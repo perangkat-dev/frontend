@@ -37,7 +37,7 @@
       "defaultEnabled": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/data-pasien-reader.js",
       "matches": [
-        "https://cirebon.epuskesmas.id/*"
+        "https://cirebon.epuskesmas.id/klaster_siklushidup/*"
       ]
     },
     {
