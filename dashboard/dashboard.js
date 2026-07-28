@@ -296,43 +296,88 @@ const IdentifierService = {
     }
 };
 
+
 // ============================================================
-// 5. WHITELIST & VALIDASI
+// 5. WHITELIST & VALIDASI (DIPERBAIKI TOTAL)
 // ============================================================
 async function getWhitelist() {
-    const url = manifest.whitelist?.url || 'https://perangkat-dev.github.io/frontend/whitelist.json';
+    // 1. Ambil URL dengan aman
+    let url = 'https://perangkat-dev.github.io/frontend/whitelist.json'; // Default
+    if (manifest.whitelist) {
+        if (typeof manifest.whitelist === 'string') {
+            url = manifest.whitelist;
+        } else if (typeof manifest.whitelist === 'object' && manifest.whitelist.url) {
+            url = manifest.whitelist.url;
+        }
+    }
+
     try {
+        console.log(`[Dashboard] 📡 Fetching whitelist from: ${url}`);
         const res = await fetch(url);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
-        return Array.isArray(data) ? data : [];
+        
+        // 2. Handle struktur JSON yang berbeda (Bisa langsung Array, atau Objek yang punya property 'whitelist')
+        if (Array.isArray(data)) {
+            return data;
+        } else if (data && Array.isArray(data.whitelist)) {
+            return data.whitelist;
+        } else {
+            console.warn(`[Dashboard] ⚠️ Whitelist format tidak dikenali. Expected Array or Object with 'whitelist' array.`);
+            return [];
+        }
     } catch (err) {
-        ErrorLogger.report('whitelist', 'whitelist', `Fetch failed: ${err.message}`);
-        return [];
+        console.error(`[Dashboard] ❌ Whitelist fetch failed:`, err);
+        return []; // Kembalikan kosong agar validasi gagal dengan aman (fail-safe)
     }
 }
 
 async function getUserTier() {
     const info = IdentifierService.getCurrentIdentifier();
     console.log(`[Dashboard] 🔍 Identifier Info:`, info);
+    
+    // ATURAN 0: Jika tidak ada identifier valid, blokir
     if (info.domain === 'skipped' || info.domain === 'other' || !info.identifier) {
-        console.log(`[Dashboard] ⚠️ No valid identifier, tier: all`);
-        return 'all';
+        console.log(`[Dashboard] 🚫 No valid identifier. Blocking access (tier: none)`);
+        return 'none';
     }
+    
     const whitelist = await getWhitelist();
+    
+    // ATURAN 1: Jika whitelist gagal dimuat atau kosong, blokir semua (Fail-Safe)
+    if (!whitelist || whitelist.length === 0) {
+        console.log(`[Dashboard] 🚫 Whitelist kosong atau gagal dimuat. Blocking access (tier: none)`);
+        return 'none';
+    }
+
+    console.log(`[Dashboard] 📋 Whitelist loaded: ${whitelist.length} entries`);
+
+    // ATURAN 2: Cari identifier di whitelist
+    // PENTING: Gunakan String() untuk mencegah error jika di JSON tertulis sebagai angka (1030825) bukan string ("1030825")
     const matched = whitelist.find(item => {
         const ids = item.identifiers || {};
-        return Object.values(ids).some(
-            val => val && val.toLowerCase().trim() === info.identifier.toLowerCase().trim()
-        );
+        return Object.values(ids).some(val => {
+            if (!val) return false;
+            return String(val).toLowerCase().trim() === String(info.identifier).toLowerCase().trim();
+        });
     });
+    
+    // ATURAN 3: Jika TIDAK ditemukan di whitelist = BLOKIR SEMUA
     if (!matched) {
-        console.log(`[Dashboard] ⚠️ Identifier not in whitelist, tier: all`);
-        return 'all';
+        console.log(`[Dashboard] 🚫 Identifier '${info.identifier}' TIDAK terdaftar di whitelist. BLOCKING ALL MODULES (tier: none).`);
+        return 'none'; 
     }
-    const isActive = matched.active !== false;
-    const userTier = isActive ? (matched.tier || 'dasar') : 'dasar';
-    console.log(`[Dashboard] ✅ Matched: ${matched.id}, Active: ${isActive}, Tier: ${userTier}`);
+    
+    // ATURAN 4: Ditemukan di whitelist. Tentukan tier berdasarkan status 'active'
+    const isActive = matched.active !== false; // Default true jika field 'active' tidak ada
+    let userTier = 'dasar'; // Default ke dasar jika inactive
+    
+    if (isActive) {
+        // Jika active, gunakan tier yang ditentukan (dasar, pro, atau max)
+        userTier = String(matched.tier || 'dasar').toLowerCase();
+    }
+    
+    console.log(`[Dashboard] ✅ Matched: ${matched.id || 'Unknown'}, Active: ${isActive}, Granted Tier: '${userTier}'`);
     return userTier;
 }
 
@@ -344,11 +389,19 @@ function getModules() {
 }
 
 function isModuleAllowedByTier(modTier, userTier) {
+    // Jika user tier 'none', blokir semua modul tanpa kecuali
+    if (userTier === 'none') return false;
+    
+    // Fallback keamanan
     if (userTier === 'all') return true;
-    const modTierSafe = modTier || 'dasar';
+    
+    const modTierSafe = String(modTier || 'dasar').toLowerCase();
+    const userTierSafe = userTier.toLowerCase();
+    
     const tierLevel = { dasar: 0, pro: 1, max: 2 };
     const modLevel = tierLevel[modTierSafe] ?? 0;
-    const userLevel = tierLevel[userTier] ?? 0;
+    const userLevel = tierLevel[userTierSafe] ?? 0;
+    
     return modLevel <= userLevel;
 }
 
