@@ -1,11 +1,11 @@
 // ============================================================
-// Jamu Dashboard - Module v1.0. (UI Clean)
+// Jamu Dashboard - Module v1.0.3
 // ============================================================
 (function() {
     'use strict';
 
     const MODULE_ID = 'jamu-dashboard';
-    const VERSION = '1.0.2';
+    const VERSION = '1.0.3';
 
     console.log(`[Dashboard] ✅ v${VERSION} loaded successfully!`);
 
@@ -36,7 +36,7 @@
     };
 
     // ============================================================
-    // 3. IDENTIFIER SERVICE (untuk whitelist)
+    // 3. IDENTIFIER SERVICE
     // ============================================================
     const IdentifierService = {
         getDomain() {
@@ -198,11 +198,16 @@
 
     async function getUserTier() {
         const info = IdentifierService.getCurrentIdentifier();
+        console.log(`[Dashboard] 🔍 Identifier Info:`, info);
+
         if (info.domain === 'skipped' || info.domain === 'other' || !info.identifier) {
+            console.log(`[Dashboard] ⚠️ No valid identifier, tier: all`);
             return 'all';
         }
 
         const whitelist = await getWhitelist();
+        console.log(`[Dashboard] 📋 Whitelist:`, whitelist);
+
         const matched = whitelist.find(item => {
             const ids = item.identifiers || {};
             return Object.values(ids).some(
@@ -210,9 +215,16 @@
             );
         });
 
-        if (!matched) return 'all';
+        if (!matched) {
+            console.log(`[Dashboard] ⚠️ Identifier not in whitelist, tier: all`);
+            return 'all';
+        }
+
         const isActive = matched.active !== false;
-        return isActive ? (matched.tier || 'dasar') : 'dasar';
+        const userTier = isActive ? (matched.tier || 'dasar') : 'dasar';
+        
+        console.log(`[Dashboard] ✅ Matched: ${matched.id}, Active: ${isActive}, Tier: ${userTier}`);
+        return userTier;
     }
 
     // ============================================================
@@ -224,10 +236,16 @@
 
     function isModuleAllowedByTier(modTier, userTier) {
         if (userTier === 'all') return true;
+        
+        const modTierSafe = modTier || 'dasar';
         const tierLevel = { dasar: 0, pro: 1, max: 2 };
-        const modLevel = tierLevel[modTier] || 0;
-        const userLevel = tierLevel[userTier] || 0;
-        return modLevel <= userLevel;
+        const modLevel = tierLevel[modTierSafe] ?? 0;
+        const userLevel = tierLevel[userTier] ?? 0;
+        
+        const allowed = modLevel <= userLevel;
+        console.log(`[Dashboard] 🔍 ${modTierSafe} (${modLevel}) <= ${userTier} (${userLevel}) = ${allowed}`);
+        
+        return allowed;
     }
 
     // ============================================================
@@ -300,7 +318,7 @@
     }
 
     // ============================================================
-    // 7. 🔥 AUTO INJECT MODULES (DENGAN TIER FILTER)
+    // 7. AUTO INJECT MODULES (DENGAN TIER FILTER)
     // ============================================================
     async function injectAllModules() {
         const userTier = await getUserTier();
@@ -309,9 +327,20 @@
         let modules = getModules().filter(m => m.id !== MODULE_ID);
         console.log(`[Dashboard] 📦 Total modules: ${modules.length}`);
 
+        // 🔥 TAMPILKAN TIER MODULE SEBELUM FILTER
+        modules.forEach(m => {
+            console.log(`  ${m.id}: tier=${m.tier || 'undefined'}`);
+        });
+
         if (userTier !== 'all') {
+            const before = modules.length;
             modules = modules.filter(m => isModuleAllowedByTier(m.tier || 'dasar', userTier));
-            console.log(`[Dashboard] 📦 Modules allowed by tier: ${modules.length}`);
+            console.log(`[Dashboard] 📦 Modules after tier filter: ${modules.length} (was ${before})`);
+            
+            // 🔥 TAMPILKAN MODULE YANG LOLOS FILTER
+            modules.forEach(m => {
+                console.log(`  ✅ ${m.id} (${m.tier || 'dasar'})`);
+            });
         }
 
         const moduleStates = (await Storage.get('moduleStates')).moduleStates || {};
@@ -351,12 +380,13 @@
     }
 
     // ============================================================
-    // 8. UI (DENGAN TAMPILAN CLEAN)
+    // 8. UI CLEAN
     // ============================================================
 
     let isUIOpen = false;
     let uiContainer = null;
     let shadowRoot = null;
+    let searchQuery = '';
 
     function getUICSS() {
         return `
@@ -381,7 +411,6 @@
             .body::-webkit-scrollbar { width: 4px; }
             .body::-webkit-scrollbar-thumb { background: #2e3640; border-radius: 2px; }
             
-            /* 🔥 SEARCH BAR - DIPERBAIKI LEBARNYA */
             .search-bar { margin-bottom: 12px; position: relative; }
             .search-input { 
                 width: 100%; 
@@ -403,7 +432,6 @@
             .search-clear:hover { color: #ef4444; }
             .search-clear.visible { display: block; }
 
-            /* 🔥 MODULE ITEM - CLEAN, HANYA NAMA + BADGE */
             .module-item { 
                 display: flex; 
                 align-items: center; 
@@ -416,7 +444,7 @@
             }
             .module-item:hover { background: #22262f; }
             .module-icon { font-size: 20px; margin-right: 12px; flex-shrink: 0; }
-            .module-info { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; }
+            .module-info { flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
             .module-name { 
                 font-size: 15px; 
                 font-weight: 500; 
@@ -439,10 +467,13 @@
                 font-weight: 600; 
                 text-transform: uppercase; 
                 letter-spacing: 0.3px; 
+                min-width: 44px;
+                text-align: center;
             }
-            .tier-dasar { background: rgba(52,211,153,0.15); color: #34d399; border: 1px solid rgba(52,211,153,0.2); }
-            .tier-pro { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.2); }
-            .tier-max { background: rgba(139,92,246,0.15); color: #8b5cf6; border: 1px solid rgba(139,92,246,0.2); }
+            .tier-dasar { background: rgba(52,211,153,0.15); color: #34d399; border: 1px solid rgba(52,211,153,0.3); }
+            .tier-pro { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+            .tier-max { background: rgba(139,92,246,0.15); color: #8b5cf6; border: 1px solid rgba(139,92,246,0.3); }
+            .tier-undefined { background: rgba(255,255,255,0.05); color: #5a6472; border: 1px solid rgba(255,255,255,0.05); }
             
             .module-toggle { flex-shrink: 0; margin-left: 12px; }
             .toggle-input { display: none; }
@@ -478,10 +509,18 @@
                 font-family: 'Courier New', monospace !important; 
             }
             #dashboard-floating-btn:active { transform: scale(0.85) !important; }
+            #dashboard-floating-btn img {
+                width: 32px;
+                height: 32px;
+                display: block;
+                object-fit: contain;
+                pointer-events: none;
+            }
             @media (max-width: 480px) { 
                 .popup { width: 95% !important; } 
                 #dashboard-floating-btn { width: 48px !important; height: 48px !important; font-size: 20px !important; bottom: 16px !important; right: 16px !important; } 
                 .module-name { font-size: 13px !important; }
+                .module-info { flex-wrap: wrap; gap: 4px; }
             }
         `;
     }
@@ -503,7 +542,7 @@
             <div class="popup" id="dashboard-popup">
                 <div class="header">
                     <div class="header-left">
-                        <span class="header-title"><span class="jamu">🍵 Jamu</span> Loader v.1</span>
+                        <span class="header-title"><span class="jamu">🍵 Jamu</span> Loader</span>
                         <span class="header-tier" id="dashboard-tier">Loading...</span>
                     </div>
                     <button class="header-close" id="dashboard-close">✕</button>
@@ -556,6 +595,10 @@
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && isUIOpen) toggleUI(false);
+            if (e.ctrlKey && e.shiftKey && (e.key === 'Q' || e.key === 'q')) {
+                e.preventDefault();
+                toggleUI(!isUIOpen);
+            }
         });
 
         renderModuleList();
@@ -582,10 +625,8 @@
         }
     }
 
-    let searchQuery = '';
-
     // ============================================================
-    // 🔥 RENDER MODULE LIST - CLEAN VERSION
+    // 9. RENDER MODULE LIST
     // ============================================================
     async function renderModuleList() {
         const container = shadowRoot?.getElementById('module-list-container');
@@ -632,11 +673,11 @@
             return;
         }
 
-        // 🔥 RENDER: NAMA + BADGE SAJA
+        // ===== RENDER MODULE =====
         const html = matchedModules.map(m => {
             const enabled = moduleStates[m.id] !== false;
-            const tierClass = `tier-${m.tier || 'dasar'}`;
-            const tierLabel = m.tier || 'dasar';
+            const tierClass = `tier-${m.tier || 'undefined'}`;
+            const tierLabel = m.tier || 'undefined';
             const icon = m.icon || '📦';
 
             return `
@@ -687,7 +728,7 @@
     }
 
     // ============================================================
-    // 9. LIST & STATS
+    // 10. LIST & STATS (Console)
     // ============================================================
     function listModules() {
         const modules = getModules();
@@ -703,7 +744,7 @@
     }
 
     // ============================================================
-    // 10. EXPOSE
+    // 11. EXPOSE
     // ============================================================
     window.JamuDashboard = {
         version: VERSION,
@@ -718,7 +759,7 @@
     };
 
     // ============================================================
-    // 11. AUTO-RUN
+    // 12. AUTO-RUN
     // ============================================================
     console.log(`[Dashboard] ✅ v${VERSION} loaded!`);
 
