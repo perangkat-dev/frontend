@@ -357,6 +357,7 @@
     let isUIOpen = false;
     let uiContainer = null;
     let shadowRoot = null;
+    let searchQuery = '';
 
     function getUICSS() {
         return `
@@ -381,7 +382,6 @@
             .body::-webkit-scrollbar { width: 4px; }
             .body::-webkit-scrollbar-thumb { background: #2e3640; border-radius: 2px; }
             
-            /* 🔥 SEARCH BAR - DIPERBAIKI LEBARNYA */
             .search-bar { margin-bottom: 12px; position: relative; }
             .search-input { 
                 width: 100%; 
@@ -403,7 +403,6 @@
             .search-clear:hover { color: #ef4444; }
             .search-clear.visible { display: block; }
 
-            /* 🔥 MODULE ITEM - CLEAN, HANYA NAMA + BADGE */
             .module-item { 
                 display: flex; 
                 align-items: center; 
@@ -489,204 +488,214 @@
     function createUI() {
         if (uiContainer) return;
 
-        const container = document.createElement('div');
-        container.id = 'dashboard-ui-container';
-        container.setAttribute('data-visible', 'false');
+        try {
+            const container = document.createElement('div');
+            container.id = 'dashboard-ui-container';
+            container.setAttribute('data-visible', 'false');
 
-        const shadow = container.attachShadow({ mode: 'closed' });
-        shadowRoot = shadow;
+            const shadow = container.attachShadow({ mode: 'closed' });
+            shadowRoot = shadow;
 
-        const template = document.createElement('template');
-        template.innerHTML = `
-            <style>${getUICSS()}</style>
-            <div class="backdrop" id="dashboard-backdrop"></div>
-            <div class="popup" id="dashboard-popup">
-                <div class="header">
-                    <div class="header-left">
-                        <span class="header-title"><span class="jamu">🍵 Jamu</span> Loader v.1</span>
-                        <span class="header-tier" id="dashboard-tier">Loading...</span>
+            const template = document.createElement('template');
+            template.innerHTML = `
+                <style>${getUICSS()}</style>
+                <div class="backdrop" id="dashboard-backdrop"></div>
+                <div class="popup" id="dashboard-popup">
+                    <div class="header">
+                        <div class="header-left">
+                            <span class="header-title"><span class="jamu">🍵 Jamu</span> Loader v.1</span>
+                            <span class="header-tier" id="dashboard-tier">Loading...</span>
+                        </div>
+                        <button class="header-close" id="dashboard-close">✕</button>
                     </div>
-                    <button class="header-close" id="dashboard-close">✕</button>
-                </div>
-                <div class="body" id="dashboard-body">
-                    <div class="search-bar">
-                        <span class="search-icon">🔍</span>
-                        <input type="text" class="search-input" id="search-input" placeholder="Cari module..." />
-                        <button class="search-clear" id="search-clear">✕</button>
+                    <div class="body" id="dashboard-body">
+                        <div class="search-bar">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" class="search-input" id="search-input" placeholder="Cari module..." />
+                            <button class="search-clear" id="search-clear">✕</button>
+                        </div>
+                        <div id="module-list-container">
+                            <div class="empty-state">Loading modules...</div>
+                        </div>
                     </div>
-                    <div id="module-list-container">
-                        <div class="empty-state">Loading modules...</div>
+                    <div class="status-bar">
+                        <span id="dashboard-status">Ready</span>
+                        <span class="active-count" id="dashboard-active">0 active</span>
                     </div>
                 </div>
-                <div class="status-bar">
-                    <span id="dashboard-status">Ready</span>
-                    <span class="active-count" id="dashboard-active">0 active</span>
-                </div>
-            </div>
-        `;
+            `;
 
-        shadow.appendChild(template.content.cloneNode(true));
-        document.body.appendChild(container);
+            shadow.appendChild(template.content.cloneNode(true));
+            document.body.appendChild(container);
 
-        const btn = document.createElement('button');
-        btn.id = 'dashboard-floating-btn';
-        btn.textContent = '📊';
-        document.body.appendChild(btn);
-         console.log('[Dashboard] ✅ Tombol 📊 berhasil dibuat');
-} catch (err) {
-    console.error('[Dashboard] ❌ Gagal membuat tombol:', err);
-}
+            // Buat tombol floating
+            const btn = document.createElement('button');
+            btn.id = 'dashboard-floating-btn';
+            btn.textContent = '📊';
+            document.body.appendChild(btn);
+            
+            console.log('[Dashboard] ✅ Tombol 📊 berhasil dibuat');
 
-        uiContainer = container;
+            uiContainer = container;
 
-        const backdrop = shadow.getElementById('dashboard-backdrop');
-        const popup = shadow.getElementById('dashboard-popup');
-        const closeBtn = shadow.getElementById('dashboard-close');
+            const backdrop = shadow.getElementById('dashboard-backdrop');
+            const popup = shadow.getElementById('dashboard-popup');
+            const closeBtn = shadow.getElementById('dashboard-close');
 
-        const toggleUI = (show) => {
-            isUIOpen = show;
-            container.setAttribute('data-visible', show ? 'true' : 'false');
-            backdrop.classList.toggle('open', show);
-            popup.classList.toggle('open', show);
-            if (show) {
-                renderModuleList();
+            const toggleUI = (show) => {
+                isUIOpen = show;
+                container.setAttribute('data-visible', show ? 'true' : 'false');
+                backdrop.classList.toggle('open', show);
+                popup.classList.toggle('open', show);
+                if (show) {
+                    renderModuleList();
+                }
+            };
+
+            btn.addEventListener('click', () => toggleUI(!isUIOpen));
+            btn.addEventListener('touchstart', (e) => { 
+                e.preventDefault(); 
+                toggleUI(!isUIOpen); 
+            }, { passive: false });
+            closeBtn.addEventListener('click', () => toggleUI(false));
+            backdrop.addEventListener('click', () => toggleUI(false));
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && isUIOpen) toggleUI(false);
+            });
+
+            renderModuleList();
+
+            // ===== SEARCH =====
+            const searchInput = shadow.getElementById('search-input');
+            const searchClear = shadow.getElementById('search-clear');
+
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    searchQuery = e.target.value;
+                    if (searchClear) {
+                        searchClear.classList.toggle('visible', searchQuery.length > 0);
+                    }
+                    renderModuleList();
+                });
             }
-        };
 
-        btn.addEventListener('click', () => toggleUI(!isUIOpen));
-        btn.addEventListener('touchstart', (e) => { e.preventDefault(); toggleUI(!isUIOpen); }, { passive: false });
-        closeBtn.addEventListener('click', () => toggleUI(false));
-        backdrop.addEventListener('click', () => toggleUI(false));
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && isUIOpen) toggleUI(false);
-        });
-
-        renderModuleList();
-
-        // ===== SEARCH =====
-        const searchInput = shadow.getElementById('search-input');
-        const searchClear = shadow.getElementById('search-clear');
-
-        if (searchInput) {
-            searchInput.addEventListener('input', (e) => {
-                searchQuery = e.target.value;
-                searchClear?.classList.toggle('visible', searchQuery.length > 0);
-                renderModuleList();
-            });
-        }
-
-        if (searchClear) {
-            searchClear.addEventListener('click', () => {
-                searchQuery = '';
-                searchInput.value = '';
-                searchClear.classList.remove('visible');
-                renderModuleList();
-            });
+            if (searchClear) {
+                searchClear.addEventListener('click', () => {
+                    searchQuery = '';
+                    if (searchInput) searchInput.value = '';
+                    searchClear.classList.remove('visible');
+                    renderModuleList();
+                });
+            }
+        } catch (err) {
+            console.error('[Dashboard] ❌ Gagal membuat UI:', err);
         }
     }
-
-    let searchQuery = '';
 
     // ============================================================
     // 🔥 RENDER MODULE LIST - CLEAN VERSION
     // ============================================================
     async function renderModuleList() {
-        const container = shadowRoot?.getElementById('module-list-container');
-        if (!container) return;
+        try {
+            const container = shadowRoot?.getElementById('module-list-container');
+            if (!container) return;
 
-        const userTier = await getUserTier();
-        const tierBadge = shadowRoot?.getElementById('dashboard-tier');
-        if (tierBadge) {
-            const tierLabel = userTier === 'all' ? 'All Access' : userTier.charAt(0).toUpperCase() + userTier.slice(1);
-            tierBadge.textContent = tierLabel;
-            tierBadge.className = `header-tier ${userTier}`;
-        }
+            const userTier = await getUserTier();
+            const tierBadge = shadowRoot?.getElementById('dashboard-tier');
+            if (tierBadge) {
+                const tierLabel = userTier === 'all' ? 'All Access' : userTier.charAt(0).toUpperCase() + userTier.slice(1);
+                tierBadge.textContent = tierLabel;
+                tierBadge.className = `header-tier ${userTier}`;
+            }
 
-        const modules = getModules().filter(m => m.id !== MODULE_ID);
-        const moduleStates = (await Storage.get('moduleStates')).moduleStates || {};
+            const modules = getModules().filter(m => m.id !== MODULE_ID);
+            const moduleStates = (await Storage.get('moduleStates')).moduleStates || {};
 
-        let allowedModules = modules;
-        if (userTier !== 'all') {
-            allowedModules = modules.filter(m => isModuleAllowedByTier(m.tier || 'dasar', userTier));
-        }
+            let allowedModules = modules;
+            if (userTier !== 'all') {
+                allowedModules = modules.filter(m => isModuleAllowedByTier(m.tier || 'dasar', userTier));
+            }
 
-        const url = window.location.href;
-        let matchedModules = allowedModules.filter(m => {
-            return (m.matches || []).some(p => {
-                if (p === '<all_urls>' || p === '') return true;
-                try {
-                    const escaped = p.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*');
-                    return new RegExp(`^${escaped}$`).test(url);
-                } catch { return url.includes(p); }
+            const url = window.location.href;
+            let matchedModules = allowedModules.filter(m => {
+                return (m.matches || []).some(p => {
+                    if (p === '<all_urls>' || p === '') return true;
+                    try {
+                        const escaped = p.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*');
+                        return new RegExp(`^${escaped}$`).test(url);
+                    } catch { return url.includes(p); }
+                });
             });
-        });
 
-        if (searchQuery.trim()) {
-            const q = searchQuery.toLowerCase().trim();
-            matchedModules = matchedModules.filter(m => {
-                const name = (m.name || m.id).toLowerCase();
-                const id = m.id.toLowerCase();
-                return name.includes(q) || id.includes(q);
-            });
-        }
+            if (searchQuery.trim()) {
+                const q = searchQuery.toLowerCase().trim();
+                matchedModules = matchedModules.filter(m => {
+                    const name = (m.name || m.id).toLowerCase();
+                    const id = m.id.toLowerCase();
+                    return name.includes(q) || id.includes(q);
+                });
+            }
 
-        if (!matchedModules.length) {
-            container.innerHTML = `<div class="empty-state">${searchQuery.trim() ? 'Tidak ada module yang cocok' : 'Tidak ada module di halaman ini'}</div>`;
-            return;
-        }
+            if (!matchedModules.length) {
+                container.innerHTML = `<div class="empty-state">${searchQuery.trim() ? 'Tidak ada module yang cocok' : 'Tidak ada module di halaman ini'}</div>`;
+                return;
+            }
 
-        // 🔥 RENDER: NAMA + BADGE SAJA
-        const html = matchedModules.map(m => {
-            const enabled = moduleStates[m.id] !== false;
-            const tierClass = `tier-${m.tier || 'dasar'}`;
-            const tierLabel = m.tier || 'dasar';
-            const icon = m.icon || '📦';
+            // 🔥 RENDER: NAMA + BADGE SAJA
+            const html = matchedModules.map(m => {
+                const enabled = moduleStates[m.id] !== false;
+                const tierClass = `tier-${m.tier || 'dasar'}`;
+                const tierLabel = m.tier || 'dasar';
+                const icon = m.icon || '📦';
 
-            return `
-                <div class="module-item" data-id="${m.id}">
-                    <span class="module-icon">${icon}</span>
-                    <div class="module-info">
-                        <span class="module-name">${m.name || m.id}</span>
-                        <span class="module-meta">
-                            <span class="tier-badge ${tierClass}">${tierLabel}</span>
-                        </span>
+                return `
+                    <div class="module-item" data-id="${m.id}">
+                        <span class="module-icon">${icon}</span>
+                        <div class="module-info">
+                            <span class="module-name">${m.name || m.id}</span>
+                            <span class="module-meta">
+                                <span class="tier-badge ${tierClass}">${tierLabel}</span>
+                            </span>
+                        </div>
+                        <div class="module-toggle">
+                            <label>
+                                <input type="checkbox" class="toggle-input" ${enabled ? 'checked' : ''} data-id="${m.id}" />
+                                <span class="toggle-track"></span>
+                            </label>
+                        </div>
                     </div>
-                    <div class="module-toggle">
-                        <label>
-                            <input type="checkbox" class="toggle-input" ${enabled ? 'checked' : ''} data-id="${m.id}" />
-                            <span class="toggle-track"></span>
-                        </label>
-                    </div>
-                </div>
-            `;
-        }).join('');
+                `;
+            }).join('');
 
-        container.innerHTML = html;
+            container.innerHTML = html;
 
-        container.querySelectorAll('.toggle-input').forEach(input => {
-            input.addEventListener('change', async (e) => {
-                const id = e.target.dataset.id;
-                const checked = e.target.checked;
-                const states = await Storage.get('moduleStates');
-                const moduleStates = states.moduleStates || {};
-                moduleStates[id] = checked;
-                await Storage.set({ moduleStates });
+            container.querySelectorAll('.toggle-input').forEach(input => {
+                input.addEventListener('change', async (e) => {
+                    const id = e.target.dataset.id;
+                    const checked = e.target.checked;
+                    const states = await Storage.get('moduleStates');
+                    const moduleStates = states.moduleStates || {};
+                    moduleStates[id] = checked;
+                    await Storage.set({ moduleStates });
 
-                if (checked) {
-                    await injectModule(id);
-                }
+                    if (checked) {
+                        await injectModule(id);
+                    }
 
-                renderModuleList();
+                    renderModuleList();
+                });
             });
-        });
 
-        const statusEl = shadowRoot?.getElementById('dashboard-status');
-        const activeEl = shadowRoot?.getElementById('dashboard-active');
-        if (statusEl) statusEl.textContent = `${matchedModules.length} modules on this page${searchQuery.trim() ? ' (filtered)' : ''}`;
-        if (activeEl) {
-            const activeCount = matchedModules.filter(m => moduleStates[m.id] !== false).length;
-            activeEl.textContent = `${activeCount} active`;
+            const statusEl = shadowRoot?.getElementById('dashboard-status');
+            const activeEl = shadowRoot?.getElementById('dashboard-active');
+            if (statusEl) statusEl.textContent = `${matchedModules.length} modules on this page${searchQuery.trim() ? ' (filtered)' : ''}`;
+            if (activeEl) {
+                const activeCount = matchedModules.filter(m => moduleStates[m.id] !== false).length;
+                activeEl.textContent = `${activeCount} active`;
+            }
+        } catch (err) {
+            console.error('[Dashboard] ❌ Gagal render module list:', err);
         }
     }
 
@@ -727,12 +736,15 @@
     console.log(`[Dashboard] ✅ v${VERSION} loaded!`);
 
     (async function() {
-        const userTier = await getUserTier();
-        console.log(`[Dashboard] 👤 User Tier: ${userTier}`);
-        await injectAllModules();
-        createUI();
+        try {
+            const userTier = await getUserTier();
+            console.log(`[Dashboard] 👤 User Tier: ${userTier}`);
+            await injectAllModules();
+            createUI();
+            console.log(`[Dashboard] 💡 Klik tombol 📊 di pojok kanan bawah untuk membuka UI`);
+        } catch (err) {
+            console.error('[Dashboard] ❌ Error during initialization:', err);
+        }
     })();
-
-    console.log(`[Dashboard] 💡 Klik tombol 📊 di pojok kanan bawah untuk membuka UI`);
 
 })();
