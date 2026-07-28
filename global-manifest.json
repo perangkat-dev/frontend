@@ -99,6 +99,21 @@
       "matches": [
         "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan/detail-pemeriksaan*"
       ]
+    },
+    {
+      "id": "auto-survey-kemkes-mandiri",
+      "name": "Auto Survey Mandiri CKG Sekolah",
+      "version": "1.0",
+      "icon": "🛠️",
+      "category": "tools",
+      "description": "Otomatis klik tombol abu-abu di daftar, dan auto-fill form (Tidak + Number) lalu submit.",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/auto-survey-kemkes-mandiri.js",
+      "matches": [
+        "https://form.kemkes.go.id/v2/skrining-form*",
+        "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan-sekolah/detail-pemeriksaan*"
+      ]
     }
   ]
 }
