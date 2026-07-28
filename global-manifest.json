@@ -9,14 +9,14 @@
     "key": ""
   },
   "whitelist": {
-    "url": "https://perangkat-dev.github.io/frontend/whitelist.json"
+    "url": {}
   },
   "modules": [
     {
       "id": "jamu-dashboard",
       "name": "Jamu Dashboard",
       "version": "1.0.0",
-      "icon": "https://perangkat-dev.github.io/frontend/logo.svg",
+      "icon": "📊",
       "category": "dashboard",
       "description": "Manajemen modul Jamu Loader",
       "tier": "dasar",
