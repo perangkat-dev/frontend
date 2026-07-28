@@ -530,7 +530,7 @@
 
         const btn = document.createElement('button');
         btn.id = 'dashboard-floating-btn';
-        btn.innerHTML = `<img src="https://perangkat-dev.github.io/frontend/logo.svg" style="width:32px; height:32px; pointer-events:none;" alt="Jamu Loader" />`;
+        btn.textContent = '📊';
         document.body.appendChild(btn);
 
         uiContainer = container;
