@@ -1,11 +1,11 @@
 // ============================================================
-// Jamu Dashboard - Module v1.0.3
+// Jamu Dashboard - Module v1.0.4
 // ============================================================
 (function() {
     'use strict';
 
     const MODULE_ID = 'jamu-dashboard';
-    const VERSION = '1.0.3';
+    const VERSION = '1.0.4';
 
     console.log(`[Dashboard] ✅ v${VERSION} loaded successfully!`);
 
@@ -200,9 +200,10 @@
         const info = IdentifierService.getCurrentIdentifier();
         console.log(`[Dashboard] 🔍 Identifier Info:`, info);
 
+        // FIX: Jika domain skipped atau tidak ada identifier, kembalikan 'dasar' bukan 'all'
         if (info.domain === 'skipped' || info.domain === 'other' || !info.identifier) {
-            console.log(`[Dashboard] ⚠️ No valid identifier, tier: all`);
-            return 'all';
+            console.log(`[Dashboard] ⚠️ No valid identifier, using default tier: dasar`);
+            return 'dasar';
         }
 
         const whitelist = await getWhitelist();
@@ -216,8 +217,8 @@
         });
 
         if (!matched) {
-            console.log(`[Dashboard] ⚠️ Identifier not in whitelist, tier: all`);
-            return 'all';
+            console.log(`[Dashboard] ⚠️ Identifier not in whitelist, using default tier: dasar`);
+            return 'dasar';
         }
 
         const isActive = matched.active !== false;
@@ -235,7 +236,8 @@
     }
 
     function isModuleAllowedByTier(modTier, userTier) {
-        if (userTier === 'all') return true;
+        // FIX: Hapus pengecekan 'all' di sini, karena kita tidak akan pernah punya userTier 'all'
+        // Tapi tetap support untuk backward compatibility
         
         const modTierSafe = modTier || 'dasar';
         const tierLevel = { dasar: 0, pro: 1, max: 2 };
@@ -262,6 +264,13 @@
 
         if (mod.id === MODULE_ID) {
             console.log(`[Dashboard] ⏭️ Skip dashboard module`);
+            return false;
+        }
+
+        // FIX: Cek tier sebelum inject
+        const userTier = await getUserTier();
+        if (!isModuleAllowedByTier(mod.tier || 'dasar', userTier)) {
+            console.log(`[Dashboard] ⛔ Module ${mod.id} (${mod.tier}) not allowed for tier ${userTier}`);
             return false;
         }
 
@@ -327,21 +336,20 @@
         let modules = getModules().filter(m => m.id !== MODULE_ID);
         console.log(`[Dashboard] 📦 Total modules: ${modules.length}`);
 
-        // 🔥 TAMPILKAN TIER MODULE SEBELUM FILTER
+        // TAMPILKAN TIER MODULE SEBELUM FILTER
         modules.forEach(m => {
             console.log(`  ${m.id}: tier=${m.tier || 'undefined'}`);
         });
 
-        if (userTier !== 'all') {
-            const before = modules.length;
-            modules = modules.filter(m => isModuleAllowedByTier(m.tier || 'dasar', userTier));
-            console.log(`[Dashboard] 📦 Modules after tier filter: ${modules.length} (was ${before})`);
-            
-            // 🔥 TAMPILKAN MODULE YANG LOLOS FILTER
-            modules.forEach(m => {
-                console.log(`  ✅ ${m.id} (${m.tier || 'dasar'})`);
-            });
-        }
+        // FIX: Selalu filter berdasarkan tier (tidak perlu cek 'all' lagi)
+        const before = modules.length;
+        modules = modules.filter(m => isModuleAllowedByTier(m.tier || 'dasar', userTier));
+        console.log(`[Dashboard] 📦 Modules after tier filter: ${modules.length} (was ${before})`);
+        
+        // TAMPILKAN MODULE YANG LOLOS FILTER
+        modules.forEach(m => {
+            console.log(`  ✅ ${m.id} (${m.tier || 'dasar'})`);
+        });
 
         const moduleStates = (await Storage.get('moduleStates')).moduleStates || {};
 
@@ -643,10 +651,8 @@
         const modules = getModules().filter(m => m.id !== MODULE_ID);
         const moduleStates = (await Storage.get('moduleStates')).moduleStates || {};
 
-        let allowedModules = modules;
-        if (userTier !== 'all') {
-            allowedModules = modules.filter(m => isModuleAllowedByTier(m.tier || 'dasar', userTier));
-        }
+        // FIX: Selalu filter berdasarkan tier
+        let allowedModules = modules.filter(m => isModuleAllowedByTier(m.tier || 'dasar', userTier));
 
         const url = window.location.href;
         let matchedModules = allowedModules.filter(m => {
