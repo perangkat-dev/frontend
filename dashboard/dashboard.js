@@ -532,6 +532,10 @@
         btn.id = 'dashboard-floating-btn';
         btn.textContent = '📊';
         document.body.appendChild(btn);
+         console.log('[Dashboard] ✅ Tombol 📊 berhasil dibuat');
+} catch (err) {
+    console.error('[Dashboard] ❌ Gagal membuat tombol:', err);
+}
 
         uiContainer = container;
 
