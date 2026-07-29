@@ -188,22 +188,6 @@
       "matches": [
         "https://cirebon.epuskesmas.id/skrininganemia/*"
       ]
-    },
-    {
-      "id": "auto-fill-no-resep",
-      "name": "Auto Fill No Resep",
-      "version": "1.4.0",
-      "icon": "📝",
-      "category": "administrasi",
-      "description": "Isi No Resep berdasarkan No. Antrean + tanggal dan lock input",
-      "tier": "dasar",
-      "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/auto-fill-no-resep.js",
-      "matches": [
-        "https://*.epuskesmas.id/pelayanan/show/*",
-        "https://*.epuskesmas.id/resep/edit/*",
-        "https://*.epuskesmas.id/resep/create/*"
-      ]
     }
   ]
 }
