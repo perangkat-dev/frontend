@@ -160,20 +160,6 @@
         "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan/detail-pemeriksaan*",
         "https://sehatindonesiaku.kemkes.go.id/ckg-pelayanan-sekolah/detail-pemeriksaan*"
       ]
-    },
-    {
-      "id": "skrining-adl",
-      "name": "Skrining ADL",
-      "version": "1.0",
-      "icon": "📝",
-      "category": "skrining",
-      "description": "Auto-fill Skrining ADL  (Activity of Daily Living) dengan pemilihan template berdasarkan rentang usia - FIXED EVENT TRIGGERING",
-      "tier": "dasar",
-      "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-adl.js",
-      "matches": [
-        "https://cirebon.epuskesmas.id/skriningadl/*"
-      ]
     }
   ]
 }
