@@ -9,7 +9,7 @@
     "key": ""
   },
   "whitelist": {
-    "url": "https://perangkat-dev.github.io/frontend/whitelist.json"
+    "url": {}
   },
   "modules": [
     {
@@ -203,20 +203,6 @@
         "https://*.epuskesmas.id/pelayanan/show/*",
         "https://*.epuskesmas.id/resep/edit/*",
         "https://*.epuskesmas.id/resep/create/*"
-      ]
-    },
-    {
-      "id": "auto-nomor-surat-keur-firebase-sync",
-      "name": "Auto Nomor Surat KEUR (Firebase Sync)",
-      "version": "8.0",
-      "icon": "🛠️",
-      "category": "administrasi",
-      "description": "Auto nomor surat 4 jenis + Firebase Sync antar komputer",
-      "tier": "dasar",
-      "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/auto-nomor-surat-keur-firebase-sync.js",
-      "matches": [
-        "https://*.epuskesmas.id/keur/*"
       ]
     },
     {
