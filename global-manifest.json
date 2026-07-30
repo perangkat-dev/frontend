@@ -204,20 +204,6 @@
         "https://*.epuskesmas.id/resep/edit/*",
         "https://*.epuskesmas.id/resep/create/*"
       ]
-    },
-    {
-      "id": "auto-nomor-surat-keur",
-      "name": "Auto Nomor Surat KEUR",
-      "version": "8.2",
-      "icon": "🗂️",
-      "category": "administrasi",
-      "description": "Auto nomor surat 4 jenis + Firebase Sync antar komputer",
-      "tier": "dasar",
-      "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/auto-nomor-surat-keur.js",
-      "matches": [
-        "https://*.epuskesmas.id/keur/*"
-      ]
     }
   ]
 }
