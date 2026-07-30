@@ -212,7 +212,7 @@
       "icon": "🗂️",
       "category": "administrasi",
       "description": "Auto nomor surat 4 jenis + Firebase Sync antar komputer tanpa grant",
-      "tier": "dasar",
+      "tier": "pro",
       "defaultEnabled": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/auto-nomor-surat-keur-firebase-sync.js",
       "matches": [
