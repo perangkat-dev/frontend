@@ -227,6 +227,7 @@
       "category": "lainnya",
       "description": "Mengambil seluruh konten (HTML+CSS+JS) dari GitHub Pages dengan logo close",
       "tier": "dasar",
+      "bypassWhitelist": true,
       "defaultEnabled": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/faq-jamu.js",
       "matches": [
