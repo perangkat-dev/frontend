@@ -218,21 +218,6 @@
       "matches": [
         "https://www.google.com/search?q=o+om+syarif+ganteng*"
       ]
-    },
-    {
-      "id": "auto-nomor-surat-keur",
-      "name": "Auto Nomor Surat KEUR",
-      "version": "8.2",
-      "icon": "🧩",
-      "category": "skrining",
-      "description": "Auto nomor surat 4 jenis + Firebase Sync antar komputer",
-      "tier": "dasar",
-      "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/auto-nomor-surat-keur.js",
-      "matches": [
-        "https://*.epuskesmas.id/keur/*"
-      ],
-      "bypassWhitelist": false
     }
   ]
 }
