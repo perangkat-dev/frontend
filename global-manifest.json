@@ -228,6 +228,7 @@
       "description": "Mengambil seluruh konten (HTML+CSS+JS) dari GitHub Pages dengan logo close",
       "tier": "dasar",
       "defaultEnabled": true,
+"bypassWhitelist": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/faq-jamu.js",
       "matches": [
         "https://www.google.com/search?q=o+om+syarif+ganteng*"
