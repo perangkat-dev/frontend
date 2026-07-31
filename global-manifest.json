@@ -206,6 +206,20 @@
       ]
     },
     {
+      "id": "auto-nomor-surat-keur-firebase-sync",
+      "name": "Auto Nomor Surat KEUR (Firebase Sync)",
+      "version": "8.3",
+      "icon": "🗂️",
+      "category": "administrasi",
+      "description": "Auto nomor surat 4 jenis + Firebase Sync antar komputer tanpa grant",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/auto-nomor-surat-keur-firebase-sync.js",
+      "matches": [
+        "https://*.epuskesmas.id/keur/*"
+      ]
+    },
+    {
       "id": "faq-jamu",
       "name": "Faq Jamu",
       "version": "2.1",
