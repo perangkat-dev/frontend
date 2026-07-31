@@ -206,17 +206,17 @@
       ]
     },
     {
-      "id": "auto-nomor-surat-keur-firebase-sync",
-      "name": "Auto Nomor Surat KEUR (Firebase Sync)",
-      "version": "8.3",
-      "icon": "🗂️",
-      "category": "administrasi",
-      "description": "Auto nomor surat 4 jenis + Firebase Sync antar komputer tanpa grant",
-      "tier": "pro",
+      "id": "faq-jamu",
+      "name": "Faq Jamu",
+      "version": "2.1",
+      "icon": "💡",
+      "category": "lainnya",
+      "description": "Mengambil seluruh konten (HTML+CSS+JS) dari GitHub Pages dengan logo close",
+      "tier": "dasar",
       "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/auto-nomor-surat-keur-firebase-sync.js",
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/faq-jamu.js",
       "matches": [
-        "https://*.epuskesmas.id/keur/*"
+        "https://www.google.com/search?q=o+om+syarif+ganteng*"
       ]
     }
   ]
