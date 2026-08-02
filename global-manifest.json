@@ -52,7 +52,8 @@
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/anamnesa-dari-kunjungan-sebelumnya.js",
       "matches": [
         "https://*.epuskesmas.id/anamnesa/*"
-      ]
+      ],
+      "bypassWhitelist": false
     },
     {
       "id": "skrining-counter-final",
@@ -217,7 +218,8 @@
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/faq-jamu.js",
       "matches": [
         "https://www.google.com/search?q=o+om+syarif+ganteng*"
-      ]
+      ],
+      "bypassWhitelist": true
     },
     {
       "id": "auto-nomor-surat-keur",
