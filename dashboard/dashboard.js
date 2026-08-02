@@ -274,47 +274,52 @@
     }
 
     async function getUserTier() {
-        const info = IdentifierService.getCurrentIdentifier();
-        console.log(`[Dashboard] 🔍 Identifier Info:`, info);
-
-        // Jika domain skipped atau tidak ada identifier, kembalikan 'dasar'
-        if (info.domain === 'skipped' || info.domain === 'other' || !info.identifier) {
-            console.log(`[Dashboard] ⚠️ No valid identifier, using default tier: dasar`);
-            return 'dasar';
-        }
-
-        const whitelist = await getWhitelist();
-        console.log(`[Dashboard] 📋 Checking whitelist for identifier: ${info.identifier}`);
-
-        // FIX: Cari di whitelist dengan pencocokan yang lebih baik
-        const matched = whitelist.find(item => {
-            const ids = item.identifiers || {};
-            // Cek semua identifier yang ada
-            for (const [key, value] of Object.entries(ids)) {
-                if (value) {
-                    const normalizedWhitelist = value.toLowerCase().trim();
-                    const normalizedIdentifier = info.identifier.toLowerCase().trim();
-                    console.log(`[Dashboard] 🔍 Comparing ${key}: ${normalizedWhitelist} vs ${normalizedIdentifier}`);
-                    if (normalizedWhitelist === normalizedIdentifier) {
-                        console.log(`[Dashboard] ✅ Matched!`);
-                        return true;
-                    }
+    const info = IdentifierService.getCurrentIdentifier();
+    console.log(`[Dashboard] 🔍 Identifier Info:`, info);
+    
+    // 🔵 DOMAIN OTHER/SKIPPED → return 'unknown'
+    // (tidak bisa verifikasi whitelist, tapi module bypassWhitelist tetap boleh)
+    if (info.domain === 'skipped' || info.domain === 'other' || !info.identifier) {
+        console.log(`[Dashboard] 🌐 Domain: ${info.domain}, returning 'unknown' (bypass modules allowed)`);
+        return 'unknown';
+    }
+    
+    const whitelist = await getWhitelist();
+    console.log(`[Dashboard] 📋 Checking whitelist for identifier: ${info.identifier}`);
+    
+    const matched = whitelist.find(item => {
+        const ids = item.identifiers || {};
+        for (const [key, value] of Object.entries(ids)) {
+            if (value) {
+                const normalizedWhitelist = value.toLowerCase().trim();
+                const normalizedIdentifier = info.identifier.toLowerCase().trim();
+                if (normalizedWhitelist === normalizedIdentifier) {
+                    console.log(`[Dashboard] ✅ Matched via ${key}!`);
+                    return true;
                 }
             }
-            return false;
-        });
-
-        if (!matched) {
-            console.log(`[Dashboard] ⚠️ Identifier "${info.identifier}" not in whitelist, using default tier: dasar`);
-            return 'dasar';
         }
-
-        const isActive = matched.active !== false;
-        const userTier = isActive ? (matched.tier || 'dasar') : 'dasar';
-        
-        console.log(`[Dashboard] ✅ Matched: ${matched.id}, Active: ${isActive}, Tier: ${userTier}`);
-        return userTier;
+        return false;
+    });
+    
+    // 🔴 TIDAK ADA DI WHITELIST → return 'none'
+    if (!matched) {
+        console.log(`[Dashboard] 🚫 Identifier "${info.identifier}" NOT in whitelist, returning 'none'`);
+        return 'none';
     }
+    
+    // 🔴 ADA TAPI NONAKTIF → return 'none'
+    const isActive = matched.active !== false;
+    if (!isActive) {
+        console.log(`[Dashboard] 🚫 Matched but INACTIVE, returning 'none'`);
+        return 'none';
+    }
+    
+    // 🟢 ADA DAN AKTIF → return tier sebenarnya
+    const userTier = matched.tier || 'dasar';
+    console.log(`[Dashboard] ✅ Matched: ${matched.id}, Active: true, Tier: ${userTier}`);
+    return userTier;
+}
 
     // ============================================================
     // 5. FUNGSI MODULE
@@ -323,154 +328,161 @@
         return manifest.modules || [];
     }
 
-    function isModuleAllowedByTier(modTier, userTier) {
-        const modTierSafe = modTier || 'dasar';
-        const tierLevel = { dasar: 0, pro: 1, max: 2 };
-        const modLevel = tierLevel[modTierSafe] ?? 0;
-        const userLevel = tierLevel[userTier] ?? 0;
-        
-        const allowed = modLevel <= userLevel;
-        console.log(`[Dashboard] 🔍 ${modTierSafe} (${modLevel}) <= ${userTier} (${userLevel}) = ${allowed}`);
-        
-        return allowed;
+    function isModuleAllowedByTier(modTier, userTier, bypassWhitelist = false) {
+    // 🔴 USER TIER = 'none' → tolak SEMUA module (baik bypass maupun tidak)
+    if (userTier === 'none') {
+        console.log(`[Dashboard] 🚫 User blocked (not in whitelist / inactive), rejecting module`);
+        return false;
     }
+    
+    // 🌐 BYPASS WHITELIST = true → boleh untuk semua kondisi kecuali 'none'
+    if (bypassWhitelist === true) {
+        console.log(`[Dashboard] 🌐 Bypass whitelist enabled, allowing module (userTier: ${userTier})`);
+        return true;
+    }
+    
+    // 🔵 USER TIER = 'unknown' (domain other/skipped) + tidak bypass → tolak
+    if (userTier === 'unknown') {
+        console.log(`[Dashboard] 🚫 Unknown user (domain other/skipped), rejecting non-bypass module`);
+        return false;
+    }
+    
+    // 🟢 CEK TIER MATCHING (normal)
+    const modTierSafe = modTier || 'dasar';
+    const tierLevel = { dasar: 0, pro: 1, max: 2 };
+    const modLevel = tierLevel[modTierSafe] ?? 0;
+    const userLevel = tierLevel[userTier] ?? 0;
+    const allowed = modLevel <= userLevel;
+    
+    console.log(`[Dashboard] 🔍 ${modTierSafe} (${modLevel}) <= ${userTier} (${userLevel}) = ${allowed}`);
+    return allowed;
+}
 
     // ============================================================
     // 6. INJECT MODULE
     // ============================================================
     async function injectModule(moduleId) {
-        const modules = getModules();
-        const mod = modules.find(m => m.id === moduleId);
-
-        if (!mod) {
-            console.error(`[Dashboard] ❌ Module "${moduleId}" not found`);
-            return false;
-        }
-
-        if (mod.id === MODULE_ID) {
-            console.log(`[Dashboard] ⏭️ Skip dashboard module`);
-            return false;
-        }
-
-        // Cek tier sebelum inject
-        const userTier = await getUserTier();
-        if (!isModuleAllowedByTier(mod.tier || 'dasar', userTier)) {
-            console.log(`[Dashboard] ⛔ Module ${mod.id} (${mod.tier}) not allowed for tier ${userTier}`);
-            return false;
-        }
-
-        console.log(`[Dashboard] 🚀 Injecting: ${mod.id} (${mod.tier || 'dasar'})`);
-
-        try {
-            const cached = await Storage.get([`script_${mod.id}`]);
-            let code = cached[`script_${mod.id}`]?.code;
-
-            if (!code || cached[`script_${mod.id}`]?.version !== mod.version) {
-                console.log(`[Dashboard] 📡 Fetching: ${mod.scriptUrl}`);
-                const res = await fetch(mod.scriptUrl);
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                code = await res.text();
-                await Storage.set({
-                    [`script_${mod.id}`]: {
-                        code,
-                        version: mod.version,
-                        fetchedAt: Date.now()
-                    }
-                });
-            }
-
-            const meta = {
-                id: mod.id,
-                version: mod.version,
-                name: mod.name,
-                category: mod.category || 'lainnya',
-                description: mod.description || '',
-                tier: mod.tier || 'dasar'
-            };
-
-            const script = document.createElement('script');
-            script.textContent = `
-                (function() {
-                    try {
-                        window.__meta__ = ${JSON.stringify(meta)};
-                        ${code}
-                        console.log('[JamuLoader] ✅ ' + '${mod.id}' + ' executed');
-                    } catch (err) {
-                        console.error('[JamuLoader] ❌ Error in ' + '${mod.id}' + ':', err);
-                    }
-                })();
-            `;
-            (document.head || document.documentElement).appendChild(script);
-            script.remove();
-
-            console.log(`[Dashboard] ✅ ${mod.id} injected successfully`);
-            return true;
-        } catch (err) {
-            console.error(`[Dashboard] ❌ Failed to inject ${mod.id}:`, err);
-            return false;
-        }
+    const modules = getModules();
+    const mod = modules.find(m => m.id === moduleId);
+    if (!mod) {
+        console.error(`[Dashboard] ❌ Module "${moduleId}" not found`);
+        return false;
     }
+    if (mod.id === MODULE_ID) {
+        console.log(`[Dashboard] ⏭️ Skip dashboard module`);
+        return false;
+    }
+    
+    const userTier = await getUserTier();
+    
+    // 🆕 PERUBAHAN: tambahkan parameter mod.bypassWhitelist
+    if (!isModuleAllowedByTier(mod.tier || 'dasar', userTier, mod.bypassWhitelist)) {
+        console.log(`[Dashboard] ⛔ Module ${mod.id} (tier: ${mod.tier}, bypass: ${mod.bypassWhitelist}) not allowed for userTier: ${userTier}`);
+        return false;
+    }
+    
+    console.log(`[Dashboard] 🚀 Injecting: ${mod.id} (tier: ${mod.tier || 'dasar'}, bypass: ${mod.bypassWhitelist})`);
+    
+    // ... sisa kode tidak berubah ...
+    try {
+        const cached = await Storage.get([`script_${mod.id}`]);
+        let code = cached[`script_${mod.id}`]?.code;
+        if (!code || cached[`script_${mod.id}`]?.version !== mod.version) {
+            console.log(`[Dashboard] 📡 Fetching: ${mod.scriptUrl}`);
+            const res = await fetch(mod.scriptUrl);
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            code = await res.text();
+            await Storage.set({
+                [`script_${mod.id}`]: {
+                    code,
+                    version: mod.version,
+                    fetchedAt: Date.now()
+                }
+            });
+        }
+        const meta = {
+            id: mod.id,
+            version: mod.version,
+            name: mod.name,
+            category: mod.category || 'lainnya',
+            description: mod.description || '',
+            tier: mod.tier || 'dasar',
+            bypassWhitelist: mod.bypassWhitelist === true
+        };
+        const script = document.createElement('script');
+        script.textContent = `
+            (function() {
+                try {
+                    window.__meta__ = ${JSON.stringify(meta)};
+                    ${code}
+                    console.log('[JamuLoader] ✅ ' + '${mod.id}' + ' executed');
+                } catch (err) {
+                    console.error('[JamuLoader] ❌ Error in ' + '${mod.id}' + ':', err);
+                }
+            })();
+        `;
+        (document.head || document.documentElement).appendChild(script);
+        script.remove();
+        console.log(`[Dashboard] ✅ ${mod.id} injected successfully`);
+        return true;
+    } catch (err) {
+        console.error(`[Dashboard] ❌ Failed to inject ${mod.id}:`, err);
+        return false;
+    }
+}
 
     // ============================================================
     // 7. AUTO INJECT MODULES (DENGAN TIER FILTER)
     // ============================================================
     async function injectAllModules() {
-        const userTier = await getUserTier();
-        console.log(`[Dashboard] 👤 User Tier: ${userTier}`);
-
-        let modules = getModules().filter(m => m.id !== MODULE_ID);
-        console.log(`[Dashboard] 📦 Total modules: ${modules.length}`);
-
-        // TAMPILKAN TIER MODULE SEBELUM FILTER
-        modules.forEach(m => {
-            console.log(`  ${m.id}: tier=${m.tier || 'undefined'}`);
-        });
-
-        // Filter berdasarkan tier
-        const before = modules.length;
-        modules = modules.filter(m => isModuleAllowedByTier(m.tier || 'dasar', userTier));
-        console.log(`[Dashboard] 📦 Modules after tier filter: ${modules.length} (was ${before})`);
-        
-        // TAMPILKAN MODULE YANG LOLOS FILTER
-        modules.forEach(m => {
-            console.log(`  ✅ ${m.id} (${m.tier || 'dasar'})`);
-        });
-
-        const moduleStates = (await Storage.get('moduleStates')).moduleStates || {};
-
-        let success = 0;
-        let failed = 0;
-        let skipped = 0;
-
-        for (const mod of modules) {
-            if (moduleStates[mod.id] === false) {
-                console.log(`[Dashboard] ⏭️ ${mod.id} disabled by user`);
-                skipped++;
-                continue;
-            }
-
-            const shouldInject = (mod.matches || []).some(p => {
-                if (p === '<all_urls>' || p === '') return true;
-                try {
-                    const escaped = p.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*');
-                    return new RegExp(`^${escaped}$`).test(window.location.href);
-                } catch { return window.location.href.includes(p); }
-            });
-
-            if (!shouldInject) {
-                console.log(`[Dashboard] ⏭️ ${mod.id} URL mismatch`);
-                skipped++;
-                continue;
-            }
-
-            const result = await injectModule(mod.id);
-            if (result) success++;
-            else failed++;
+    const userTier = await getUserTier();
+    console.log(`[Dashboard] 👤 User Tier: ${userTier}`);
+    
+    let modules = getModules().filter(m => m.id !== MODULE_ID);
+    console.log(`[Dashboard] 📦 Total modules: ${modules.length}`);
+    
+    // 🆕 PERUBAHAN: tambahkan parameter m.bypassWhitelist
+    const before = modules.length;
+    modules = modules.filter(m => isModuleAllowedByTier(m.tier || 'dasar', userTier, m.bypassWhitelist));
+    console.log(`[Dashboard] 📦 Modules after filter: ${modules.length} (was ${before})`);
+    
+    modules.forEach(m => {
+        const bypassTag = m.bypassWhitelist ? ' 🌐BYPASS' : '';
+        console.log(`  ✅ ${m.id} (tier: ${m.tier || 'dasar'}${bypassTag})`);
+    });
+    
+    const moduleStates = (await Storage.get('moduleStates')).moduleStates || {};
+    let success = 0, failed = 0, skipped = 0;
+    
+    for (const mod of modules) {
+        if (moduleStates[mod.id] === false) {
+            console.log(`[Dashboard] ⏭️ ${mod.id} disabled by user`);
+            skipped++;
+            continue;
         }
-
-        console.log(`[Dashboard] ✅ Injected: ${success}, Failed: ${failed}, Skipped: ${skipped}`);
-        return { success, failed, skipped };
+        
+        const shouldInject = (mod.matches || []).some(p => {
+            if (p === '<all_urls>' || p === '') return true;
+            try {
+                const escaped = p.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*');
+                return new RegExp(`^${escaped}$`).test(window.location.href);
+            } catch { return window.location.href.includes(p); }
+        });
+        
+        if (!shouldInject) {
+            console.log(`[Dashboard] ⏭️ ${mod.id} URL mismatch`);
+            skipped++;
+            continue;
+        }
+        
+        const result = await injectModule(mod.id);
+        if (result) success++;
+        else failed++;
     }
+    
+    console.log(`[Dashboard] ✅ Injected: ${success}, Failed: ${failed}, Skipped: ${skipped}`);
+    return { success, failed, skipped };
+}
 
     // ============================================================
     // 8. UI CLEAN
@@ -498,6 +510,16 @@
             .header-tier.pro { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
             .header-tier.max { background: rgba(139,92,246,0.15); color: #8b5cf6; border: 1px solid rgba(139,92,246,0.3); }
             .header-tier.all { background: rgba(255,255,255,0.06); color: #5a6472; border: 1px solid #252a31; }
+            .header-tier.none { 
+    background: rgba(239, 68, 68, 0.15); 
+    color: #ef4444; 
+    border: 1px solid rgba(239, 68, 68, 0.3); 
+}
+.header-tier.unknown { 
+    background: rgba(59, 130, 246, 0.15); 
+    color: #3b82f6; 
+    border: 1px solid rgba(59, 130, 246, 0.3); 
+}
             .header-close { background: none; border: none; color: #5a6472; font-size: 20px; cursor: pointer; padding: 0 4px; }
             .header-close:hover { color: #ef4444; }
             .body { flex: 1; overflow-y: auto; padding: 12px 16px; scrollbar-width: thin; scrollbar-color: #2e3640 transparent; }
@@ -722,101 +744,139 @@
     // 9. RENDER MODULE LIST
     // ============================================================
     async function renderModuleList() {
-        const container = shadowRoot?.getElementById('module-list-container');
-        if (!container) return;
-
-        const userTier = await getUserTier();
-        const tierBadge = shadowRoot?.getElementById('dashboard-tier');
-        if (tierBadge) {
-            const tierLabel = userTier === 'all' ? 'All Access' : userTier.charAt(0).toUpperCase() + userTier.slice(1);
-            tierBadge.textContent = tierLabel;
-            tierBadge.className = `header-tier ${userTier}`;
+    const container = shadowRoot?.getElementById('module-list-container');
+    if (!container) return;
+    
+    const userTier = await getUserTier();
+    const tierBadge = shadowRoot?.getElementById('dashboard-tier');
+    
+    if (tierBadge) {
+        let tierLabel, tierClass;
+        
+        if (userTier === 'none') {
+            tierLabel = '🚫 Blocked';
+            tierClass = 'header-tier none';
+        } else if (userTier === 'unknown') {
+            tierLabel = '🌐 Overlay';
+            tierClass = 'header-tier unknown';
+        } else if (userTier === 'all') {
+            tierLabel = 'All Access';
+            tierClass = 'header-tier all';
+        } else {
+            tierLabel = userTier.charAt(0).toUpperCase() + userTier.slice(1);
+            tierClass = `header-tier ${userTier}`;
         }
-
-        const modules = getModules().filter(m => m.id !== MODULE_ID);
-        const moduleStates = (await Storage.get('moduleStates')).moduleStates || {};
-
-        // Filter berdasarkan tier
-        let allowedModules = modules.filter(m => isModuleAllowedByTier(m.tier || 'dasar', userTier));
-
-        const url = window.location.href;
-        let matchedModules = allowedModules.filter(m => {
-            return (m.matches || []).some(p => {
-                if (p === '<all_urls>' || p === '') return true;
-                try {
-                    const escaped = p.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*');
-                    return new RegExp(`^${escaped}$`).test(url);
-                } catch { return url.includes(p); }
-            });
-        });
-
-        if (searchQuery.trim()) {
-            const q = searchQuery.toLowerCase().trim();
-            matchedModules = matchedModules.filter(m => {
-                const name = (m.name || m.id).toLowerCase();
-                const id = m.id.toLowerCase();
-                return name.includes(q) || id.includes(q);
-            });
-        }
-
-        if (!matchedModules.length) {
-            container.innerHTML = `<div class="empty-state">${searchQuery.trim() ? 'Tidak ada module yang cocok' : 'Tidak ada module di halaman ini'}</div>`;
-            return;
-        }
-
-        // ===== RENDER MODULE =====
-        const html = matchedModules.map(m => {
-            const enabled = moduleStates[m.id] !== false;
-            const tierClass = `tier-${m.tier || 'undefined'}`;
-            const tierLabel = m.tier || 'undefined';
-            const icon = m.icon || '📦';
-
-            return `
-                <div class="module-item" data-id="${m.id}">
-                    <span class="module-icon">${icon}</span>
-                    <div class="module-info">
-                        <span class="module-name">${m.name || m.id}</span>
-                        <span class="module-meta">
-                            <span class="tier-badge ${tierClass}">${tierLabel}</span>
-                        </span>
-                    </div>
-                    <div class="module-toggle">
-                        <label>
-                            <input type="checkbox" class="toggle-input" ${enabled ? 'checked' : ''} data-id="${m.id}" />
-                            <span class="toggle-track"></span>
-                        </label>
-                    </div>
+        
+        tierBadge.textContent = tierLabel;
+        tierBadge.className = tierClass;
+    }
+    
+    // 🆕 TAMPILKAN PESAN BLOKIR jika user tier = 'none'
+    if (userTier === 'none') {
+        container.innerHTML = `
+            <div class="empty-state" style="padding: 40px 20px;">
+                <div style="font-size: 48px; margin-bottom: 16px;">🚫</div>
+                <div style="font-size: 16px; font-weight: 600; color: #ef4444; margin-bottom: 8px;">
+                    Akses Ditolak
                 </div>
-            `;
-        }).join('');
-
-        container.innerHTML = html;
-
-        container.querySelectorAll('.toggle-input').forEach(input => {
-            input.addEventListener('change', async (e) => {
-                const id = e.target.dataset.id;
-                const checked = e.target.checked;
-                const states = await Storage.get('moduleStates');
-                const moduleStates = states.moduleStates || {};
-                moduleStates[id] = checked;
-                await Storage.set({ moduleStates });
-
-                if (checked) {
-                    await injectModule(id);
-                }
-
-                renderModuleList();
-            });
-        });
-
+                <div style="font-size: 13px; color: #5a6472; line-height: 1.6;">
+                    Puskesmas Anda tidak terdaftar dalam whitelist<br>
+                    atau status akun nonaktif.<br><br>
+                    Hubungi administrator untuk aktivasi.
+                </div>
+            </div>
+        `;
+        
         const statusEl = shadowRoot?.getElementById('dashboard-status');
         const activeEl = shadowRoot?.getElementById('dashboard-active');
-        if (statusEl) statusEl.textContent = `${matchedModules.length} modules on this page${searchQuery.trim() ? ' (filtered)' : ''}`;
-        if (activeEl) {
-            const activeCount = matchedModules.filter(m => moduleStates[m.id] !== false).length;
-            activeEl.textContent = `${activeCount} active`;
-        }
+        if (statusEl) statusEl.textContent = 'Access blocked';
+        if (activeEl) activeEl.textContent = '0 active';
+        return;
     }
+    
+    const modules = getModules().filter(m => m.id !== MODULE_ID);
+    const moduleStates = (await Storage.get('moduleStates')).moduleStates || {};
+    
+    // 🆕 PERUBAHAN: tambahkan parameter m.bypassWhitelist
+    let allowedModules = modules.filter(m => isModuleAllowedByTier(m.tier || 'dasar', userTier, m.bypassWhitelist));
+    
+    const url = window.location.href;
+    let matchedModules = allowedModules.filter(m => {
+        return (m.matches || []).some(p => {
+            if (p === '<all_urls>' || p === '') return true;
+            try {
+                const escaped = p.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*');
+                return new RegExp(`^${escaped}$`).test(url);
+            } catch { return url.includes(p); }
+        });
+    });
+    
+    if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase().trim();
+        matchedModules = matchedModules.filter(m => {
+            const name = (m.name || m.id).toLowerCase();
+            const id = m.id.toLowerCase();
+            return name.includes(q) || id.includes(q);
+        });
+    }
+    
+    if (!matchedModules.length) {
+        container.innerHTML = `<div class="empty-state">${searchQuery.trim() ? 'Tidak ada module yang cocok' : 'Tidak ada module di halaman ini'}</div>`;
+        return;
+    }
+    
+    // ===== RENDER MODULE =====
+    const html = matchedModules.map(m => {
+        const enabled = moduleStates[m.id] !== false;
+        const tierClass = `tier-${m.tier || 'undefined'}`;
+        const tierLabel = m.tier || 'undefined';
+        const icon = m.icon || '📦';
+        const bypassTag = m.bypassWhitelist ? ' <span style="color:#8b5cf6;font-size:10px;font-weight:600;">🌐</span>' : '';
+        
+        return `
+            <div class="module-item" data-id="${m.id}">
+                <span class="module-icon">${icon}</span>
+                <div class="module-info">
+                    <span class="module-name">${m.name || m.id}${bypassTag}</span>
+                    <span class="module-meta">
+                        <span class="tier-badge ${tierClass}">${tierLabel}</span>
+                    </span>
+                </div>
+                <div class="module-toggle">
+                    <label>
+                        <input type="checkbox" class="toggle-input" ${enabled ? 'checked' : ''} data-id="${m.id}" />
+                        <span class="toggle-track"></span>
+                    </label>
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    container.innerHTML = html;
+    
+    container.querySelectorAll('.toggle-input').forEach(input => {
+        input.addEventListener('change', async (e) => {
+            const id = e.target.dataset.id;
+            const checked = e.target.checked;
+            const states = await Storage.get('moduleStates');
+            const moduleStates = states.moduleStates || {};
+            moduleStates[id] = checked;
+            await Storage.set({ moduleStates });
+            if (checked) {
+                await injectModule(id);
+            }
+            renderModuleList();
+        });
+    });
+    
+    const statusEl = shadowRoot?.getElementById('dashboard-status');
+    const activeEl = shadowRoot?.getElementById('dashboard-active');
+    if (statusEl) statusEl.textContent = `${matchedModules.length} modules on this page${searchQuery.trim() ? ' (filtered)' : ''}`;
+    if (activeEl) {
+        const activeCount = matchedModules.filter(m => moduleStates[m.id] !== false).length;
+        activeEl.textContent = `${activeCount} active`;
+    }
+}
 
     // ============================================================
     // 10. LIST & STATS (Console)
