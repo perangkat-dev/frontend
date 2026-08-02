@@ -9,7 +9,7 @@ const VERSION = '1.0.6';
 // ============================================================
 // 0. DEBUG FLAG
 // ============================================================
-let DEBUG = true;
+let DEBUG = false;
 const log = (...args) => DEBUG && console.log('[Dashboard]', ...args);
 const warn = (...args) => DEBUG && console.warn('[Dashboard]', ...args);
 const error = (...args) => console.error('[Dashboard]', ...args);
