@@ -265,6 +265,21 @@
         "https://*.epuskesmas.id/dashboardilp"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "kessan-bpjs-auto",
+      "name": "KESSAN BPJS Auto",
+      "version": "5.0",
+      "icon": "🧩",
+      "category": "skrining",
+      "description": "Otomatis mengisi KESSAN BPJS Kesehatan dari daftar No. BPJS",
+      "tier": "dasar",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/kessan-bpjs-auto.js",
+      "matches": [
+        "https://kesan.bpjs-kesehatan.go.id/*"
+      ],
+      "bypassWhitelist": true
     }
   ]
 }
