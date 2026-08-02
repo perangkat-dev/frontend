@@ -248,6 +248,21 @@
         "https://asdk.kemkes.go.id/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "exporter-data-skrining",
+      "name": "Exporter Data Skrining",
+      "version": "1.0",
+      "icon": "🛠️",
+      "category": "skrining",
+      "description": "Menambahkan fitur preview popup, copy to clipboard, dan export Excel untuk data skrining ePuskesmas",
+      "tier": "dasar",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/exporter-data-skrining.js",
+      "matches": [
+        "https://*.epuskesmas.id/dashboardilp"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
