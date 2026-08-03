@@ -222,21 +222,6 @@
       "bypassWhitelist": true
     },
     {
-      "id": "auto-nomor-surat-keur",
-      "name": "Auto Nomor Surat KEUR",
-      "version": "8.3",
-      "icon": "🛠️",
-      "category": "tools",
-      "description": "Auto nomor surat 4 jenis",
-      "tier": "dasar",
-      "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/auto-nomor-surat-keur.js",
-      "matches": [
-        "https://*.epuskesmas.id/keur/*"
-      ],
-      "bypassWhitelist": false
-    },
-    {
       "id": "asdk-apps-menu",
       "name": "ASDK Apps Menu",
       "version": "3.2",
