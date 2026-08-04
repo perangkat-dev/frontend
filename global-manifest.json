@@ -234,7 +234,7 @@
       "matches": [
         "https://asdk.kemkes.go.id/*"
       ],
-      "bypassWhitelist": false
+      "bypassWhitelist": true
     },
     {
       "id": "exporter-data-skrining",
