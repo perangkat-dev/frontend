@@ -353,6 +353,21 @@
         "https://cirebon.epuskesmas.id/skriningkesehatangigilansia/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-gigi-mulut-remaja",
+      "name": "Skrining Gigi & Mulut Remaja",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining Gigi & Mulut Remaja",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-gigi-mulut-remaja.js",
+      "matches": [
+        "https://cirebon.epuskesmas.id/skriningkesehatangigimulutremaja*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
