@@ -518,6 +518,21 @@
         "https://*.epuskesmas.id/skriningkesehatanpenglihatan/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-lansia-sederhana-skilas",
+      "name": "Skrining Lansia Sederhana (SKILAS)",
+      "version": "2026-03-15",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Auto-fill Formulir Skrining Lansia Sederhana (SKILAS) untuk usia 60+ tahun",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-lansia-sederhana-skilas.js",
+      "matches": [
+        "https://*.epuskesmas.id/skriningskilas/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
