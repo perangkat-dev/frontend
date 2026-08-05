@@ -443,6 +443,21 @@
         "https://*.epuskesmas.id/skriningkankerkolorektal/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-kekerasan-pada-perempuan",
+      "name": "Skrining Kekerasan pada Perempuan",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining Kekerasan pada Perempuan (Woman Abuse Screening Tools/WAST)",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-kekerasan-pada-perempuan.js",
+      "matches": [
+        "https://*.epuskesmas.id/skrining/kekerasanperempuan/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
