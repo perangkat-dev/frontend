@@ -593,6 +593,21 @@
         "https://*.epuskesmas.id/skriningpuma/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-who-assist",
+      "name": "Skrining WHO - ASSIST",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining WHO - ASSIST  untuk semua pasien (tanpa kondisi)",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-who-assist.js",
+      "matches": [
+        "https://*.epuskesmas.id/skriningwho/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
