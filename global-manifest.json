@@ -383,6 +383,36 @@
         "https://cirebon.epuskesmas.id/skriningdiabetesmelitus/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-hipertensi",
+      "name": "Skrining Hipertensi",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining Hipertensi untuk semua gender dan usia (langsung jalan otomatis)",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-hipertensi.js",
+      "matches": [
+        "https://cirebon.epuskesmas.id/skrininghipertensi/*"
+      ],
+      "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-imunisasi-dewasa",
+      "name": "Skrining Imunisasi Dewasa",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining Imunisasi Dewasa dengan validasi gender (Perempuan) dan pemilihan template berdasarkan rentang usia (<22 vs ≥22)",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-imunisasi-dewasa.js",
+      "matches": [
+        "https://cirebon.epuskesmas.id/skriningimunisasidewasa/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
