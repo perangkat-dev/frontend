@@ -323,6 +323,21 @@
         "https://*.epuskesmas.id/risikokankerserviks/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-gigi-dewasa",
+      "name": "Skrining Gigi Dewasa",
+      "version": "2026-03-15",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining Gigi Dewasa untuk semua pasien (tanpa kondisi)",
+      "tier": "dasar",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-gigi-dewasa.js",
+      "matches": [
+        "https://cirebon.epuskesmas.id/skriningkesehatangigidewasa/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
