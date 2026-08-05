@@ -503,6 +503,21 @@
         "https://*.epuskesmas.id/skriningkesehatanjiwadewasalansia/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-kesehatan-penglihatan",
+      "name": "Skrining Kesehatan Penglihatan",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining Kesehatan Penglihatan dengan pemilihan template berdasarkan usia (<18 vs ≥18 tahun)",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-kesehatan-penglihatan.js",
+      "matches": [
+        "https://*.epuskesmas.id/skriningkesehatanpenglihatan/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
