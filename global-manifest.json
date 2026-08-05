@@ -137,15 +137,13 @@
       "icon": "📝",
       "category": "skrining",
       "description": "Auto-fill Skrining Faktor Risiko untuk semua gender dan usia",
-      "tier": "pro",
+      "tier": "dasar",
       "defaultEnabled": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-faktor-risiko.js",
       "matches": [
         "https://cirebon.epuskesmas.id/skriningfaktorrisiko/*"
       ],
-      "dependencies": [
-        "data-pasien-reader"
-      ]
+      "bypassWhitelist": false
     },
     {
       "id": "ckg-pelayanan-auto-skip-tool",
