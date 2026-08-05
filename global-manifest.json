@@ -338,6 +338,21 @@
         "https://cirebon.epuskesmas.id/skriningkesehatangigidewasa/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-gigi-lansia",
+      "name": "Skrining Gigi Lansia",
+      "version": "2026-03-15",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining Gigi Lansia untuk lansia",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-gigi-lansia.js",
+      "matches": [
+        "https://cirebon.epuskesmas.id/skriningkesehatangigilansia/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
