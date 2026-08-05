@@ -488,6 +488,21 @@
         "https://*.epuskesmas.id/skriningkesehatangigimulutbalita/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-kesehatan-jiwa-phq-4",
+      "name": "Skrining Kesehatan Jiwa PHQ-4",
+      "version": "2026-03-16",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining Kesehatan Jiwa Dewasa dan Lansia (PHQ-4) untuk semua pasien",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-kesehatan-jiwa-phq-4.js",
+      "matches": [
+        "https://*.epuskesmas.id/skriningkesehatanjiwadewasalansia/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
