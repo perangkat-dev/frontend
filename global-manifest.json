@@ -295,6 +295,21 @@
         "https://pcarejkn.bpjs-kesehatan.go.id/eclaim/EntriDaftarDokkel"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-gds-4",
+      "name": "Skrining GDS-4",
+      "version": "1.1",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Auto-fill Skrining Geriatric Depression Scale (GDS-4) dengan enhanced event triggering + forced score recalculation",
+      "tier": "dasar",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-gds-4.js",
+      "matches": [
+        "https://cirebon.epuskesmas.id/skrining/gds/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
