@@ -578,6 +578,21 @@
         "https://*.epuskesmas.id/skriningobesitas/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-ppok-dengan-kuesioner-puma",
+      "name": "Skrining PPOK dengan Kuesioner PUMA",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining PPOK dengan validasi usia ≥40 tahun + logika conditional field \\\"usia\\\" berdasarkan rentang usia",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-ppok-dengan-kuesioner-puma.js",
+      "matches": [
+        "https://*.epuskesmas.id/skriningpuma/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
