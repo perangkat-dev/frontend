@@ -37,7 +37,7 @@
       "defaultEnabled": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/data-pasien-reader.js",
       "matches": [
-        "https://cirebon.epuskesmas.id/klaster_siklushidup/*"
+        "https://*.epuskesmas.id/klaster_siklushidup/*"
       ]
     },
     {
@@ -66,7 +66,7 @@
       "defaultEnabled": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-counter-final.js",
       "matches": [
-        "https://cirebon.epuskesmas.id/klaster_siklushidup/*"
+        "https://*.epuskesmas.id/klaster_siklushidup/*"
       ]
     },
     {
@@ -127,7 +127,7 @@
       "defaultEnabled": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-pengkajian-nutrisi-mna.js",
       "matches": [
-        "https://cirebon.epuskesmas.id/skriningpengkajiannutrisi/create/*"
+        "https://*.epuskesmas.id/skriningpengkajiannutrisi/create/*"
       ]
     },
     {
@@ -141,7 +141,7 @@
       "defaultEnabled": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-faktor-risiko.js",
       "matches": [
-        "https://cirebon.epuskesmas.id/skriningfaktorrisiko/*"
+        "https://*.epuskesmas.id/skriningfaktorrisiko/*"
       ],
       "bypassWhitelist": false
     },
@@ -171,7 +171,7 @@
       "defaultEnabled": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-adl.js",
       "matches": [
-        "https://cirebon.epuskesmas.id/skriningadl/*"
+        "https://*.epuskesmas.id/skriningadl/*"
       ]
     },
     {
@@ -185,7 +185,7 @@
       "defaultEnabled": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-anemia.js",
       "matches": [
-        "https://cirebon.epuskesmas.id/skrininganemia/*"
+        "https://*.epuskesmas.id/skrininganemia/*"
       ]
     },
     {
@@ -305,7 +305,7 @@
       "defaultEnabled": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-gds-4.js",
       "matches": [
-        "https://cirebon.epuskesmas.id/skrining/gds/*"
+        "https://*.epuskesmas.id/skrining/gds/*"
       ],
       "bypassWhitelist": false
     },
