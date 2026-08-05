@@ -428,6 +428,21 @@
         "https://*.epuskesmas.id/skriningindrapendengaran/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-kanker-kolorektal",
+      "name": "Skrining Kanker Kolorektal",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining Kanker Kolorektal untuk semua gender dan usia",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-kanker-kolorektal.js",
+      "matches": [
+        "https://*.epuskesmas.id/skriningkankerkolorektal/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
