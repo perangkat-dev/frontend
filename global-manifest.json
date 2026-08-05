@@ -413,6 +413,21 @@
         "https://cirebon.epuskesmas.id/skriningimunisasidewasa/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-indra-pendengaran",
+      "name": "Skrining Indra Pendengaran",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining Indra Pendengaran untuk semua pasien (tanpa kondisi)",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-indra-pendengaran.js",
+      "matches": [
+        "https://*.epuskesmas.id/skriningindrapendengaran/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
