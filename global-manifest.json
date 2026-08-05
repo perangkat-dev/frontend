@@ -310,6 +310,21 @@
         "https://cirebon.epuskesmas.id/skrining/gds/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-risiko-kanker-serviks",
+      "name": "Skrining Risiko Kanker Serviks",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining Risiko Kanker Serviks dengan validasi gender & usia (Hanya untuk Perempuan ≥30 tahun)",
+      "tier": "dasar",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-risiko-kanker-serviks.js",
+      "matches": [
+        "https://*.epuskesmas.id/risikokankerserviks/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
