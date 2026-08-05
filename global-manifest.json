@@ -458,6 +458,21 @@
         "https://*.epuskesmas.id/skrining/kekerasanperempuan/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-kelainan-empedu-bayi",
+      "name": "Skrining Kelainan Empedu Bayi",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining Kelainan Empedu Bayi dengan pemilihan template berdasarkan usia dalam bulan",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-kelainan-empedu-bayi.js",
+      "matches": [
+        "https://*.epuskesmas.id/skriningkelainanempedubayi/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
