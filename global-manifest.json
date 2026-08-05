@@ -548,6 +548,36 @@
         "https://*.epuskesmas.id/skrininglayakhamil/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-malaria",
+      "name": "Skrining Malaria",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining Malaria untuk semua pasien (tanpa kondisi)",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-malaria.js",
+      "matches": [
+        "https://*.epuskesmas.id/skriningmalaria/*"
+      ],
+      "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-obesitas",
+      "name": "Skrining Obesitas",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining Obesitas dengan kalkulasi IMT otomatis + warning popup (FIXED: Dropdown set before popup, IMT range fix)",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-obesitas.js",
+      "matches": [
+        "https://*.epuskesmas.id/skriningobesitas/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
