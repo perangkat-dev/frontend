@@ -368,6 +368,21 @@
         "https://cirebon.epuskesmas.id/skriningkesehatangigimulutremaja*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-diabetes-melitus",
+      "name": "Skrining Diabetes Melitus",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Auto-fill Skrining Diabetes Melitus untuk semua gender dan usia",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-diabetes-melitus.js",
+      "matches": [
+        "https://cirebon.epuskesmas.id/skriningdiabetesmelitus/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
