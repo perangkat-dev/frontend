@@ -683,6 +683,21 @@
         "https://*.epuskesmas.id/skriningsdq611/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-risiko-stroke",
+      "name": "Skrining Risiko Stroke",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining Risiko Stroke untuk semua pasien (tanpa kondisi)",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-risiko-stroke.js",
+      "matches": [
+        "https://*.epuskesmas.id/skriningrisikostroke/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
