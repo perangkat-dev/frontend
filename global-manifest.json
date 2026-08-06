@@ -698,6 +698,21 @@
         "https://*.epuskesmas.id/skriningrisikostroke/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-risiko-penyakit-jantung",
+      "name": "Skrining Risiko Penyakit Jantung",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining Risiko Penyakit Jantung untuk semua pasien (tanpa kondisi)",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-risiko-penyakit-jantung.js",
+      "matches": [
+        "https://*.epuskesmas.id/skriningrisikojantung/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
