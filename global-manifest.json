@@ -653,6 +653,21 @@
         "https://*.epuskesmas.id/skriningsrq29/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-sdq-11-18-tahun",
+      "name": "Skrining SDQ (11 - 18 Tahun)",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining SDQ dengan validasi rentang usia 11 sampai 18 tahun (inklusif)",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-sdq-11-18-tahun.js",
+      "matches": [
+        "https://*.epuskesmas.id/skriningsdq1118/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
