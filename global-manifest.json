@@ -608,6 +608,21 @@
         "https://*.epuskesmas.id/skriningwho/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-thalasemia",
+      "name": "Skrining Thalasemia",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining Thalasemia dengan pemilihan template berdasarkan rentang usia",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-thalasemia.js",
+      "matches": [
+        "https://*.epuskesmas.id/skriningthalasemia/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
