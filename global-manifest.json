@@ -728,6 +728,21 @@
         "https://*.epuskesmas.id/skriningkankerparu*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-tbc",
+      "name": "Skrining TBC",
+      "version": "2.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining TBC Oke",
+      "tier": "dasar",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-tbc.js",
+      "matches": [
+        "https://*.epuskesmas.id/skrining/tbc/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
