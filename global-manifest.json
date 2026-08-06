@@ -728,6 +728,21 @@
         "https://*.epuskesmas.id/skriningkankerpayudara/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-risiko-kanker-paru",
+      "name": "Skrining Risiko Kanker Paru",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining Risiko Kanker Paru dengan conditional gender + usia + konfirmasi untuk perempuan",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-risiko-kanker-paru.js",
+      "matches": [
+        "https://*.epuskesmas.id/skriningkankerparu*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
