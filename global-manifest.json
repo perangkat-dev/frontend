@@ -713,6 +713,21 @@
         "https://*.epuskesmas.id/skriningrisikojantung/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-risiko-kanker-payudara",
+      "name": "Skrining Risiko Kanker Payudara",
+      "version": "1.0",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "Skrining Risiko Kanker Payudara (Hanya untuk Perempuan) dengan validasi gender",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-risiko-kanker-payudara.js",
+      "matches": [
+        "https://*.epuskesmas.id/skriningkankerpayudara/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
