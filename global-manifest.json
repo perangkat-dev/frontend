@@ -623,6 +623,21 @@
         "https://*.epuskesmas.id/skriningthalasemia/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "skrining-tbc",
+      "name": "Skrining TBC",
+      "version": "2026-03-15",
+      "icon": "📝",
+      "category": "skrining",
+      "description": "try to take over the world!",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-tbc.js",
+      "matches": [
+        "https://*.epuskesmas.id/skrining/tbc/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
