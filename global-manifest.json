@@ -582,11 +582,11 @@
     {
       "id": "skrining-ppok-dengan-kuesioner-puma",
       "name": "Skrining PPOK dengan Kuesioner PUMA",
-      "version": "1.0",
-      "icon": "📝",
+      "version": "2.0",
+      "icon": "🧩",
       "category": "skrining",
       "description": "Skrining PPOK dengan validasi usia ≥40 tahun + logika conditional field \\\"usia\\\" berdasarkan rentang usia",
-      "tier": "pro",
+      "tier": "dasar",
       "defaultEnabled": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/skrining-ppok-dengan-kuesioner-puma.js",
       "matches": [
