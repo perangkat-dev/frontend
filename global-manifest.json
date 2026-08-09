@@ -743,6 +743,25 @@
         "https://*.epuskesmas.id/keur/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "puskesmas-darurat",
+      "name": "Puskesmas Darurat",
+      "version": "5.4",
+      "icon": "💾",
+      "category": "tools",
+      "description": "Sistem Darurat Puskesmas - 4 Tab (Rekap modal, cetak tanpa popup, CSV bersih)",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/puskesmas-darurat.js",
+      "matches": [
+        "https://www.google.com/search?q=puskesmas+darurat*",
+        "https://www.google.com/search?q=aplikasi+darurat*",
+        "https://www.google.com/search?q=pkm+darurat*",
+        "https://example.com/",
+        "https://www.detik.com/"
+      ],
+      "bypassWhitelist": true
     }
   ]
 }
