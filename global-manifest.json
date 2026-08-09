@@ -265,21 +265,6 @@
       "bypassWhitelist": true
     },
     {
-      "id": "auto-nomor-surat-keur",
-      "name": "Auto Nomor Surat KEUR",
-      "version": "8.5",
-      "icon": "🔧",
-      "category": "tools",
-      "description": "Auto nomor surat 4 jenis + Firebase Sync (Mandiri & Dashboard)",
-      "tier": "dasar",
-      "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/auto-nomor-surat-keur.js",
-      "matches": [
-        "https://*.epuskesmas.id/keur/*"
-      ],
-      "bypassWhitelist": false
-    },
-    {
       "id": "bpjs-kunjungan-sehat",
       "name": "BPJS kunjungan sehat",
       "version": "2.7",
