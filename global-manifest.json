@@ -743,6 +743,21 @@
         "https://*.epuskesmas.id/keur/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "usila-belum-periksa",
+      "name": "Usila Belum Periksa",
+      "version": "1.2",
+      "icon": "🔧",
+      "category": "tools",
+      "description": "Tombol untuk memilih filter dengan jeda 0.5 detik tiap aksi: Ruangan UMUM, Pemeriksaan Belum Diperiksa, Skrining Visual Hijau, Klaster 3, Siklus Hidup Lanjut Usia",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/usila-belum-periksa.js",
+      "matches": [
+        "https://cirebon.epuskesmas.id/pelayana*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
