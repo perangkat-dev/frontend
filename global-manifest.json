@@ -745,29 +745,6 @@
       "bypassWhitelist": false
     },
     {
-      "id": "capture-data-surat-keterangan-epuskesmas",
-      "name": "Capture Data Surat Keterangan - ePuskesmas",
-      "version": "2.8",
-      "icon": "🗃️",
-      "category": "administrasi",
-      "description": "Menangkap data Surat Keterangan (Sehat/Sakit/Buta Warna/Bebas Narkoba) dari ePuskesmas dan kirim ke Google Sheets (Insert/Update) + Tarif (ANGKA) & Petugas khusus Sehat",
-      "tier": "dasar",
-      "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/capture-data-surat-keterangan-epuskesmas.js",
-      "matches": [
-        "https://*.epuskesmas.id/keur/create/*",
-        "https://*.epuskesmas.id/keur/createsehat/*",
-        "https://*.epuskesmas.id/keur/editsehat/*",
-        "https://*.epuskesmas.id/keur/createsakit/*",
-        "https://*.epuskesmas.id/keur/editsakit/*",
-        "https://*.epuskesmas.id/keur/createbutawarna/*",
-        "https://*.epuskesmas.id/keur/editbutawarna/*",
-        "https://*.epuskesmas.id/keur/createbebasnarkoba/*",
-        "https://*.epuskesmas.id/keur/editbebasnarkoba/*"
-      ],
-      "bypassWhitelist": false
-    },
-    {
       "id": "laporan-surat-keterangan-2-0",
       "name": "Laporan Surat Keterangan 2.0",
       "version": "2.1",
