@@ -781,6 +781,21 @@
         "https://*.epuskesmas.id/keur/editbebasnarkoba/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "laporan-surat-keterangan-2-0",
+      "name": "Laporan Surat Keterangan 2.0",
+      "version": "2.1",
+      "icon": "🛠️",
+      "category": "tools",
+      "description": "Laporan Surat Keterangan (Sehat & Berobat) dari data Google Sheets",
+      "tier": "pro",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/laporan-surat-keterangan-2-0.js",
+      "matches": [
+        "https://*.epuskesmas.id/dashboardsip"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
