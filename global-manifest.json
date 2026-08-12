@@ -814,6 +814,21 @@
         "https://example.com/"
       ],
       "bypassWhitelist": true
+    },
+    {
+      "id": "laporan-surat-keterangan-2-1",
+      "name": "Laporan Surat Keterangan 2.1",
+      "version": "2.1",
+      "icon": "📊",
+      "category": "laporan",
+      "description": "Laporan Surat Keterangan (Sehat & Berobat) dari data Google Sheets - Dengan Auto Retry",
+      "tier": "dasar",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/laporan-surat-keterangan-2-1.js",
+      "matches": [
+        "https://*.epuskesmas.id/dashboardsip"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
