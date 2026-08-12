@@ -791,6 +791,29 @@
         "https://*.epuskesmas.id/dashboardsip"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "capture-data-surat-keterangan-3-0",
+      "name": "Capture Data Surat Keterangan 3.0",
+      "version": "3.0",
+      "icon": "🔧",
+      "category": "tools",
+      "description": "Menangkap data Surat Keterangan (Sehat/Sakit/Buta Warna/Bebas Narkoba) - Auto kirim ke Google Sheets saat Simpan/Update",
+      "tier": "dasar",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/capture-data-surat-keterangan-3-0.js",
+      "matches": [
+        "https://*.epuskesmas.id/keur/create/*",
+        "https://*.epuskesmas.id/keur/createsehat/*",
+        "https://*.epuskesmas.id/keur/editsehat/*",
+        "https://*.epuskesmas.id/keur/createsakit/*",
+        "https://*.epuskesmas.id/keur/editsakit/*",
+        "https://*.epuskesmas.id/keur/createbutawarna/*",
+        "https://*.epuskesmas.id/keur/editbutawarna/*",
+        "https://*.epuskesmas.id/keur/createbebasnarkoba/*",
+        "https://*.epuskesmas.id/keur/editbebasnarkoba/*"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
