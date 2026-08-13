@@ -799,6 +799,21 @@
         "https://*.epuskesmas.id/keur/editbebasnarkoba/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "laporan-harian-suket-sehat",
+      "name": "Laporan Harian Suket Sehat",
+      "version": "1.2",
+      "icon": "📈",
+      "category": "administrasi",
+      "description": "Laporan Penerimaan Harian untuk Printer POS",
+      "tier": "dasar",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/laporan-harian-suket-sehat.js",
+      "matches": [
+        "https://*.epuskesmas.id/dashboardsip"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
