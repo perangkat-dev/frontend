@@ -814,6 +814,21 @@
         "https://*.epuskesmas.id/dashboardsip"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "laporan-surat-keterangan3-3",
+      "name": "Laporan Surat Keterangan3.3",
+      "version": "3.3",
+      "icon": "📈",
+      "category": "administrasi",
+      "description": "Laporan semua Surat Keterangan",
+      "tier": "dasar",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/laporan-surat-keterangan3-3.js",
+      "matches": [
+        "https://*.epuskesmas.id/dashboardsip"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
