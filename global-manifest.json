@@ -819,14 +819,14 @@
       "id": "wajib-mobile-jkn",
       "name": "Wajib Mobile JKN",
       "version": "2.0",
-      "icon": "🎯",
-      "category": "tools",
+      "icon": "🧩",
+      "category": "skrining",
       "description": "Mengganti tombol pendaftaran BPJS dengan pesan wajib Mobile JKN + audio lanjutan",
       "tier": "dasar",
       "defaultEnabled": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/wajib-mobile-jkn.js",
       "matches": [
-        "https://*/*"
+        "https://*.epuskesmas.id/antreanpendaftaran*"
       ],
       "bypassWhitelist": false
     }
