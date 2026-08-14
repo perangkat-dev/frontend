@@ -2,12 +2,12 @@
 // Module: draggable-ui
 // Nama: Draggable UI
 // Versi: 1.0.0
-// Kategori: skrining
+// Kategori: lainnya
 // Tier: dasar
-// Deskripsi: Otomatis mengisi KESSAN BPJS Kesehatan dari daftar No. BPJS
+// Deskripsi: 
 // Dependencies: 
 // Bypass Whitelist: false
-// Tanggal: 14/8/2026, 18.58.32
+// Tanggal: 14/8/2026, 21.26.53
 // ============================================================
 // ==UserScript==
 // @name         Draggable UI
