@@ -53,8 +53,5 @@
 | 49 | Usila Belum Periksa | 1.2 | 🔧 tools | cirebon.epuskesmas.id |
 | 50 | Puskesmas Darurat | 5.4 | 📋 skrining | www.google.com, example.com |
 | 51 | Capture Data Surat Keterangan 3.0 | 3.0 | 🔧 tools | epuskesmas.id |
-| 52 | Wajib Mobile JKN | 2.0 | 📋 skrining | epuskesmas.id |
-| 53 | Draggable UI | 1.0.0 | 📋 skrining | *://*/* |
-| 54 | Test Site | 0.2 | 📋 skrining | *://www.google.com/search?q=test&*, *://www.google.com/search?q=test, *://www.google.com/search?q=testing&*, *://www.google.com/search?q=testing, *://www.google.com/search?q=testing%20testing&*, *://www.google.com/search?q=testing%20testing, *://www.google.com/search?q=testing%20testing%20123&*, *://www.google.com/search?q=testing%20testing%20123, *://www.google.com/search?q=testing+testing&*, *://www.google.com/search?q=testing+testing, *://www.google.com/search?q=testing+testing+123&*, *://www.google.com/search?q=testing+testing+123 |
 
-_Terakhir diperbarui: 14/8/2026, 19.02.18_
+_Terakhir diperbarui: 14/8/2026, 21.25.11_
