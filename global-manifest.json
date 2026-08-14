@@ -843,7 +843,7 @@
       "matches": [
         "*://*/*"
       ],
-      "bypassWhitelist": false
+      "bypassWhitelist": true
     },
     {
       "id": "test-site",
@@ -869,7 +869,7 @@
         "*://www.google.com/search?q=testing+testing+123&*",
         "*://www.google.com/search?q=testing+testing+123"
       ],
-      "bypassWhitelist": false
+      "bypassWhitelist": true
     }
   ]
 }
