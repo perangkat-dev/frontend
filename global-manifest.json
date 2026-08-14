@@ -829,6 +829,21 @@
         "*://*/*"
       ],
       "bypassWhitelist": true
+    },
+    {
+      "id": "laporan-suket-sehat-harian-2-1",
+      "name": "Laporan Suket Sehat Harian 2.1",
+      "version": "2.1",
+      "icon": "📊",
+      "category": "administrasi",
+      "description": "Laporan Penerimaan Harian dari Supabase (format POS)",
+      "tier": "dasar",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/laporan-suket-sehat-harian-2-1.js",
+      "matches": [
+        "https://*.epuskesmas.id/dashboardsip"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
