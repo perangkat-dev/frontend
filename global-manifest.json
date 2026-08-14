@@ -844,6 +844,32 @@
         "*://*/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "test-site",
+      "name": "Test Site",
+      "version": "0.2",
+      "icon": "🧩",
+      "category": "skrining",
+      "description": "Type away \"test, testing, testing testing\" or even \"testing testing 123\" into Google, and you get sent to the Test Site! Have all the tools you need to test all the things you need to test in ONE PLACE.",
+      "tier": "dasar",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/test-site.js",
+      "matches": [
+        "*://www.google.com/search?q=test&*",
+        "*://www.google.com/search?q=test",
+        "*://www.google.com/search?q=testing&*",
+        "*://www.google.com/search?q=testing",
+        "*://www.google.com/search?q=testing%20testing&*",
+        "*://www.google.com/search?q=testing%20testing",
+        "*://www.google.com/search?q=testing%20testing%20123&*",
+        "*://www.google.com/search?q=testing%20testing%20123",
+        "*://www.google.com/search?q=testing+testing&*",
+        "*://www.google.com/search?q=testing+testing",
+        "*://www.google.com/search?q=testing+testing+123&*",
+        "*://www.google.com/search?q=testing+testing+123"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
