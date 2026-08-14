@@ -53,5 +53,6 @@
 | 49 | Usila Belum Periksa | 1.2 | 🔧 tools | cirebon.epuskesmas.id |
 | 50 | Puskesmas Darurat | 5.4 | 📋 skrining | www.google.com, example.com |
 | 51 | Capture Data Surat Keterangan 3.0 | 3.0 | 🔧 tools | epuskesmas.id |
+| 52 | Draggable UI | 1.0.0 | 📦 lainnya | *://*/* |
 
-_Terakhir diperbarui: 14/8/2026, 21.25.11_
+_Terakhir diperbarui: 15/8/2026, 02.53.22_
