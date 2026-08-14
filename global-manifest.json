@@ -814,21 +814,6 @@
         "https://*.epuskesmas.id/dashboardsip"
       ],
       "bypassWhitelist": false
-    },
-    {
-      "id": "draggable-ui",
-      "name": "Draggable UI",
-      "version": "1.0.0",
-      "icon": "✨",
-      "category": "lainnya",
-      "description": "",
-      "tier": "dasar",
-      "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/draggable-ui.js",
-      "matches": [
-        "*://*/*"
-      ],
-      "bypassWhitelist": true
     }
   ]
 }
