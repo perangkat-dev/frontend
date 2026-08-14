@@ -828,7 +828,7 @@
       "matches": [
         "*://*/*"
       ],
-      "bypassWhitelist": false
+      "bypassWhitelist": true
     }
   ]
 }
