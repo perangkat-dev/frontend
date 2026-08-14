@@ -844,6 +844,21 @@
         "https://*.epuskesmas.id/dashboardsip"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "laporan-keuangan-harian-supabase",
+      "name": "Laporan Keuangan Harian - Supabase",
+      "version": "2.2",
+      "icon": "📊",
+      "category": "administrasi",
+      "description": "Laporan Penerimaan Harian dari Supabase (format POS)",
+      "tier": "dasar",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/laporan-keuangan-harian-supabase.js",
+      "matches": [
+        "https://*.epuskesmas.id/dashboardsip"
+      ],
+      "bypassWhitelist": false
     }
   ]
 }
