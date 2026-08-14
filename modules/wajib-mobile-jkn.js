@@ -1,1 +1,139 @@
-function a0_0x5072(_0x5de92a,_0x2f9954){_0x5de92a=_0x5de92a-0x1b3;const _0x45e74c=a0_0x45e7();let _0x5072df=_0x45e74c[_0x5de92a];if(a0_0x5072['gAdAQE']===undefined){var _0x412905=function(_0x2362d8){const _0x560326='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=';let _0x1497ce='',_0x2161f6='';for(let _0x1a5bc9=0x0,_0x4cfeaa,_0x2832af,_0x169580=0x0;_0x2832af=_0x2362d8['charAt'](_0x169580++);~_0x2832af&&(_0x4cfeaa=_0x1a5bc9%0x4?_0x4cfeaa*0x40+_0x2832af:_0x2832af,_0x1a5bc9++%0x4)?_0x1497ce+=String['fromCharCode'](0xff&_0x4cfeaa>>(-0x2*_0x1a5bc9&0x6)):0x0){_0x2832af=_0x560326['indexOf'](_0x2832af);}for(let _0x312617=0x0,_0xe9a9ac=_0x1497ce['length'];_0x312617<_0xe9a9ac;_0x312617++){_0x2161f6+='%'+('00'+_0x1497ce['charCodeAt'](_0x312617)['toString'](0x10))['slice'](-0x2);}return decodeURIComponent(_0x2161f6);};a0_0x5072['AmHklJ']=_0x412905,a0_0x5072['YddNmH']={},a0_0x5072['gAdAQE']=!![];}const _0x34af9d=_0x45e74c[0x0],_0x2c4eb5=_0x5de92a+_0x34af9d,_0x3f8a03=a0_0x5072['YddNmH'][_0x2c4eb5];return!_0x3f8a03?(_0x5072df=a0_0x5072['AmHklJ'](_0x5072df),a0_0x5072['YddNmH'][_0x2c4eb5]=_0x5072df):_0x5072df=_0x3f8a03,_0x5072df;}const a0_0x2cf62e=a0_0x5072;function a0_0x45e7(){const _0x95b97a=['C3r5Bgu','yNv0Dg9U','mZy5mJKYnwvmAKjorG','zM9YrwfJAa','ntKXodiYt1rvvwny','yxbWBhK','otC0ntvZELrXueK','CgL0y2G','zNvUy3rPB24','zM9YBvnLBgvJDa','zw5Kzwq','ntm0ndm0nfrytwD6Eq','zgLZCgXHEq','C3bLzwnOu3LUDgHLC2LZ','ywz0zxjIzwDPBG','odu2nwftt1fkDW','Bw9KywXFzgf0yv9WyxnPzw4','mJi4ngrqDwfdBG','CMf0zq','y2fUy2vS','Dw5KzwzPBMvK','AwqTsuq','C3bLywS','i21VzgfSx2rHDgfFCgfZAwvU','mJi1ndGWmg9ywMPUtG','BM9Uzq','CxvLCNLtzwXLy3rVCG','x192DwvFxW','CgvZyw4TBw9IAwXLlwPRBG','Aw5JBhvKzxm','otC2wxfUvMzV','ChjVDg90ExbL','CMvTB3zL','C2HVDY5ICY5TB2rHBa','cIaGicaGicaGpgrPDIbPzd0I','yMfJA1rVugvUzgfMDgfYyw4','yxbW','lM1VzgfSlwzVB3rLCG','C3jJ','CxvLCNLtzwXLy3rVCKfSBa','nJeYnMTAvgLbtq','ywrKrxzLBNrmAxn0zw5LCG','CMvTB3zLrxzLBNrmAxn0zw5LCG','Aw5Zzxj0qwrQywnLBNrive1m','z2v0rwXLBwvUDej5swq'];a0_0x45e7=function(){return _0x95b97a;};return a0_0x45e7();}(function(_0x345fd6,_0x18e991){const _0xb416c2=a0_0x5072,_0x3378e8=_0x345fd6();while(!![]){try{const _0x51c2e4=-parseInt(_0xb416c2(0x1c8))/0x1*(-parseInt(_0xb416c2(0x1bb))/0x2)+-parseInt(_0xb416c2(0x1dd))/0x3+-parseInt(_0xb416c2(0x1b5))/0x4+-parseInt(_0xb416c2(0x1b9))/0x5*(-parseInt(_0xb416c2(0x1d2))/0x6)+parseInt(_0xb416c2(0x1db))/0x7+-parseInt(_0xb416c2(0x1c2))/0x8+-parseInt(_0xb416c2(0x1d9))/0x9;if(_0x51c2e4===_0x18e991)break;else _0x3378e8['push'](_0x3378e8['shift']());}catch(_0x5c44a8){_0x3378e8['push'](_0x3378e8['shift']());}}}(a0_0x45e7,0xd8a45),function(_0x1497ce){(function(){'use strict';const _0x3fcee6=a0_0x5072;const _0x2161f6=_0x3fcee6(0x1c6),_0x1a5bc9='Silahkan\x20mendaftar\x20menggunakan\x20Mobile\x20JKN',_0x4cfeaa=_0x3fcee6(0x1cc)+_0x2161f6+'\x22\x20style=\x22width:\x20100%;\x20padding:\x204px\x200\x200;\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-size:\x2018px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-weight:\x20bold;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#f9a825;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20text-align:\x20center;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-bottom:\x2010px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20line-height:\x201.4;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20SILAHKAN\x20MENDAFTAR<br>MENGGUNAKAN\x20MOBILE\x20JKN\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-size:\x2016px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#555;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20text-align:\x20center;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20line-height:\x201.7;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20margin-bottom:\x208px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Pendaftaran\x20pasien\x20BPJS\x20melalui\x20OFFLINE<br>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<strong>tidak\x20lagi\x20tersedia</strong>.<br>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20Gunakan\x20aplikasi\x20<strong>Mobile\x20JKN</strong>\x20di\x20smartphone\x20Anda<br>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20untuk\x20mendaftar\x20antrian\x20ke\x20poli\x20yang\x20dituju.\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20<div\x20style=\x22\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:\x20#f8f9fa;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border-radius:\x206px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20padding:\x207px\x2012px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-size:\x2014px;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#777;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20text-align:\x20center;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20border:\x201px\x20solid\x20#e9ecef;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x22>\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20📲\x20Download:\x20<strong>Mobile\x20JKN</strong>\x20di\x20Play\x20Store\x20/\x20App\x20Store\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20\x20\x20\x20\x20</div>\x0a\x20\x20\x20\x20',_0x2832af=HTMLMediaElement[_0x3fcee6(0x1c9)]['play'];HTMLMediaElement[_0x3fcee6(0x1c9)]['play']=function(){const _0x5afcd4=_0x3fcee6,_0x5dedf4=_0x2832af[_0x5afcd4(0x1dc)](this,arguments);return this['src']&&this[_0x5afcd4(0x1d0)][_0x5afcd4(0x1c7)]('bpjs_aktif')&&this[_0x5afcd4(0x1d3)](_0x5afcd4(0x1b4),function _0x39d3ee(){const _0x2b4754=_0x5afcd4;this[_0x2b4754(0x1d4)](_0x2b4754(0x1b4),_0x39d3ee),_0x169580();}),_0x5dedf4;};function _0x169580(){const _0x5de9c5=_0x3fcee6;if(!window['speechSynthesis'])return;speechSynthesis[_0x5de9c5(0x1bd)]();const _0x2a9fab=new SpeechSynthesisUtterance(_0x1a5bc9);_0x2a9fab['lang']=_0x5de9c5(0x1bf),_0x2a9fab[_0x5de9c5(0x1bc)]=0.9,_0x2a9fab[_0x5de9c5(0x1de)]=0x1,speechSynthesis[_0x5de9c5(0x1c0)](_0x2a9fab);}function _0x312617(){const _0x313958=_0x3fcee6,_0x143fd9=document['getElementById'](_0x313958(0x1ce));return _0x143fd9&&_0x143fd9[_0x313958(0x1c5)]?_0x143fd9[_0x313958(0x1c5)]:null;}function _0xe9a9ac(){const _0x26bec8=_0x3fcee6;if(window[_0x26bec8(0x1b7)])speechSynthesis[_0x26bec8(0x1bd)]();const _0x59c163=_0x312617();_0x59c163&&typeof _0x59c163[_0x26bec8(0x1cd)]===_0x26bec8(0x1df)?_0x59c163[_0x26bec8(0x1cd)]():location['reload']();}function _0x56d81f(){const _0x51ed7a=_0x3fcee6,_0x3659a9=_0x312617();if(!_0x3659a9||String(_0x3659a9[_0x51ed7a(0x1b3)])!=='1')return;const _0x24f3e3=document['getElementById'](_0x51ed7a(0x1ba)),_0x4bf296=_0x24f3e3?_0x24f3e3[_0x51ed7a(0x1c4)]('.modal-footer'):null;if(!_0x4bf296)return;if(_0x4bf296[_0x51ed7a(0x1c4)]('#'+_0x2161f6))return;_0x4bf296[_0x51ed7a(0x1d1)]('button')[_0x51ed7a(0x1da)](_0x8744c5=>{const _0x15daec=_0x51ed7a;_0x8744c5[_0x15daec(0x1d7)][_0x15daec(0x1b6)]=_0x15daec(0x1c3);}),_0x4bf296[_0x51ed7a(0x1d5)](_0x51ed7a(0x1b8),_0x4cfeaa);}function _0x17d1f9(){const _0x225699=_0x3fcee6,_0x45443d=document[_0x225699(0x1d6)](_0x225699(0x1ba)),_0x3ccda9=_0x45443d?_0x45443d['querySelector'](_0x225699(0x1cf)):null;if(!_0x3ccda9)return;const _0x1ca4aa=_0x3ccda9[_0x225699(0x1c4)]('#'+_0x2161f6);if(_0x1ca4aa)_0x1ca4aa[_0x225699(0x1ca)]();_0x3ccda9[_0x225699(0x1d1)](_0x225699(0x1d8))['forEach'](_0x18030f=>{const _0x190730=_0x225699;_0x18030f['style'][_0x190730(0x1b6)]='';});}$(document)['on'](_0x3fcee6(0x1cb),_0x3fcee6(0x1c1),function(){setTimeout(_0x56d81f,0x64);}),$(document)['on']('hidden.bs.modal',_0x3fcee6(0x1c1),function(){const _0x7ce964=_0x3fcee6,_0x18a8d0=_0x312617(),_0x135efa=_0x18a8d0&&String(_0x18a8d0[_0x7ce964(0x1b3)])==='1';_0x17d1f9();if(_0x135efa)_0xe9a9ac();});}());}(typeof __meta__!==a0_0x2cf62e(0x1be)?__meta__:{}));
+(function(__meta__){ (function () {
+    'use strict';
+
+    const PESAN_ID = 'pesan-mobile-jkn';
+
+    // Teks yang akan dibacakan TTS setelah audio bpjs_aktif selesai
+    const TEKS_TTS = 'Silahkan mendaftar menggunakan Mobile JKN';
+
+    // Pesan menyesuaikan tema Bootstrap modal (warna, font-size, dll ikut modal asli)
+    // Hanya judul tetap kuning & besar sesuai permintaan
+    const PESAN_HTML = `
+        <div id="${PESAN_ID}" style="width: 100%; padding: 4px 0 0;">
+            <div style="
+                font-size: 18px;
+                font-weight: bold;
+                color: #f9a825;
+                text-align: center;
+                margin-bottom: 10px;
+                line-height: 1.4;
+            ">
+                SILAHKAN MENDAFTAR<br>MENGGUNAKAN MOBILE JKN
+            </div>
+            <div style="
+                font-size: 16px;
+                color: #555;
+                text-align: center;
+                line-height: 1.7;
+                margin-bottom: 8px;
+            ">
+                Pendaftaran pasien BPJS melalui OFFLINE<br>
+                <strong>tidak lagi tersedia</strong>.<br>
+                Gunakan aplikasi <strong>Mobile JKN</strong> di smartphone Anda<br>
+                untuk mendaftar antrian ke poli yang dituju.
+            </div>
+            <div style="
+                background: #f8f9fa;
+                border-radius: 6px;
+                padding: 7px 12px;
+                font-size: 14px;
+                color: #777;
+                text-align: center;
+                border: 1px solid #e9ecef;
+            ">
+                📲 Download: <strong>Mobile JKN</strong> di Play Store / App Store
+            </div>
+        </div>
+    `;
+
+    // ── Audio TTS ────────────────────────────────────────────────
+    // Intersep Audio.prototype.play untuk mendeteksi kapan bpjs_aktif.ogg selesai,
+    // lalu langsung putar TTS "Silahkan mendaftar menggunakan Mobile JKN"
+    const playAsli = HTMLMediaElement.prototype.play;
+    HTMLMediaElement.prototype.play = function () {
+        const hasil = playAsli.apply(this, arguments);
+        if (this.src && this.src.includes('bpjs_aktif')) {
+            this.addEventListener('ended', function onEnded() {
+                this.removeEventListener('ended', onEnded);
+                putarTTS();
+            });
+        }
+        return hasil;
+    };
+
+    function putarTTS() {
+        if (!window.speechSynthesis) return;
+        speechSynthesis.cancel(); // stop jika ada TTS sebelumnya
+        const utt = new SpeechSynthesisUtterance(TEKS_TTS);
+        utt.lang  = 'id-ID';
+        utt.rate  = 0.9;
+        utt.pitch = 1;
+        speechSynthesis.speak(utt);
+    }
+
+    // ── Modal intersep ───────────────────────────────────────────
+    function getVueInstance() {
+        const el = document.getElementById('app');
+        return el && el.__vue__ ? el.__vue__ : null;
+    }
+
+    function resetKeHalamanAwal() {
+        // Stop TTS jika masih berjalan
+        if (window.speechSynthesis) speechSynthesis.cancel();
+
+        const vue = getVueInstance();
+        if (vue && typeof vue.backToPendaftaran === 'function') {
+            vue.backToPendaftaran();
+        } else {
+            location.reload();
+        }
+    }
+
+    function intersepModalBPJS() {
+        // Hanya intersep untuk pasien BPJS (formSelect == '1')
+        const vue = getVueInstance();
+        if (!vue || String(vue.formSelect) !== '1') return;
+
+        const modal       = document.getElementById('modal_data_pasien');
+        const modalFooter = modal ? modal.querySelector('.modal-footer') : null;
+        if (!modalFooter) return;
+
+        // Jangan duplikat
+        if (modalFooter.querySelector('#' + PESAN_ID)) return;
+
+        // Sembunyikan tombol asli
+        modalFooter.querySelectorAll('button').forEach(btn => {
+            btn.style.display = 'none';
+        });
+
+        // Sisipkan pesan
+        modalFooter.insertAdjacentHTML('afterbegin', PESAN_HTML);
+    }
+
+    function bersihkanModal() {
+        const modal       = document.getElementById('modal_data_pasien');
+        const modalFooter = modal ? modal.querySelector('.modal-footer') : null;
+        if (!modalFooter) return;
+
+        const pesan = modalFooter.querySelector('#' + PESAN_ID);
+        if (pesan) pesan.remove();
+
+        modalFooter.querySelectorAll('button').forEach(btn => {
+            btn.style.display = '';
+        });
+    }
+
+    // Saat modal mulai tampil → intersep
+    $(document).on('show.bs.modal', '#modal_data_pasien', function () {
+        setTimeout(intersepModalBPJS, 100);
+    });
+
+    // Saat modal selesai ditutup → bersihkan + stop TTS + reset halaman (khusus BPJS)
+    $(document).on('hidden.bs.modal', '#modal_data_pasien', function () {
+        const vue = getVueInstance();
+        const isBPJS = vue && String(vue.formSelect) === '1';
+        bersihkanModal();
+        if (isBPJS) resetKeHalamanAwal();
+    });
+
+})(); })(typeof __meta__ !== 'undefined' ? __meta__ : {});
