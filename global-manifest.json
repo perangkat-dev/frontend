@@ -859,6 +859,21 @@
         "*://*/*"
       ],
       "bypassWhitelist": false
+    },
+    {
+      "id": "tampermonkey-api-comprehensive-tester",
+      "name": "🧪 Tampermonkey API Comprehensive Tester",
+      "version": "2.0.0",
+      "icon": "🌐",
+      "category": "lainnya",
+      "description": "Comprehensive test for all Jamu APIs with advanced features",
+      "tier": "dasar",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/tampermonkey-api-comprehensive-tester.js",
+      "matches": [
+        "*://*/*"
+      ],
+      "bypassWhitelist": true
     }
   ]
 }
