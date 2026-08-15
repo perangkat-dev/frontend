@@ -816,21 +816,6 @@
       "bypassWhitelist": false
     },
     {
-      "id": "laporan-surat-keterangan3-3",
-      "name": "Laporan Surat Keterangan3.3",
-      "version": "3.3",
-      "icon": "📊",
-      "category": "administrasi",
-      "description": "Laporan semua Surat Keterangan",
-      "tier": "dasar",
-      "defaultEnabled": true,
-      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/laporan-surat-keterangan3-3.js",
-      "matches": [
-        "https://*.epuskesmas.id/dashboardsip"
-      ],
-      "bypassWhitelist": false
-    },
-    {
       "id": "laporan-keuangan-harian-supabase",
       "name": "Laporan Keuangan Harian - Supabase",
       "version": "2.2",
@@ -840,6 +825,21 @@
       "tier": "dasar",
       "defaultEnabled": true,
       "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/laporan-keuangan-harian-supabase.js",
+      "matches": [
+        "https://*.epuskesmas.id/dashboardsip"
+      ],
+      "bypassWhitelist": false
+    },
+    {
+      "id": "laporan-surat-keterangan-3-3-rapi",
+      "name": "Laporan Surat Keterangan 3.3 rapi",
+      "version": "3.3",
+      "icon": "🧩",
+      "category": "skrining",
+      "description": "Laporan semua Surat Keterangan",
+      "tier": "dasar",
+      "defaultEnabled": true,
+      "scriptUrl": "https://perangkat-dev.github.io/frontend/modules/laporan-surat-keterangan-3-3-rapi.js",
       "matches": [
         "https://*.epuskesmas.id/dashboardsip"
       ],
