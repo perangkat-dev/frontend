@@ -25,7 +25,7 @@
     var CONFIG = {
         STORAGE_URL: "https://onhxygwiigcmlfqveken.supabase.co/storage/v1/object/public/secure-scripts/dashboard-main.js",
         CACHE_KEY: "jamu_dashboard_script",
-        CACHE_TTL: 1 * 60 * 1000, // 24 jam dalam milidetik. tambah ini di depan 24 *
+        CACHE_TTL: 24 *60 * 60 * 1000, // 24 jam dalam milidetik. tambah ini di depan 24 *
         VERSION: "2.4.0"
     };
 
